@@ -1,0 +1,12 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".controle.FormularioActivity">
+
+    <item android:id="@+id/menu_formulario"
+        android:title="@string/salvar"
+        android:icon="@drawable/icon_check"
+        app:showAsAction="always">
+
+    </item>
+</menu>

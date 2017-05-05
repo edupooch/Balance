@@ -1,0 +1,14 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".controle.ListaPacientesActivity">
+
+
+    <item
+        android:icon="@drawable/icon_config"
+        android:orderInCategory="3"
+        android:title="@string/configura_es"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

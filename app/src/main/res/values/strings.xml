@@ -1,4 +1,35 @@
 <resources>
     <string name="app_name">Balance</string>
+
+
     <string name="action_settings">Settings</string>
+    <string name="title_activity_formulario">Adicionar</string>
+
+    <string name="title_activity_perfil">Perfil</string>
+
+    <string name="dialog_yes">Sim</string>
+    <string name="dialog_no">Não</string>
+
+    <string name="salvar">SALVAR</string>
+
+    <string name="text_inicial_vazio">Você ainda não tem pacientes cadastrados. Adicione um paciente novo no botão no canto inferior direito da tela</string>
+    <string name="text_inicial">Selecione um paciente para realizar um novo teste ou verificar os resultados de testes anteriores</string>
+    <string name="anos">anos</string>
+    <string name="editar">Editar</string>
+    <string name="deletar">Deletar</string>
+    <string name="dialog_deletar">Deseja deletar este paciente e todos os seus testes?</string>
+    <string name="atencao_deletar">Deletar Paciente</string>
+
+    <string name="configura_es">Configurações</string>
+    <string name="testes">testes</string>
+    <string name="divisor">|</string>
+    <string name="testes_anteriores">TESTES ANTERIORES</string>
+    <string name="o_paciente_ainda_n_o_realizou_nenhum_teste">Não há testes cadastrados</string>
+    <string name="dados_do_paciente">DADOS CADASTRAIS</string>
+    <string name="masculino">Masculino</string>
+    <string name="feminino">Feminino</string>
+    <string name="contato">CONTATO</string>
+
+
 </resources>
+
