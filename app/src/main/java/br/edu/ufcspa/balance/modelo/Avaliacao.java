@@ -5,5 +5,5 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-public class Teste implements Serializable {
+public class Avaliacao implements Serializable {
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,227 +9,360 @@
     tools:context=".controle.CadastroActivity"
     tools:showIn="@layout/activity_formulario">
 
-    <ScrollView
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btFoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/icon_profile_pic"
+                android:contentDescription="@string/bota_o_para_inserir_foto_do_paciente" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="11dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edTextNomePaciente"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/nome_do_paciente"
+                    android:inputType="textCapWords"
+                    android:maxLength="50" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+
+                    <EditText
+                        android:id="@+id/edTextDataNascimento"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:hint="@string/data_de_nascimento"
+                        android:inputType="number"
+                        android:theme="@style/AppTheme" />
+
+                    <ImageButton
+                        android:id="@+id/btDataNascimento"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/icon_data"
+                        android:contentDescription="@string/description_calendario" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageButton
-                    android:id="@+id/btFoto"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_margin="10dp"
-                    android:background="@drawable/icon_profile_pic" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="11dp"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:maxLength="50"
-                        android:id="@+id/edTextNomePaciente"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:hint="Nome do Paciente"
-                        android:inputType="textCapWords" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-
-                        <EditText
-                            android:id="@+id/edTextDataNascimento"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:hint="Data de nascimento"
-                            android:inputType="number"
-                            android:theme="@style/AppTheme" />
-
-                        <ImageButton
-                            android:id="@+id/btData"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/icon_data" />
-
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-
-                >
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="Gênero"
-                    android:textSize="12sp"
-
-                    />
-
-                <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:orientation="horizontal"
-                    segmentedgroup:sc_border_width="2dp"
-                    segmentedgroup:sc_corner_radius="10dp"
-                    segmentedgroup:sc_tint_color="#9e9e9e"
-
-                    >
-
-                    <RadioButton
-                        android:id="@+id/btnMasculino"
-                        style="@style/RadioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/masculino" />
-
-                    <RadioButton
-                        android:id="@+id/btnFeminino"
-                        style="@style/RadioButton"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/feminino" />
-                </info.hoang8f.android.segmented.SegmentedGroup>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/icon_peso" />
-
-                <EditText
-                    android:maxLength="5"
-                    android:id="@+id/edTextPeso"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Massa corporal (em kg)"
-                    android:inputType="numberDecimal" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/icon_altura" />
-
-                <EditText
-                    android:maxLength="3"
-                    android:id="@+id/edTextAltura"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="1"
-                    android:hint="Estatura (em cm)"
-                    android:inputType="numberDecimal" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/icon_obs" />
-
-                <EditText
-                    android:id="@+id/edTextObs"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Observações" />
-            </LinearLayout>
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="4dp"
-                android:layout_marginTop="15dp"
-                android:autoText="false"
-                android:text="CONTATO"
-                android:textColor="@color/cor1VerdeEscuro" />
+                android:text="@string/genero"
+                android:textSize="12sp" />
 
-
-            <LinearLayout
+            <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:orientation="horizontal"
+                segmentedgroup:sc_border_width="2dp"
+                segmentedgroup:sc_corner_radius="10dp"
+                segmentedgroup:sc_tint_color="#9e9e9e">
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@drawable/icon_phone" />
-
-                <EditText
-                    android:id="@+id/edTextTelefone"
+                <RadioButton
+                    android:id="@+id/btnMasculino"
+                    style="@style/RadioButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="5dp"
-                    android:hint="Telefone"
-                    android:maxLength="15"
-                    android:inputType="phone"
-                    android:textStyle="italic" />
+                    android:layout_weight="1"
+                    android:text="@string/masculino" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="28dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/icon_mail" />
-
-                <EditText
-                    android:id="@+id/edTextEmail"
+                <RadioButton
+                    android:id="@+id/btnFeminino"
+                    style="@style/RadioButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="E-mail"
-                    android:maxLength="50"
-                    android:inputType="textEmailAddress"
-                    android:textStyle="italic" />
+                    android:layout_weight="1"
+                    android:text="@string/feminino" />
+            </info.hoang8f.android.segmented.SegmentedGroup>
+        </LinearLayout>
 
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/description_peso"
+                android:paddingTop="5dp"
+                android:src="@drawable/icon_peso" />
+
+            <EditText
+                android:id="@+id/edTextPeso"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/massa_corporal_em_kg"
+                android:inputType="numberDecimal"
+                android:maxLength="5" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/description_altura"
+                android:padding="2dp"
+                android:src="@drawable/icon_altura" />
+
+            <EditText
+                android:id="@+id/edTextAltura"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/estatura_em_cm"
+                android:inputType="numberDecimal"
+                android:maxLength="3" />
+
 
         </LinearLayout>
-    </ScrollView>
 
-</RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/description_obs"
+                android:src="@drawable/icon_obs"
+                android:tint="#9f9f9f" />
+
+            <EditText
+                android:id="@+id/edTextObs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/observacoes" />
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/info_clinicas"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btDataAnamnese"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/icon_data"
+                android:contentDescription="@string/description_calendario" />
+
+            <EditText
+                android:id="@+id/edTextDataAnamnese"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/data_de_anamnese"
+                android:inputType="number"
+                android:theme="@style/AppTheme" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/description_obs"
+                android:src="@drawable/icon_obs"
+                android:tint="#9f9f9f" />
+
+            <EditText
+                android:id="@+id/edTextDiagnostico"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/diagnostico_clinico" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/btDataDiagnostico"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="7dp"
+                android:background="@drawable/icon_data"
+                android:contentDescription="@string/description_calendario" />
+
+            <EditText
+                android:id="@+id/edTextDataDiagnostico"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:hint="@string/data_de_anamnese"
+                android:inputType="number"
+                android:theme="@style/AppTheme" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/description_obs"
+                android:src="@drawable/icon_obs"
+                android:tint="#9f9f9f" />
+
+            <EditText
+                android:id="@+id/edTextCurrentDisease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hist_rico_da_doen_a_atual" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/description_obs"
+                android:src="@drawable/icon_obs"
+                android:tint="#9f9f9f" />
+
+            <EditText
+                android:id="@+id/edTextPreviousDisease"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/hist_rico_de_doen_as_anteriores" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:contentDescription="@string/description_obs"
+                android:src="@drawable/icon_obs"
+                android:tint="#9f9f9f" />
+
+            <EditText
+                android:id="@+id/edTextProcedimentos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/procedimentos_terap_uticos" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="4dp"
+            android:layout_marginTop="15dp"
+            android:text="@string/contato"
+            android:textColor="@color/colorPrimaryDark" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/icon_phone"
+                android:contentDescription="@string/description_telefone" />
+
+            <EditText
+                android:id="@+id/edTextTelefone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/telefone"
+                android:inputType="phone"
+                android:maxLength="15" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="28dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/icon_mail"
+                android:contentDescription="@string/description_email" />
+
+            <EditText
+                android:id="@+id/edTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/e_mail"
+                android:inputType="textEmailAddress"
+                android:maxLength="50" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</ScrollView>

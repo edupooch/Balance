@@ -1,16 +1,19 @@
 package br.edu.ufcspa.balance.modelo;
 
-import android.support.annotation.NonNull;
-
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by edupooch on 21/12/15.
  */
-public class Paciente extends SugarRecord<Paciente> implements Serializable{
+public class Paciente extends SugarRecord<Paciente> implements Serializable {
+
+    public static final int MASCULINO = 1;
+    public static final int FEMININO = 0;
+    public static final String DATA_NULA = "01/01/1800";
 
     public Long id = null;
     private String nome;
@@ -23,58 +26,16 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable{
     private String obs;
     private String caminhoFoto;
 
-
+    private Date anamnesisDate;
+    private String diagnostico;
+    private Date dataDiagnostico;
+    private String historicoDoencaAtual;
+    private String historicoDoencasAnteriores;
+    private String procedimentosTerapeuticos;
+    private List<Avaliacao> avaliacoes;
 
     public Paciente() {
     }
-
-    /*
-    public JSONObject toJSon() {
-        JSONObject paciente = new JSONObject();
-
-        String encodedImage = " ";
-
-        if (foto!= null){
-            BitmapFactory.Options options0 = new BitmapFactory.Options();
-            options0.inSampleSize = 2;
-            //options.inJustDecodeBounds = true;
-            options0.inScaled = false;
-            options0.inDither = false;
-            options0.inPreferredConfig = Bitmap.Config.ARGB_8888;
-
-            Bitmap bmp = BitmapFactory.decodeFile(getFoto());
-
-            ByteArrayOutputStream baos0 = new ByteArrayOutputStream();
-
-            bmp.compress(Bitmap.CompressFormat.JPEG,100,baos0);
-            byte[] imageBytes0 = baos0.toByteArray();
-
-            encodedImage = Base64.encodeToString(imageBytes0, Base64.DEFAULT);
-        }
-
-
-
-
-        try {
-            paciente.put("nome",getNome());
-            paciente.put("telefone",getTelefone());
-            paciente.put("email", getEmail());
-            paciente.put("massa", getMassa());
-            paciente.put("estatura", getEstatura());
-            paciente.put("nascimento", getDataNascimento());
-
-
-
-            if(!encodedImage.isEmpty()){ // se nao tiver vazia adicionar a foto do paciente
-                paciente.put("foto",encodedImage);
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return paciente;
-    }
-
-*/
 
     public String getCaminhoFoto() {
         return caminhoFoto;
@@ -161,11 +122,78 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable{
         this.obs = obs;
     }
 
+    public Date getAnamnesisDate() {
+        return anamnesisDate;
+    }
+
+    public void setAnamnesisDate(Date anamnesisDate) {
+        this.anamnesisDate = anamnesisDate;
+    }
+
+    public String getDiagnostico() {
+        return diagnostico;
+    }
+
+    public void setDiagnostico(String diagnostico) {
+        this.diagnostico = diagnostico;
+    }
+
+    public Date getDataDiagnostico() {
+        return dataDiagnostico;
+    }
+
+    public void setDataDiagnostico(Date dataDiagnostico) {
+        this.dataDiagnostico = dataDiagnostico;
+    }
+
+    public String getHistoricoDoencaAtual() {
+        return historicoDoencaAtual;
+    }
+
+    public void setHistoricoDoencaAtual(String historicoDoencaAtual) {
+        this.historicoDoencaAtual = historicoDoencaAtual;
+    }
+
+    public String getHistoricoDoencasAnteriores() {
+        return historicoDoencasAnteriores;
+    }
+
+    public void setHistoricoDoencasAnteriores(String historicoDoencasAnteriores) {
+        this.historicoDoencasAnteriores = historicoDoencasAnteriores;
+    }
+
+    public String getProcedimentosTerapeuticos() {
+        return procedimentosTerapeuticos;
+    }
+
+    public void setProcedimentosTerapeuticos(String procedimentosTerapeuticos) {
+        this.procedimentosTerapeuticos = procedimentosTerapeuticos;
+    }
+
+    public List<Avaliacao> getAvaliacoes() {
+        return avaliacoes;
+    }
+
+    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
+        this.avaliacoes = avaliacoes;
+    }
+
     public void copy(Paciente pacienteAlterado) {
         this.nome = pacienteAlterado.getNome();
         this.massa = pacienteAlterado.getMassa();
         this.estatura = pacienteAlterado.getEstatura();
         this.email = pacienteAlterado.getEmail();
         this.obs = pacienteAlterado.getObs();
+        this.telefone = pacienteAlterado.getTelefone();
+        this.dataNascimento = pacienteAlterado.getDataNascimento();
+        this.genero = pacienteAlterado.getGenero();
+        this.caminhoFoto = pacienteAlterado.getCaminhoFoto();
+        this.anamnesisDate = pacienteAlterado.getAnamnesisDate();
+        this.diagnostico = pacienteAlterado.getDiagnostico();
+        this.dataDiagnostico = pacienteAlterado.getDataDiagnostico();
+        this.historicoDoencaAtual = pacienteAlterado.getHistoricoDoencaAtual();
+        this.historicoDoencasAnteriores = pacienteAlterado.getHistoricoDoencasAnteriores();
+        this.procedimentosTerapeuticos = pacienteAlterado.getProcedimentosTerapeuticos();
+        this.avaliacoes = pacienteAlterado.getAvaliacoes();
     }
 }

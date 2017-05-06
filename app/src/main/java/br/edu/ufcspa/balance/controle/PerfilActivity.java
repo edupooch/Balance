@@ -22,7 +22,6 @@ import java.io.FileOutputStream;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.dao.PacienteDAO;
 import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
@@ -184,7 +183,7 @@ public class PerfilActivity extends AppCompatActivity {
     private void carregaLista() {
 //        listaTestes = (ListView) findViewById(R.id.lista_testes);
 ////        TesteDAO dao = new TesteDAO(this);
-////        List<Teste> testes = dao.buscaTestes(paciente);
+////        List<Avaliacao> testes = dao.buscaTestes(paciente);
 //
 //        //Coloca o tamanho da lista em dp de acordo com o numero de pacientes (75dp por paciente)
 //        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaTestes.getLayoutParams();
@@ -200,7 +199,7 @@ public class PerfilActivity extends AppCompatActivity {
 //
 //        Collections.reverse(testes);
 //
-////        ArrayAdapter<Teste> adapter =
+////        ArrayAdapter<Avaliacao> adapter =
 ////                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, testes);
 //
 //        listaTestes.setAdapter(new TestesAdapter(this,testes));
@@ -208,7 +207,7 @@ public class PerfilActivity extends AppCompatActivity {
 //        listaTestes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
-//                Teste teste = (Teste) listaTestes.getItemAtPosition(position);
+//                Avaliacao teste = (Avaliacao) listaTestes.getItemAtPosition(position);
 //                // teste clicado
 //
 //                Intent intentVaiPraAnalise = new Intent(PerfilActivity.this, AnaliseTesteActivity.class);
@@ -221,13 +220,13 @@ public class PerfilActivity extends AppCompatActivity {
     }
 //    @Override
 //    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-//        MenuItem deletar = menu.add("Deletar Teste");
+//        MenuItem deletar = menu.add("Deletar Avaliacao");
 //        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 //            @Override
 //            public boolean onMenuItemClick(MenuItem item) {
 //
 //                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-//                Teste teste  = (Teste) listaTestes.getItemAtPosition(info.position);
+//                Avaliacao teste  = (Avaliacao) listaTestes.getItemAtPosition(info.position);
 //                TesteDAO dao = new TesteDAO(PerfilActivity.this);
 //
 //                dao.deleta(teste);

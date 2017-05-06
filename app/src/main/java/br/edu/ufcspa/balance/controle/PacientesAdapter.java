@@ -55,10 +55,8 @@ public class PacientesAdapter extends BaseAdapter {
         Paciente paciente = pacientes.get(position);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = convertView;
-        if (view == null) { //usa -se o convertView para otimizar o carregamento de listas muito grandes
+        if (view == null) { //usa-se o convertView para otimizar o carregamento de listas muito grandes
             view = inflater.inflate(R.layout.list_item_pacientes, parent, false);
-            //parent passa os valores do pai para funcionar os tamanhos pré-definidos no xml
-            //false é usado para não adicionar a view duas vezes
         }
 //        TesteDAO dao = new TesteDAO(context);
 //        int nTestes = dao.contarTestesDoPaciente(paciente);
@@ -66,10 +64,6 @@ public class PacientesAdapter extends BaseAdapter {
 
         TextView textNome = (TextView) view.findViewById(R.id.textNomePacienteLista);
         textNome.setText(paciente.getNome());
-
-        TextView textIdade = (TextView) view.findViewById(R.id.textIdadeLista);
-        int idade = Calcula.idade(paciente.getDataNascimento());
-        textIdade.setText(String.valueOf(idade));
 
         TextView textTestes = (TextView) view.findViewById(R.id.textNumeroTestesLista);
         textTestes.setText(String.valueOf(0));//nTestes

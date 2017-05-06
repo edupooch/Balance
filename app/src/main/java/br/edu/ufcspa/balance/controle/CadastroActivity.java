@@ -67,7 +67,7 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
         TextWatcher watcherData = new TextWatcherData(date);
         date.addTextChangedListener(watcherData);
 
-        ImageButton btData = (ImageButton) findViewById(R.id.btData);
+        ImageButton btData = (ImageButton) findViewById(R.id.btDataNascimento);
         btData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -134,7 +134,7 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
                     }
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Insira o nome do paciente", Toast.LENGTH_LONG).show();
                 }
                 break;
         }

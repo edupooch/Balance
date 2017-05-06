@@ -13,24 +13,45 @@
     <string name="salvar">SALVAR</string>
 
     <string name="text_inicial_vazio">Você ainda não tem pacientes cadastrados. Adicione um paciente novo no botão no canto inferior direito da tela</string>
-    <string name="text_inicial">Selecione um paciente para realizar um novo teste ou verificar os resultados de testes anteriores</string>
+    <string name="text_inicial">Selecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
     <string name="anos">anos</string>
     <string name="editar">Editar</string>
     <string name="deletar">Deletar</string>
-    <string name="dialog_deletar">Deseja deletar este paciente e todos os seus testes?</string>
+    <string name="dialog_deletar">Deseja deletar este paciente e todos os seus exames?</string>
     <string name="atencao_deletar">Deletar Paciente</string>
 
     <string name="configura_es">Configurações</string>
     <string name="testes">testes</string>
     <string name="divisor">|</string>
     <string name="testes_anteriores">TESTES ANTERIORES</string>
-    <string name="o_paciente_ainda_n_o_realizou_nenhum_teste">Não há testes cadastrados</string>
+    <string name="o_paciente_ainda_n_o_realizou_nenhum_teste">Não há exames cadastrados</string>
     <string name="dados_do_paciente">DADOS CADASTRAIS</string>
     <string name="masculino">Masculino</string>
     <string name="feminino">Feminino</string>
     <string name="contato">CONTATO</string>
     <string name="abandonar_cadastro">Abandonar Cadastro</string>
-    <string name="dialog_abandonar_cadastro">Deseja abandonar o teste? Todos os dados do cadastro serão perdidos.</string>
+    <string name="dialog_abandonar_cadastro">Deseja abandonar o cadastro? Todos os dados do cadastro serão perdidos.</string>
+    <string name="bota_o_para_inserir_foto_do_paciente">Botaão para inserir foto do paciente</string>
+    <string name="nome_do_paciente">Nome do Paciente</string>
+    <string name="data_de_nascimento">Data de nascimento</string>
+    <string name="description_calendario">Botão para abrir um calendário e escolher a data</string>
+    <string name="genero">Gênero</string>
+    <string name="description_peso">Ícone de balança</string>
+    <string name="massa_corporal_em_kg">Massa corporal (em kg)</string>
+    <string name="estatura_em_cm">Estatura (em cm)</string>
+    <string name="description_altura">Ícone da altura: fita métrica</string>
+    <string name="observacoes">Observações</string>
+    <string name="description_telefone">Ícone de Telefone</string>
+    <string name="telefone">Telefone</string>
+    <string name="e_mail">E-mail</string>
+    <string name="description_email">Ícone de e-mail</string>
+    <string name="description_obs">Ícone das observaçoes</string>
+    <string name="info_clinicas">INFORMAÇÕES CLÍNICAS</string>
+    <string name="data_de_anamnese">Data de Anamnese</string>
+    <string name="diagnostico_clinico">Diagnostico Clínico</string>
+    <string name="hist_rico_da_doen_a_atual">Histórico da Doença Atual</string>
+    <string name="hist_rico_de_doen_as_anteriores">Histórico de Doenças Anteriores</string>
+    <string name="procedimentos_terap_uticos">Procedimentos terapêuticos</string>
 
 
 </resources>

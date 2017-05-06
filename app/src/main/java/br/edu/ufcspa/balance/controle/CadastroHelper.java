@@ -3,14 +3,14 @@ package br.edu.ufcspa.balance.controle;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.support.annotation.Nullable;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
-import java.io.FileOutputStream;
+import java.sql.Date;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,99 +22,138 @@ import br.edu.ufcspa.balance.modelo.Paciente;
 /**
  * Created by edupooch on 17/02/16.
  */
-public class CadastroHelper {
 
-    private final EditText campoNome;
-    private final EditText campoData;
-    private final EditText campoAltura;
-    private final EditText campoPeso;
-    private final EditText campoEmail;
-    private final EditText campoTelefone;
-    private final EditText campoObs;
-    private final ImageButton btFoto;
+class CadastroHelper {
+
+
+    private ImageButton btFoto;
+    private EditText edTextNomePaciente;
+    private EditText edTextDataNascimento;
     private RadioButton btnMasculino;
     private RadioButton btnFeminino;
+    private EditText edTextPeso;
+    private EditText edTextAltura;
+    private EditText edTextObs;
+    private EditText edTextDataAnamnese;
+    private EditText edTextDiagnostico;
+    private EditText edTextDataDiagnostico;
+    private EditText edTextCurrentDisease;
+    private EditText edTextPreviousDisease;
+    private EditText edTextProcedimentos;
+    private EditText edTextTelefone;
+    private EditText edTextEmail;
 
-    public CadastroHelper(final CadastroActivity activity) {
-        campoNome = (EditText) activity.findViewById(R.id.edTextNomePaciente);
-        campoData = (EditText) activity.findViewById(R.id.edTextDataNascimento);
-        btnFeminino = (RadioButton) activity.findViewById(R.id.btnFeminino);
-        btnMasculino = (RadioButton) activity.findViewById(R.id.btnMasculino);
-        campoAltura = (EditText) activity.findViewById(R.id.edTextAltura);
-        campoPeso = (EditText) activity.findViewById(R.id.edTextPeso);
-        campoEmail = (EditText) activity.findViewById(R.id.edTextEmail);
-        campoTelefone = (EditText) activity.findViewById(R.id.edTextTelefone);
-        campoTelefone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
-        campoObs = (EditText) activity.findViewById(R.id.edTextObs);
+    CadastroHelper(final CadastroActivity activity) {
         btFoto = (ImageButton) activity.findViewById(R.id.btFoto);
-
-
+        edTextNomePaciente = (EditText) activity.findViewById(R.id.edTextNomePaciente);
+        edTextDataNascimento = (EditText) activity.findViewById(R.id.edTextDataNascimento);
+        btnMasculino = (RadioButton) activity.findViewById(R.id.btnMasculino);
+        btnFeminino = (RadioButton) activity.findViewById(R.id.btnFeminino);
+        edTextPeso = (EditText) activity.findViewById(R.id.edTextPeso);
+        edTextAltura = (EditText) activity.findViewById(R.id.edTextAltura);
+        edTextObs = (EditText) activity.findViewById(R.id.edTextObs);
+        edTextDataAnamnese = (EditText) activity.findViewById(R.id.edTextDataAnamnese);
+        edTextDiagnostico = (EditText) activity.findViewById(R.id.edTextDiagnostico);
+        edTextDataDiagnostico = (EditText) activity.findViewById(R.id.edTextDataDiagnostico);
+        edTextCurrentDisease = (EditText) activity.findViewById(R.id.edTextCurrentDisease);
+        edTextPreviousDisease = (EditText) activity.findViewById(R.id.edTextPreviousDisease);
+        edTextProcedimentos = (EditText) activity.findViewById(R.id.edTextProcedimentos);
+        edTextTelefone = (EditText) activity.findViewById(R.id.edTextTelefone);
+        edTextEmail = (EditText) activity.findViewById(R.id.edTextEmail);
     }
 
 
-    public Paciente pegaInfoDosCampos(Long id) {
+    Paciente pegaInfoDosCampos(Long id) {
         Paciente paciente = new Paciente();
 
         if (id != null) paciente.setId(id);
-        paciente.setNome(campoNome.getText().toString());
+        paciente.setNome(edTextNomePaciente.getText().toString());
+        paciente.setDataNascimento(getDataFromEditText(edTextDataNascimento));
 
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        try {
-            paciente.setDataNascimento(new java.sql.Date(format.parse(campoData.getText().toString()).getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        if (!edTextAltura.getText().toString().isEmpty())
+            paciente.setEstatura(Double.valueOf(edTextAltura.getText().toString()));
+        if (!edTextPeso.getText().toString().isEmpty())
+            paciente.setMassa(Double.valueOf(edTextPeso.getText().toString()));
 
-        paciente.setEstatura(Double.valueOf(campoAltura.getText().toString()));
-        paciente.setMassa(Double.valueOf(campoPeso.getText().toString()));
-        paciente.setTelefone(campoTelefone.getText().toString());
-        paciente.setEmail(campoEmail.getText().toString());
-        paciente.setObs(campoObs.getText().toString());
+        paciente.setTelefone(edTextTelefone.getText().toString());
+        paciente.setEmail(edTextEmail.getText().toString());
+        paciente.setObs(edTextObs.getText().toString());
+
+        paciente.setAnamnesisDate(getDataFromEditText(edTextDataAnamnese));
+        paciente.setDiagnostico(edTextDiagnostico.getText().toString());
+        paciente.setDataDiagnostico(getDataFromEditText(edTextDataDiagnostico));
+
+        paciente.setHistoricoDoencaAtual(edTextCurrentDisease.getText().toString());
+        paciente.setHistoricoDoencasAnteriores(edTextPreviousDisease.getText().toString());
+        paciente.setProcedimentosTerapeuticos(edTextProcedimentos.getText().toString());
         paciente.setCaminhoFoto((String) btFoto.getTag());
+
         if (btnMasculino.isChecked()) {
-            paciente.setGenero(1);
+            paciente.setGenero(Paciente.MASCULINO);
         } else if (btnFeminino.isChecked()) {
-            paciente.setGenero(0);
+            paciente.setGenero(Paciente.FEMININO);
         }
         return paciente;
     }
 
-    public void preencheFormulário(Paciente paciente) {
-        campoNome.setText(paciente.getNome());
-        Log.d("tag", paciente.getDataNascimento().toString());
-        DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String strData = df.format(paciente.getDataNascimento());
-        campoData.setText(strData);
-        campoData.setFocusable(false);
-        campoData.setEnabled(false);
+    @Nullable
+    private Date getDataFromEditText(EditText edTextData) {
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String strData;
+        if (!edTextData.getText().toString().isEmpty()) {
+            strData = edTextData.getText().toString();
+        } else {
+            strData = Paciente.DATA_NULA; //Se um date for null o framework do banco da erro
+        }
+
+        try {
+            return (new java.sql.Date(format.parse(strData).getTime()));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    void preencheFormulário(Paciente paciente) {
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+
+        edTextNomePaciente.setText(paciente.getNome());
+        edTextDataNascimento.setText(dateFormat.format(paciente.getDataNascimento()));
+        edTextDataNascimento.setFocusable(false);
+
         if (paciente.getGenero() == 0) {
             btnFeminino.setChecked(true);
         } else {
             btnMasculino.setChecked(true);
         }
-        btnMasculino.setEnabled(false);
-        btnFeminino.setEnabled(false);
 
-        campoPeso.setText(String.valueOf(paciente.getMassa()));
-        campoAltura.setText(String.valueOf(paciente.getEstatura()));
-        campoTelefone.setText(paciente.getTelefone());
+        edTextPeso.setText(String.valueOf(paciente.getMassa()));
+        edTextAltura.setText(String.valueOf(paciente.getEstatura()));
+        edTextTelefone.setText(paciente.getTelefone());
 
-        campoEmail.setText(paciente.getEmail());
-        campoObs.setText(paciente.getObs());
+        edTextEmail.setText(paciente.getEmail());
+        edTextObs.setText(paciente.getObs());
+
+        edTextDataAnamnese.setText(dateFormat.format(paciente.getAnamnesisDate()));
+        edTextDiagnostico.setText(paciente.getDiagnostico());
+        edTextDataAnamnese.setText(dateFormat.format(paciente.getDataDiagnostico()));
+        edTextCurrentDisease.setText(paciente.getHistoricoDoencaAtual());
+        edTextPreviousDisease.setText(paciente.getHistoricoDoencasAnteriores());
+        edTextProcedimentos.setText(paciente.getProcedimentosTerapeuticos());
         carregaImagem(paciente.getCaminhoFoto());
     }
 
-    public boolean validateFields() {
-
-        return (!campoNome.getText().toString().isEmpty());
+    boolean validateFields() {
+        return (!edTextNomePaciente.getText().toString().isEmpty());
     }
 
     /**
      * Método que carrega a imagem no espaço do ícone
      *
-     * @param caminhoFoto
+     * @param caminhoFoto diretorio da foto
      */
-    public void carregaImagem(String caminhoFoto) {
+    void carregaImagem(String caminhoFoto) {
         if (caminhoFoto != null) {
             final BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = 8;
@@ -126,7 +165,7 @@ public class CadastroHelper {
                 Matrix matrix = new Matrix();
                 matrix.postRotate(180);
                 bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-                FileOutputStream out = null;
+
 
             } else {
                 //horizontal
@@ -138,3 +177,4 @@ public class CadastroHelper {
         }
     }
 }
+

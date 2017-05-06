@@ -16,6 +16,7 @@
             android:layout_height="54dp"
             android:layout_centerInParent="true"
             android:layout_margin="4dp"
+            android:tint="@color/colorPrimary"
             android:src="@drawable/icon_usuario_redondo" />
 
         <ImageView
@@ -25,11 +26,6 @@
             android:padding="5dp"
             android:layout_centerInParent="true"
             android:src="@drawable/icon_moldura_redonda"/>
-
-
-
-
-
 
     </RelativeLayout>
 
@@ -70,24 +66,6 @@
                 android:layout_marginRight="5dp"
                 android:text="@string/testes" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/divisor" />
-
-            <TextView
-                android:id="@+id/textIdadeLista"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginStart="3dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="3dp"
-                android:layout_marginStart="3dp"
-                android:text="@string/anos" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

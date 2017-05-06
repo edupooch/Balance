@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.dao.PacienteDAO;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 
@@ -140,7 +139,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 String[] endereco = {paciente.getEmail()};
-                composeEmail(endereco,"Teste da Caminhada de Seis Minutos");
+                composeEmail(endereco,"Avaliacao da Caminhada de Seis Minutos");
                 return false;
             }
         });

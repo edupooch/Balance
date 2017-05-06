@@ -23,7 +23,7 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:paddingTop="@dimen/activity_vertical_margin"
-            android:text="Avaliação do Equilíbrio" />
+            android:text="Balance: Avaliação do Equilíbrio" />
 
         <TextView
             android:id="@+id/textInicial"
