@@ -19,7 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.util.Collections;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcspa.balance.R;
@@ -63,7 +63,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(ListaPacientesActivity.this, FormularioActivity.class));
+                startActivity(new Intent(ListaPacientesActivity.this, CadastroActivity.class));
             }
         });
     }
@@ -71,11 +71,14 @@ public class ListaPacientesActivity extends AppCompatActivity {
     private void carregaLista() {
 
         listaPacientes = (ListView) findViewById(R.id.lista_pacientes);
-
-
-
-        PacienteDAO dao = new PacienteDAO(this);
-        List<Paciente> pacientes = dao.buscaPacientes();
+        List<Paciente> pacientes;
+        //PacienteDAO dao = new PacienteDAO(this);
+        try {
+            pacientes = Paciente.listAll(Paciente.class);
+        }catch (RuntimeException e){
+            e.printStackTrace();
+            pacientes = new ArrayList<>();
+        }
         //Collections.sort(pacientes);
         //ArrayAdapter<Paciente> adapter = new ArrayAdapter<Paciente>(this, R.layout.list_item_pacientes, pacientes);
 
@@ -88,7 +91,6 @@ public class ListaPacientesActivity extends AppCompatActivity {
         } else {
             textInicial.setText(R.string.text_inicial);
         }
-        dao.close();
 
         //Coloca o tamanho da lista em dp de acordo com o numero de pacientes (75dp por paciente)
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaPacientes.getLayoutParams();

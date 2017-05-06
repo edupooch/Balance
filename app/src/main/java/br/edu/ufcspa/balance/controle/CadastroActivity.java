@@ -2,13 +2,15 @@ package br.edu.ufcspa.balance.controle;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,17 +25,15 @@ import java.io.File;
 import java.util.Calendar;
 import java.util.Locale;
 
-import br.edu.ufcspa.balance.dao.PacienteDAO;
 import br.edu.ufcspa.balance.modelo.Paciente;
 import br.edu.ufcspa.balance.R;
 
-public class FormularioActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
+public class CadastroActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
 
     public static final int REQUEST_CODE_CAMERA = 123;
-    private FormularioHelper helper;
+    private CadastroHelper helper;
     private Long idPaciente;
-    private EditText date;
     private String caminhoFoto;
 
 
@@ -47,10 +47,12 @@ public class FormularioActivity extends AppCompatActivity implements DatePickerD
     private void iniciaComponentes() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        ActionBar supportActionBar = getSupportActionBar();
+        assert supportActionBar != null;
+        supportActionBar.setDefaultDisplayHomeAsUpEnabled(true);
 
         idPaciente = null;
-        helper = new FormularioHelper(this);
+        helper = new CadastroHelper(this);
 
         Intent intent = getIntent();
         Paciente paciente = (Paciente) intent.getSerializableExtra("paciente");
@@ -60,7 +62,7 @@ public class FormularioActivity extends AppCompatActivity implements DatePickerD
             idPaciente = paciente.getId();
         }
 
-        date = (EditText) findViewById(R.id.edTextDataNascimento);
+        EditText date = (EditText) findViewById(R.id.edTextDataNascimento);
         //Text Watcher para aceitar apenas datas no formato dd/mm/aaaa
         TextWatcher watcherData = new TextWatcherData(date);
         date.addTextChangedListener(watcherData);
@@ -70,7 +72,7 @@ public class FormularioActivity extends AppCompatActivity implements DatePickerD
             @Override
             public void onClick(View v) {
                 Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = new DatePickerDialog(FormularioActivity.this, FormularioActivity.this, now.get(Calendar.YEAR),
+                DatePickerDialog dpd = new DatePickerDialog(CadastroActivity.this, CadastroActivity.this, now.get(Calendar.YEAR),
                         now.get(Calendar.MONTH),
                         now.get(Calendar.DAY_OF_MONTH));
 
@@ -116,22 +118,20 @@ public class FormularioActivity extends AppCompatActivity implements DatePickerD
         switch (item.getItemId()) {
             case R.id.menu_formulario:
                 if (helper.validateFields()) {
-
-                    Paciente paciente = helper.pegaPacienteFromFields(idPaciente);
-                    PacienteDAO dao = new PacienteDAO(this);
+                    Paciente paciente = helper.pegaInfoDosCampos(idPaciente);
+//                    PacienteDAO dao = new PacienteDAO(this);
 
                     if (idPaciente == null) {
-                        dao.insere(paciente);
+                        paciente.save();
                         Toast.makeText(getApplicationContext(), "Paciente " + paciente.getNome() + " adicionado!", Toast.LENGTH_LONG).show();
 
                     } else {
-                        dao.altera(paciente);
-                        Intent intentVaiProPerfil = new Intent(FormularioActivity.this, PerfilActivity.class);
+                        atualizaDados(paciente);
+                        Intent intentVaiProPerfil = new Intent(CadastroActivity.this, PerfilActivity.class);
                         intentVaiProPerfil.putExtra("paciente", paciente);
                         startActivity(intentVaiProPerfil);
                         Toast.makeText(getApplicationContext(), "Paciente " + paciente.getNome() + " alterado!", Toast.LENGTH_LONG).show();
                     }
-                    dao.close();
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Preencha todos os campos!", Toast.LENGTH_LONG).show();
@@ -139,6 +139,12 @@ public class FormularioActivity extends AppCompatActivity implements DatePickerD
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void atualizaDados(Paciente pacienteAlterado) {
+        Paciente pacienteBanco = Paciente.findById(Paciente.class, pacienteAlterado.getId());
+        pacienteBanco.copy(pacienteAlterado);
+        pacienteBanco.save();
     }
 
     @Override
@@ -166,5 +172,27 @@ public class FormularioActivity extends AppCompatActivity implements DatePickerD
                 "/" + String.format(Locale.getDefault(), "%04d", year);
 
         edTextData.setText(strData);
+    }
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(R.string.abandonar_cadastro);
+        builder.setMessage(getString(R.string.dialog_abandonar_cadastro));
+        builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

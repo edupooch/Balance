@@ -10,20 +10,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.FileOutputStream;
-import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
@@ -153,7 +148,7 @@ public class PerfilActivity extends AppCompatActivity {
         switch (item.getItemId()) {
 
             case R.id.action_editar:
-                Intent intentVaiProFormulario = new Intent(PerfilActivity.this, FormularioActivity.class);
+                Intent intentVaiProFormulario = new Intent(PerfilActivity.this, CadastroActivity.class);
                 intentVaiProFormulario.putExtra("paciente", paciente);
                 startActivity(intentVaiProFormulario);
                 finish();
@@ -168,14 +163,8 @@ public class PerfilActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        PacienteDAO dao = new PacienteDAO(PerfilActivity.this);
-//                        TesteDAO daoTeste = new TesteDAO(PerfilActivity.this);
-//TODO: deletar todos os testes do paciente
-                        dao.deleta(paciente);
-//                        daoTeste.deletaTodosDoPaciente(paciente);
-//
-                        dao.close();
-//                        daoTeste.close();
+                        Paciente pacienteBanco = Paciente.findById(Paciente.class, paciente.getId());
+                        pacienteBanco.delete();
                         finish();
                     }
                 });

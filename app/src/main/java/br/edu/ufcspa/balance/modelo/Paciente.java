@@ -2,15 +2,17 @@ package br.edu.ufcspa.balance.modelo;
 
 import android.support.annotation.NonNull;
 
+import com.orm.SugarRecord;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * Created by edupooch on 21/12/15.
  */
-public class Paciente implements Serializable{
+public class Paciente extends SugarRecord<Paciente> implements Serializable{
 
-    private Long id = null;
+    public Long id = null;
     private String nome;
     private String telefone;
     private String email;
@@ -20,6 +22,7 @@ public class Paciente implements Serializable{
     private int genero;
     private String obs;
     private String caminhoFoto;
+
 
 
     public Paciente() {
@@ -158,4 +161,11 @@ public class Paciente implements Serializable{
         this.obs = obs;
     }
 
+    public void copy(Paciente pacienteAlterado) {
+        this.nome = pacienteAlterado.getNome();
+        this.massa = pacienteAlterado.getMassa();
+        this.estatura = pacienteAlterado.getEstatura();
+        this.email = pacienteAlterado.getEmail();
+        this.obs = pacienteAlterado.getObs();
+    }
 }

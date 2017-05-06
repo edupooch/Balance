@@ -4,26 +4,26 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 
 import java.io.FileOutputStream;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.controle.FormularioActivity;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 /**
  * Created by edupooch on 17/02/16.
  */
-public class FormularioHelper {
+public class CadastroHelper {
 
-
-    private Paciente paciente;
     private final EditText campoNome;
     private final EditText campoData;
     private final EditText campoAltura;
@@ -35,10 +35,7 @@ public class FormularioHelper {
     private RadioButton btnMasculino;
     private RadioButton btnFeminino;
 
-    public FormularioHelper(final FormularioActivity activity) {
-
-        Paciente paciente = new Paciente();
-
+    public CadastroHelper(final CadastroActivity activity) {
         campoNome = (EditText) activity.findViewById(R.id.edTextNomePaciente);
         campoData = (EditText) activity.findViewById(R.id.edTextDataNascimento);
         btnFeminino = (RadioButton) activity.findViewById(R.id.btnFeminino);
@@ -52,12 +49,10 @@ public class FormularioHelper {
         btFoto = (ImageButton) activity.findViewById(R.id.btFoto);
 
 
-
     }
 
 
-
-    public Paciente pegaPacienteFromFields(Long id) {
+    public Paciente pegaInfoDosCampos(Long id) {
         Paciente paciente = new Paciente();
 
         if (id != null) paciente.setId(id);
@@ -86,8 +81,9 @@ public class FormularioHelper {
 
     public void preencheFormulário(Paciente paciente) {
         campoNome.setText(paciente.getNome());
-        String[] arrayData = paciente.getDataNascimento().toString().split("-");
-        String strData = arrayData[2] + "/" + arrayData[1] + "/" + arrayData[0];
+        Log.d("tag", paciente.getDataNascimento().toString());
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+        String strData = df.format(paciente.getDataNascimento());
         campoData.setText(strData);
         campoData.setFocusable(false);
         campoData.setEnabled(false);
@@ -96,8 +92,9 @@ public class FormularioHelper {
         } else {
             btnMasculino.setChecked(true);
         }
-       // btnMasculino.setEnabled(false);
-     //   btnFeminino.setEnabled(false);
+        btnMasculino.setEnabled(false);
+        btnFeminino.setEnabled(false);
+
         campoPeso.setText(String.valueOf(paciente.getMassa()));
         campoAltura.setText(String.valueOf(paciente.getEstatura()));
         campoTelefone.setText(paciente.getTelefone());
@@ -105,22 +102,11 @@ public class FormularioHelper {
         campoEmail.setText(paciente.getEmail());
         campoObs.setText(paciente.getObs());
         carregaImagem(paciente.getCaminhoFoto());
-        this.paciente = paciente;
-
     }
 
     public boolean validateFields() {
 
-        return (!campoNome.getText().toString().isEmpty() &&
-                !campoData.getText().toString().isEmpty() &&
-                !campoData.getText().toString().contains("M")&&
-                !campoData.getText().toString().contains("D")&&
-                !campoData.getText().toString().contains("A")&&
-                !campoPeso.getText().toString().isEmpty() &&
-                !campoAltura.getText().toString().isEmpty() &&
-                btnFeminino.isChecked() ^ btnMasculino.isChecked()
-
-        );
+        return (!campoNome.getText().toString().isEmpty());
     }
 
     /**

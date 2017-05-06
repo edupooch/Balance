@@ -29,6 +29,8 @@
     <string name="masculino">Masculino</string>
     <string name="feminino">Feminino</string>
     <string name="contato">CONTATO</string>
+    <string name="abandonar_cadastro">Abandonar Cadastro</string>
+    <string name="dialog_abandonar_cadastro">Deseja abandonar o teste? Todos os dados do cadastro serão perdidos.</string>
 
 
 </resources>

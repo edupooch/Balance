@@ -33,7 +33,7 @@
             android:gravity="center"
             android:paddingBottom="10dp"
             android:paddingTop="5dp"
-            android:text="Texto inicial" />
+            android:text="Você ainda não possui nenhum paciente, clique no botão abaixo para cadastrar." />
 
         <ListView
             android:id="@+id/lista_pacientes"
