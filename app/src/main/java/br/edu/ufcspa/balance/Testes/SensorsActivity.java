@@ -82,7 +82,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         finish();
 
-
     }
 
     @Override
