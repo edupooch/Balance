@@ -1,6 +1,7 @@
 package br.edu.ufcspa.balance.modelo;
 
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.List;
 public class Paciente extends SugarRecord<Paciente> implements Serializable {
 
     public static final int MASCULINO = 1;
-    public static final int FEMININO = 0;
+    public static final int FEMININO = 2;
     public static final String DATA_NULA = "01/01/1800";
 
     public Long id = null;
@@ -32,6 +33,8 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
     private String historicoDoencaAtual;
     private String historicoDoencasAnteriores;
     private String procedimentosTerapeuticos;
+
+    @Ignore
     private List<Avaliacao> avaliacoes;
 
     public Paciente() {
