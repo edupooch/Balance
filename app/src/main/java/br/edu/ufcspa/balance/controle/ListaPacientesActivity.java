@@ -109,6 +109,9 @@ public class ListaPacientesActivity extends AppCompatActivity {
         TextView textInicial = (TextView) findViewById(R.id.textInicial);
         if (listaPacientes.getCount() == 0) {
             textInicial.setVisibility(View.VISIBLE);
+        }else{
+            textInicial.setVisibility(View.GONE);
+
         }
 
         //Coloca o tamanho da lista em dp de acordo com o numero de pacientes (75dp por paciente)

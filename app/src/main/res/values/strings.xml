@@ -55,7 +55,7 @@
     <string name="hist_rico_de_doen_as_anteriores">Histórico de Doenças Anteriores</string>
     <string name="procedimentos_terap_uticos">Procedimentos terapêuticos</string>
     <string name="balance_avalia_o_do_equil_brio">Balance: Avaliação do Equilíbrio</string>
-    <string name="text_inicial">Balance: Avaliação do Equilíbrio\nVocê ainda não tem pacientes cadastrados. Adicione um paciente novo no botão no canto inferior direito da tela</string>
+    <string name="text_inicial">Ainda não há Pacientes Cadastrados.</string>
     <string name="text_header_lista">Balance: Avaliação do Equilíbrio\nSelecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
 
 

@@ -216,6 +216,8 @@ public class PerfilActivity extends AppCompatActivity {
         }else{
             TextView  txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
             txtMsgVazio.setText("Nenhuma avaliação realizada ainda.");
+            TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
+            txtVerMais.setVisibility(View.GONE);
         }
 
 
