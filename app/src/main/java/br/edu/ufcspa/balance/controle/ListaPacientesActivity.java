@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,6 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.Testes.SensorsActivity;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 
@@ -36,9 +38,27 @@ public class ListaPacientesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pacientes);
         iniciaComponentes();
-        View header = getLayoutInflater().inflate(R.layout.header_lista_pacientes, null);
-        listaPacientes.addHeaderView(header);
+        //View header = getLayoutInflater().inflate(R.layout.header_lista_pacientes, null);
+        //listaPacientes.addHeaderView(header);
         registerForContextMenu(listaPacientes);
+
+
+        /////////////////////////////TESTE - APAGAR
+
+
+        Button b = (Button) findViewById(R.id.button);
+                b.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentVaiPraListaDeAvaliacoes = new Intent(ListaPacientesActivity.this, SensorsActivity.class);
+                        startActivity(intentVaiPraListaDeAvaliacoes);
+                    }
+                });
+
+
+        ////////////////////////////////////
+
+
     }
 
     private void iniciaComponentes() {
