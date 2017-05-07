@@ -137,7 +137,7 @@ class CadastroHelper {
 
         edTextDataAnamnese.setText(dateFormat.format(paciente.getAnamnesisDate()));
         edTextDiagnostico.setText(paciente.getDiagnostico());
-        edTextDataAnamnese.setText(dateFormat.format(paciente.getDataDiagnostico()));
+        edTextDataDiagnostico.setText(dateFormat.format(paciente.getDataDiagnostico()));
         edTextCurrentDisease.setText(paciente.getHistoricoDoencaAtual());
         edTextPreviousDisease.setText(paciente.getHistoricoDoencasAnteriores());
         edTextProcedimentos.setText(paciente.getProcedimentosTerapeuticos());

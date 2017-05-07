@@ -12,12 +12,11 @@
 
     <string name="salvar">SALVAR</string>
 
-    <string name="text_inicial_vazio">Você ainda não tem pacientes cadastrados. Adicione um paciente novo no botão no canto inferior direito da tela</string>
-    <string name="text_inicial">Selecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
+
     <string name="anos">anos</string>
     <string name="editar">Editar</string>
     <string name="deletar">Deletar</string>
-    <string name="dialog_deletar">Deseja deletar este paciente e todos os seus exames?</string>
+    <string name="dialog_deletar">Deseja deletar este paciente e todos os seus exames? Esta ação não poderá ser desfeita.</string>
     <string name="atencao_deletar">Deletar Paciente</string>
 
     <string name="configura_es">Configurações</string>
@@ -52,6 +51,9 @@
     <string name="hist_rico_da_doen_a_atual">Histórico da Doença Atual</string>
     <string name="hist_rico_de_doen_as_anteriores">Histórico de Doenças Anteriores</string>
     <string name="procedimentos_terap_uticos">Procedimentos terapêuticos</string>
+    <string name="balance_avalia_o_do_equil_brio">Balance: Avaliação do Equilíbrio</string>
+    <string name="text_inicial">Balance: Avaliação do Equilíbrio\nVocê ainda não tem pacientes cadastrados. Adicione um paciente novo no botão no canto inferior direito da tela</string>
+    <string name="text_header_lista">Balance: Avaliação do Equilíbrio\nSelecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
 
 
 </resources>

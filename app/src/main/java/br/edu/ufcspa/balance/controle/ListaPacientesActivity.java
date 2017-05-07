@@ -36,6 +36,8 @@ public class ListaPacientesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_pacientes);
         iniciaComponentes();
+        View header = getLayoutInflater().inflate(R.layout.header_lista_pacientes, null);
+        listaPacientes.addHeaderView(header);
         registerForContextMenu(listaPacientes);
     }
 
@@ -74,7 +76,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
         //PacienteDAO dao = new PacienteDAO(this);
         try {
             pacientes = Paciente.listAll(Paciente.class);
-        }catch (RuntimeException e){
+        } catch (RuntimeException e) {
             e.printStackTrace();
             pacientes = new ArrayList<>();
         }
@@ -86,15 +88,13 @@ public class ListaPacientesActivity extends AppCompatActivity {
 
         TextView textInicial = (TextView) findViewById(R.id.textInicial);
         if (listaPacientes.getCount() == 0) {
-            textInicial.setText(R.string.text_inicial_vazio);
-        } else {
-            textInicial.setText(R.string.text_inicial);
+            textInicial.setVisibility(View.VISIBLE);
         }
 
         //Coloca o tamanho da lista em dp de acordo com o numero de pacientes (75dp por paciente)
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaPacientes.getLayoutParams();
-        lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75 * pacientes.size(), getResources().getDisplayMetrics());;
-        listaPacientes.setLayoutParams(lp);
+//        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaPacientes.getLayoutParams();
+//        lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75 * pacientes.size(), getResources().getDisplayMetrics());;
+//        listaPacientes.setLayoutParams(lp);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
                 String[] endereco = {paciente.getEmail()};
-                composeEmail(endereco,"Avaliacao da Caminhada de Seis Minutos");
+                composeEmail(endereco, "Avaliacao da Caminhada de Seis Minutos");
                 return false;
             }
         });

@@ -12,12 +12,12 @@ import java.util.Locale;
  */
 
 class TextWatcherData implements TextWatcher {
-    private final EditText date;
+    private final EditText editText;
     private String current = "";
     private Calendar cal = Calendar.getInstance();
 
-    TextWatcherData(EditText date) {
-        this.date = date;
+    TextWatcherData(EditText editText) {
+        this.editText = editText;
     }
 
     @Override
@@ -39,7 +39,7 @@ class TextWatcherData implements TextWatcher {
                 clean = clean + ddmmyyyy.substring(clean.length());
             } else {
                 //This part makes sure that when we finish entering numbers
-                //the date is correct, fixing it otherwise
+                //the editText is correct, fixing it otherwise
                 int day = Integer.parseInt(clean.substring(0, 2));
                 int mon = Integer.parseInt(clean.substring(2, 4));
                 int year = Integer.parseInt(clean.substring(4, 8));
@@ -49,7 +49,7 @@ class TextWatcherData implements TextWatcher {
                 year = (year < 1900) ? 1900 : (year > Calendar.getInstance().get(Calendar.YEAR)) ? Calendar.getInstance().get(Calendar.YEAR) : year;
                 cal.set(Calendar.YEAR, year);
                 // ^ first set year for the line below to work correctly
-                //with leap years - otherwise, date e.g. 29/02/2012
+                //with leap years - otherwise, editText e.g. 29/02/2012
                 //would be automatically corrected to 28/02/2012
 
                 day = (day > cal.getActualMaximum(Calendar.DATE)) ? cal.getActualMaximum(Calendar.DATE) : day;
@@ -62,8 +62,8 @@ class TextWatcherData implements TextWatcher {
 
             sel = sel < 0 ? 0 : sel;
             current = clean;
-            date.setText(current);
-            date.setSelection(sel < current.length() ? sel : current.length());
+            editText.setText(current);
+            editText.setSelection(sel < current.length() ? sel : current.length());
         }
     }
 

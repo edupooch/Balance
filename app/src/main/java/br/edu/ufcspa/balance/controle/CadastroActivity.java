@@ -62,24 +62,7 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
             idPaciente = paciente.getId();
         }
 
-        EditText date = (EditText) findViewById(R.id.edTextDataNascimento);
-        //Text Watcher para aceitar apenas datas no formato dd/mm/aaaa
-        TextWatcher watcherData = new TextWatcherData(date);
-        date.addTextChangedListener(watcherData);
-
-        ImageButton btData = (ImageButton) findViewById(R.id.btDataNascimento);
-        btData.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar now = Calendar.getInstance();
-                DatePickerDialog dpd = new DatePickerDialog(CadastroActivity.this, CadastroActivity.this, now.get(Calendar.YEAR),
-                        now.get(Calendar.MONTH),
-                        now.get(Calendar.DAY_OF_MONTH));
-
-                dpd.show();
-
-            }
-        });
+        configuraCampoDatas();
 
         //INICIA O BOTÃO DA CAMERA
         ImageButton btFoto = (ImageButton) findViewById(R.id.btFoto);
@@ -93,6 +76,22 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
                 startActivityForResult(intentCamera, REQUEST_CODE_CAMERA);
             }
         });
+    }
+
+    private void configuraCampoDatas() {
+        EditText edTextDataNascimento = (EditText) findViewById(R.id.edTextDataNascimento);
+        edTextDataNascimento.addTextChangedListener(new TextWatcherData(edTextDataNascimento));
+        EditText edTextDataAnamnese = (EditText) findViewById(R.id.edTextDataAnamnese);
+        edTextDataAnamnese.addTextChangedListener(new TextWatcherData(edTextDataAnamnese));
+        EditText edTextDataDiagnostico = (EditText) findViewById(R.id.edTextDataDiagnostico);
+        edTextDataDiagnostico.addTextChangedListener(new TextWatcherData(edTextDataDiagnostico));
+
+        ImageButton btDataNascimento = (ImageButton) findViewById(R.id.btDataNascimento);
+        btDataNascimento.setOnClickListener(new CalendarioListener(this));
+        ImageButton btDataAnamnese = (ImageButton) findViewById(R.id.btDataAnamnese);
+        btDataAnamnese.setOnClickListener(new CalendarioListener(this));
+        ImageButton btDataDiagnostico = (ImageButton) findViewById(R.id.btDataDiagnostico);
+        btDataDiagnostico.setOnClickListener(new CalendarioListener(this));
     }
 
     @Override
