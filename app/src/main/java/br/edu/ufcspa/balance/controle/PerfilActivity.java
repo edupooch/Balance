@@ -6,31 +6,41 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.FileOutputStream;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 
 public class PerfilActivity extends AppCompatActivity {
+
     private PerfilActivity activity = this;
     private Paciente paciente;
-    private ListView listaTestes;
-
+    private ArrayList<Avaliacao> avaliacoes;
+    private static int TAMANHO_ITEM_AVALIACAO = 82+1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +54,7 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void iniciaComponentes() {
         escreveDados();
-        carregaLista();
+        carregaListaAvaliacoes();
 
         FloatingActionButton btIniciarTeste = (FloatingActionButton) findViewById(R.id.btnPlayTeste);
         btIniciarTeste.setOnClickListener(new View.OnClickListener() {
@@ -180,7 +190,36 @@ public class PerfilActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void carregaLista() {
+    private void carregaListaAvaliacoes() {
+
+        //TESTE PARA CARREGAMENTO -- descomentar última linha para realizar teste
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setIdPaciente(paciente.id);
+        avaliacao.setData(new Date(System.currentTimeMillis()));
+        avaliacao.setPernas(Avaliacao.UMA_PERNA);
+        avaliacao.setOlhos(Avaliacao.OLHOS_ABERTOS);
+        avaliacao.setFrequencia(100);
+        avaliacao.setArea(72.25);
+        //avaliacao.save();
+
+        try {
+            avaliacoes  = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?",String.valueOf(this.paciente.getId()));
+        }catch (Exception e){
+            e.printStackTrace();
+            avaliacoes = new ArrayList<Avaliacao>();
+        }
+
+        if(!avaliacoes.isEmpty()){
+            popularListaAvaliacoes(avaliacoes);
+            TextView  txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
+            txtMsgVazio.setText("Clique na Avaliação para mais detalhes.");
+        }else{
+            TextView  txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
+            txtMsgVazio.setText("Nenhuma avaliação realizada ainda.");
+        }
+
+
+
 //        listaTestes = (ListView) findViewById(R.id.lista_testes);
 ////        TesteDAO dao = new TesteDAO(this);
 ////        List<Avaliacao> testes = dao.buscaTestes(paciente);
@@ -218,6 +257,41 @@ public class PerfilActivity extends AppCompatActivity {
 //
 //        dao.close();
     }
+
+    private void popularListaAvaliacoes(List<Avaliacao> avaliacoes) {
+
+        ListView listaAvaliacoes = (ListView) findViewById(R.id.lista_avaliacoes_anteriores);
+
+        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaAvaliacoes.getLayoutParams();
+
+        if(avaliacoes.size() < 3){
+            lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * avaliacoes.size(), getResources().getDisplayMetrics());
+            listaAvaliacoes.setLayoutParams(lp);
+            TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
+            txtVerMais.setVisibility(View.GONE);
+        }else{
+            lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * 3, getResources().getDisplayMetrics());
+            listaAvaliacoes.setLayoutParams(lp);
+            TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
+            txtVerMais.setVisibility(View.VISIBLE);
+        }
+
+        AvaliacoesAdapter adapter = new AvaliacoesAdapter(this, avaliacoes);
+        listaAvaliacoes.setAdapter(adapter);
+
+
+    }
+
+    public void txtVerMais_Click(View view){
+
+        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, ListaAvaliacoesActivity.class);
+        intentVaiPraListaDeAvaliacoes.putExtra("avaliacoes", avaliacoes);
+        intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
+        startActivity(intentVaiPraListaDeAvaliacoes);
+
+    }
+
+
 //    @Override
 //    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
 //        MenuItem deletar = menu.add("Deletar Avaliacao");
@@ -241,6 +315,6 @@ public class PerfilActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        carregaLista();
+        carregaListaAvaliacoes();
     }
 }

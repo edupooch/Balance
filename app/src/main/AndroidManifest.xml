@@ -4,6 +4,7 @@
     package="br.edu.ufcspa.balance">
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+
     <application
         android:name="com.orm.SugarApp"
         android:allowBackup="true"
@@ -14,27 +15,23 @@
         android:theme="@style/AppTheme"
         tools:replace="android:icon">
 
-        <meta-data
-            android:name="DATABASE"
-            android:value="balance_dados.db" />
-        <meta-data
-            android:name="VERSION"
-            android:value="1" />
-        <meta-data
-            android:name="QUERY_LOG"
-            android:value="true" />
+        <!-- <meta-data -->
+        <!-- android:name="DATABASE" -->
+        <!-- android:value="balance_dados.db" /> -->
+        <!-- <meta-data -->
+        <!-- android:name="VERSION" -->
+        <!-- android:value="1" /> -->
+        <!-- <meta-data -->
+        <!-- android:name="QUERY_LOG" -->
+        <!-- android:value="true" /> -->
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="br.edu.ufcspa.balance.modelo" />
 
-
         <activity
             android:name=".controle.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".controle.ListaPacientesActivity"
             android:label="@string/app_name"
@@ -45,7 +42,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".controle.CadastroActivity"
             android:label="@string/title_activity_formulario"
@@ -60,6 +56,15 @@
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
             android:value="controle.ListaPacientesActivity" />
+
+        <activity
+            android:name=".controle.ListaAvaliacoesActivity"
+            android:label="@string/title_activity_lista_avaliacoes"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Testes.SensorsActivity"
+            android:label="@string/title_activity_sensors"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

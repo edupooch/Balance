@@ -320,17 +320,45 @@
             android:background="@color/colorPrimary" />
 
         <TextView
+            android:id="@+id/text_sem_avaliacoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="5dp"
             android:gravity="center"
-            android:text="@string/o_paciente_ainda_n_o_realizou_nenhum_teste"
-            android:visibility="gone" />
+            android:text="Nenhuma avaliação realizada ainda."
+            android:visibility="visible" />
 
-        <ListView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/lista_avaliacoes_anteriores"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:scrollbars="none"
+                >
+
+            </ListView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/text_ver_mais"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            android:onClick="txtVerMais_Click"
+            android:text="Ver mais"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="25dp" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
