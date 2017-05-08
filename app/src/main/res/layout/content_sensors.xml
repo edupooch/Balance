@@ -50,6 +50,22 @@
         android:layout_width="match_parent"
         android:layout_height="25dp" />
 
+    <TextView
+        android:id="@+id/label_acelerometro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Dados Acelerômetro:"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/txt_a"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A:"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
     <Button
         android:id="@+id/btn_terminar"
         android:layout_width="wrap_content"
