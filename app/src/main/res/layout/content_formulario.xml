@@ -245,7 +245,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/data_de_anamnese"
+                android:hint="@string/data_de_diagnostico"
                 android:inputType="number"
                 android:theme="@style/AppTheme" />
         </LinearLayout>
