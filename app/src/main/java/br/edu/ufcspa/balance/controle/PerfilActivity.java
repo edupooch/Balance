@@ -202,7 +202,7 @@ public class PerfilActivity extends AppCompatActivity {
         avaliacao.setOlhos(Avaliacao.OLHOS_ABERTOS);
         avaliacao.setFrequencia(100);
         avaliacao.setArea(72.25);
-        //avaliacao.save();
+//        avaliacao.save();
 
         try {
             avaliacoes  = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?",String.valueOf(this.paciente.getId()));
