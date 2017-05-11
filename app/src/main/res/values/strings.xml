@@ -56,7 +56,7 @@
     <string name="procedimentos_terap_uticos">Procedimentos terapêuticos</string>
     <string name="balance_avalia_o_do_equil_brio">Balance: Avaliação do Equilíbrio</string>
     <string name="text_inicial">Ainda não há Pacientes Cadastrados.</string>
-    <string name="text_header_lista">Balance: Avaliação do Equilíbrio\nSelecione um paciente para realizar uma nova avaliação ou verificar os resultados de avaliações anteriores</string>
+    <string name="text_header_lista">Balance: Avaliação do Equilíbrio\nSelecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
 
 
 </resources>

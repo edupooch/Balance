@@ -53,6 +53,8 @@ public class PerfilActivity extends AppCompatActivity {
         iniciaComponentes();
     }
 
+
+
     private void iniciaComponentes() {
         escreveDados();
         carregaListaAvaliacoes();
@@ -201,7 +203,7 @@ public class PerfilActivity extends AppCompatActivity {
         avaliacao.setOlhos(Avaliacao.OLHOS_ABERTOS);
         avaliacao.setFrequencia(100);
         avaliacao.setArea(72.25);
-        //avaliacao.save();
+//        avaliacao.save();
 
         try {
             avaliacoes  = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?",String.valueOf(this.paciente.getId()));
@@ -276,7 +278,7 @@ public class PerfilActivity extends AppCompatActivity {
             lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * 3, getResources().getDisplayMetrics());
             listaAvaliacoes.setLayoutParams(lp);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
-            txtVerMais.setVisibility(View.VISIBLE);
+            txtVerMais.setVisibility(View.GONE);
         }
 
         AvaliacoesAdapter adapter = new AvaliacoesAdapter(this, avaliacoes);

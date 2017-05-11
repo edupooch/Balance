@@ -245,7 +245,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="@string/data_de_anamnese"
+                android:hint="@string/data_de_diagnostico"
                 android:inputType="number"
                 android:theme="@style/AppTheme" />
         </LinearLayout>
@@ -259,7 +259,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/description_obs"
-                android:src="@drawable/icon_obs"
+                android:src="@drawable/icon_hist_doenca"
                 android:tint="#9f9f9f" />
 
             <EditText
@@ -279,7 +279,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/description_obs"
-                android:src="@drawable/icon_obs"
+                android:src="@drawable/icon_hist_doenca_anterior"
                 android:tint="#9f9f9f" />
 
             <EditText
@@ -299,7 +299,7 @@
                 android:layout_height="30dp"
                 android:layout_marginTop="5dp"
                 android:contentDescription="@string/description_obs"
-                android:src="@drawable/icon_obs"
+                android:src="@drawable/icon_procedimentos"
                 android:tint="#9f9f9f" />
 
             <EditText
