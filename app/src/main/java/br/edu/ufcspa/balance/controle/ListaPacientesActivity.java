@@ -41,24 +41,6 @@ public class ListaPacientesActivity extends AppCompatActivity {
         //View header = getLayoutInflater().inflate(R.layout.header_lista_pacientes, null);
         //listaPacientes.addHeaderView(header);
         registerForContextMenu(listaPacientes);
-
-
-        /////////////////////////////TESTE - APAGAR
-
-
-        Button b = (Button) findViewById(R.id.button);
-                b.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intentVaiPraListaDeAvaliacoes = new Intent(ListaPacientesActivity.this, SensorsActivity.class);
-                        startActivity(intentVaiPraListaDeAvaliacoes);
-                    }
-                });
-
-
-        ////////////////////////////////////
-
-
     }
 
     private void iniciaComponentes() {

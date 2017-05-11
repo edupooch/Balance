@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.Testes.SensorsActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Paciente;
@@ -56,15 +57,15 @@ public class PerfilActivity extends AppCompatActivity {
         escreveDados();
         carregaListaAvaliacoes();
 
-        FloatingActionButton btIniciarTeste = (FloatingActionButton) findViewById(R.id.btnPlayTeste);
-        btIniciarTeste.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intentVaiProPreTeste = new Intent(PerfilActivity.this, ListaPacientesActivity.class);
-                //intentVaiProPreTeste.putExtra("paciente", paciente);
-                startActivity(intentVaiProPreTeste);
-            }
-        });
+//        FloatingActionButton btIniciarTeste = (FloatingActionButton) findViewById(R.id.btnComecarAvaliacao);
+//        btIniciarTeste.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intentVaiProPreTeste = new Intent(PerfilActivity.this, ListaPacientesActivity.class);
+//                //intentVaiProPreTeste.putExtra("paciente", paciente);
+//                startActivity(intentVaiProPreTeste);
+//            }
+//        });
 
 
         ImageView campoFoto = (ImageView) findViewById(R.id.foto_paciente);
@@ -289,6 +290,14 @@ public class PerfilActivity extends AppCompatActivity {
         Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, ListaAvaliacoesActivity.class);
         intentVaiPraListaDeAvaliacoes.putExtra("avaliacoes", avaliacoes);
         intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
+        startActivity(intentVaiPraListaDeAvaliacoes);
+
+    }
+
+    public void btnComecarAvaliacao_Click(View view){
+
+        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, SensorsActivity.class);
+        intentVaiPraListaDeAvaliacoes.putExtra("paciente",paciente);
         startActivity(intentVaiPraListaDeAvaliacoes);
 
     }

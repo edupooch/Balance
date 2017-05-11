@@ -59,12 +59,32 @@
         android:textSize="24sp" />
 
     <TextView
-        android:id="@+id/txt_a"
+        android:id="@+id/txt_ax"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="A:"
+        android:text="X:"
         android:textAlignment="center"
         android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txt_ay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Y:"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/txt_az"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Z:"
+        android:textAlignment="center"
+        android:textSize="30sp" />
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="25dp" />
 
     <Button
         android:id="@+id/btn_terminar"
