@@ -105,6 +105,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
 
         dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis(),ax,ay,az));
+
         }
 
     public void btn_Terminar_Click(View view){
