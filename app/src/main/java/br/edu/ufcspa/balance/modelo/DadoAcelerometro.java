@@ -1,5 +1,7 @@
 package br.edu.ufcspa.balance.modelo;
 
+import com.google.gson.Gson;
+
 /**
  * Created by Rodrigo on 07/05/2017.
  */
@@ -18,6 +20,8 @@ public class DadoAcelerometro {
         this.y = y;
         this.z = z;
     }
+
+
 
     public Long getTempo() {
         return tempo;
@@ -51,5 +55,10 @@ public class DadoAcelerometro {
         this.z = z;
     }
 
+    @Override
+    public String toString() {
 
+    Gson gson = new Gson();
+        return gson.toJson(this);
+    }
 }

@@ -1,5 +1,7 @@
 package br.edu.ufcspa.balance.modelo;
 
+import com.google.gson.Gson;
+
 /**
  * Created by Rodrigo on 07/05/2017.
  */
@@ -48,5 +50,12 @@ public class DadoGiroscopio {
         this.x = x;
         this.y = y;
         this.z = z;
+    }
+
+    @Override
+    public String toString() {
+
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

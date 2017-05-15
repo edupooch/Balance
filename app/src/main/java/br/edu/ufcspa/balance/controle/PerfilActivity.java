@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -49,7 +50,7 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         iniciaComponentes();
     }
 
@@ -195,16 +196,6 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void carregaListaAvaliacoes() {
 
-        //TESTE PARA CARREGAMENTO -- descomentar última linha para realizar teste
-        Avaliacao avaliacao = new Avaliacao();
-        avaliacao.setIdPaciente(paciente.id);
-        avaliacao.setData(new Date(System.currentTimeMillis()));
-        avaliacao.setPernas(Avaliacao.UMA_PERNA);
-        avaliacao.setOlhos(Avaliacao.OLHOS_ABERTOS);
-        avaliacao.setFrequencia(100);
-        avaliacao.setArea(72.25);
-//        avaliacao.save();
-
         try {
             avaliacoes  = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?",String.valueOf(this.paciente.getId()));
         }catch (Exception e){
@@ -222,45 +213,6 @@ public class PerfilActivity extends AppCompatActivity {
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
             txtVerMais.setVisibility(View.GONE);
         }
-
-
-
-//        listaTestes = (ListView) findViewById(R.id.lista_testes);
-////        TesteDAO dao = new TesteDAO(this);
-////        List<Avaliacao> testes = dao.buscaTestes(paciente);
-//
-//        //Coloca o tamanho da lista em dp de acordo com o numero de pacientes (75dp por paciente)
-//        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaTestes.getLayoutParams();
-//        lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 75 * testes.size(), getResources().getDisplayMetrics());;
-//        listaTestes.setLayoutParams(lp);
-//
-////        registerForContextMenu(listaTestes);
-//        if (testes.size() == 0){
-//            findViewById(R.id.text_nenhum_teste).setVisibility(View.VISIBLE);
-//        } else{
-//            findViewById(R.id.text_nenhum_teste).setVisibility(View.GONE);
-//        }
-//
-//        Collections.reverse(testes);
-//
-////        ArrayAdapter<Avaliacao> adapter =
-////                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, testes);
-//
-//        listaTestes.setAdapter(new TestesAdapter(this,testes));
-//
-//        listaTestes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> lista, View item, int position, long id) {
-//                Avaliacao teste = (Avaliacao) listaTestes.getItemAtPosition(position);
-//                // teste clicado
-//
-//                Intent intentVaiPraAnalise = new Intent(PerfilActivity.this, AnaliseTesteActivity.class);
-//                intentVaiPraAnalise.putExtra("teste", teste);
-//                startActivity(intentVaiPraAnalise);
-//            }
-//        });
-//
-//        dao.close();
     }
 
     private void popularListaAvaliacoes(List<Avaliacao> avaliacoes) {
@@ -278,7 +230,7 @@ public class PerfilActivity extends AppCompatActivity {
             lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * 3, getResources().getDisplayMetrics());
             listaAvaliacoes.setLayoutParams(lp);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
-            txtVerMais.setVisibility(View.GONE);
+            txtVerMais.setVisibility(View.VISIBLE);
         }
 
         AvaliacoesAdapter adapter = new AvaliacoesAdapter(this, avaliacoes);
@@ -302,6 +254,38 @@ public class PerfilActivity extends AppCompatActivity {
         intentVaiPraListaDeAvaliacoes.putExtra("paciente",paciente);
         startActivity(intentVaiPraListaDeAvaliacoes);
 
+    }
+
+    public void btnDeletarAvaliacao_Click(View view){
+
+        view = (View) view.getParent().getParent().getParent();
+        TextView txtAvaliacao = (TextView) view.findViewById(R.id.text_id_avaliacao);
+        final Long idAvalicao = Long.parseLong(txtAvaliacao.getText().toString());
+
+
+
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Deseja excluir esta avaliação?");
+
+        builder.setNegativeButton("Excluir", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+
+                        Avaliacao avaliacao = Avaliacao.findById(Avaliacao.class, idAvalicao);
+                        avaliacao.delete();
+                        carregaListaAvaliacoes();
+                    }
+                }
+        );
+
+        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                }
+        );
+
+        // Create the AlertDialog object and show it
+        builder.create().show();
     }
 
 

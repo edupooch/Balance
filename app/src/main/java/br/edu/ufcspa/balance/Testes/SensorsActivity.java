@@ -1,12 +1,14 @@
 package br.edu.ufcspa.balance.Testes;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -14,13 +16,18 @@ import android.view.View;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.DadoGiroscopio;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class SensorsActivity extends AppCompatActivity implements SensorEventListener{
+
+    private SensorsActivity This = this;
 
     private Paciente paciente;
 
@@ -67,7 +74,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         txtAx = (TextView) findViewById(R.id.txt_ax);
         txtAy = (TextView) findViewById(R.id.txt_ay);
         txtAz = (TextView) findViewById(R.id.txt_az);
-
 
 
     }
@@ -131,7 +137,34 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         }
 
-        finish();
+
+        //Salva nova avaliação
+        Avaliacao avaliacao = new Avaliacao();
+        avaliacao.setIdPaciente(paciente.id);
+        avaliacao.setData(new Date(System.currentTimeMillis()));
+        avaliacao.setPernas(Avaliacao.UMA_PERNA);
+        avaliacao.setOlhos(Avaliacao.OLHOS_ABERTOS);
+        avaliacao.setFrequencia(100);
+        avaliacao.setArea(0.0);
+        avaliacao.setDadosAcelerometro(Arrays.deepToString(dadosAcelerometro.toArray()));
+        avaliacao.setDadosGiroscopio(Arrays.deepToString(dadosGiroscopio.toArray()));
+
+        Log.d("-- -- -- GIROSCOPIO", ":"+String.valueOf(Arrays.deepToString(dadosGiroscopio.toArray())));
+        Log.d("-- -- -- ACELEROMETRO", ":"+String.valueOf(Arrays.deepToString(dadosAcelerometro.toArray())));
+
+
+        avaliacao.save();
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Avaliação salva com sucesso!")
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                This.finish();
+                            }
+                        }
+                );
+        // Create the AlertDialog object and show it
+        builder.create().show();
 
     }
 

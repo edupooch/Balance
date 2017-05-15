@@ -17,11 +17,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:paddingRight="1dp">
 
             <TextView
                 android:id="@+id/text_data"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif-light"
@@ -36,12 +36,22 @@
 
             <TextView
                 android:id="@+id/text_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="3dp"
                 android:layout_marginRight="3dp"
                 android:layout_weight="1"
-                android:textSize="18sp" />
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/btnDeletarAvaliacao"
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:onClick="btnDeletarAvaliacao_Click"
+                android:padding="4dp"
+                android:src="@drawable/delete"
+                android:tint="@color/colorAccent" />
 
         </LinearLayout>
 
@@ -128,4 +138,15 @@
                 android:textColor="?attr/colorButtonNormal" />
         </LinearLayout>
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/text_id_avaliacao"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fontFamily="sans-serif-light"
+        android:paddingLeft="2dp"
+        android:paddingRight="2dp"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 </LinearLayout>

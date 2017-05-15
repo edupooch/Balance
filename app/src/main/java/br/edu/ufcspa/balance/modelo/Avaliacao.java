@@ -5,6 +5,8 @@ import com.orm.SugarRecord;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+
 
 
 public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
@@ -26,12 +28,16 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
     private Integer mitigacao = null;
     private Integer frequencia = null;
     private Double area = null;
+    private String observacoes = null;
+
 
     private Double cetro_X = null;
     private Double cetro_Y = null;
     private Double cetro_Z = null;
 
-    private String observacoes = null;
+    private String dadosGiroscopio;
+    private String dadosAcelerometro;
+
 
     @Override
     public Long getId() {
@@ -137,5 +143,21 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
 
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
+    }
+
+    public String getDadosGiroscopio() {
+        return dadosGiroscopio;
+    }
+
+    public void setDadosGiroscopio(String dadosGiroscopio) {
+        this.dadosGiroscopio = dadosGiroscopio;
+    }
+
+    public String getDadosAcelerometro() {
+        return dadosAcelerometro;
+    }
+
+    public void setDadosAcelerometro(String dadosAcelerometro) {
+        this.dadosAcelerometro = dadosAcelerometro;
     }
 }
