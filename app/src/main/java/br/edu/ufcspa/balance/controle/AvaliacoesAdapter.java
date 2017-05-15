@@ -11,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.io.FileOutputStream;
 import java.util.List;
 
@@ -58,6 +60,10 @@ public class AvaliacoesAdapter extends BaseAdapter {
             view = inflater.inflate(R.layout.list_item_avaliacao, parent, false);
         }
 
+        //ID
+        TextView txtId = (TextView) view.findViewById(R.id.text_id_avaliacao);
+        txtId.setText(String.valueOf(avaliacao.id));
+
         //DATA
         TextView txtData = (TextView) view.findViewById(R.id.text_data);
         txtData.setText(Util.converterDate(avaliacao.getData()));
@@ -90,4 +96,5 @@ public class AvaliacoesAdapter extends BaseAdapter {
 
         return view;
     }
+
 }
