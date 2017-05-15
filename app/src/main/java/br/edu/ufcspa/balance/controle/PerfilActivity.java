@@ -6,11 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +21,6 @@ import android.widget.TextView;
 
 import java.io.FileOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -102,7 +99,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         TextView textoPeso = (TextView) findViewById(R.id.text_peso);
         TextView textoAltura = (TextView) findViewById(R.id.text_altura);
-        TextView textoIMC = (TextView) findViewById(R.id.text_imc);
+        //TextView textoIMC = (TextView) findViewById(R.id.text_imc);
         TextView textoTelefone = (TextView) findViewById(R.id.text_telefone);
         TextView textoEmail = (TextView) findViewById(R.id.text_email);
         TextView textoIdade = (TextView) findViewById(R.id.text_idade);
@@ -112,7 +109,7 @@ public class PerfilActivity extends AppCompatActivity {
         activity.setTitle(paciente.getNome());
         textoPeso.setText(String.format(Locale.US, "%.2f kg", paciente.getMassa()));
         textoAltura.setText(String.format(Locale.US, "%.0f cm", paciente.getEstatura()));
-        textoIMC.setText(String.format(Locale.US, "IMC %.2f", Calcula.imc(paciente.getMassa(), paciente.getEstatura())));
+        //textoIMC.setText(String.format(Locale.US, "IMC %.2f", Calcula.imc(paciente.getMassa(), paciente.getEstatura())));
         if (paciente.getTelefone().isEmpty()) {
             if (paciente.getEmail().isEmpty()) {//tirar o titulo contato se não tem telefone nem email
                 findViewById(R.id.titulo_contato).setVisibility(View.GONE);

@@ -29,20 +29,21 @@
 
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="178dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:layout_weight="1"
-            android:background="@drawable/round_edge">
+            android:background="@drawable/round_edge"
+            android:weightSum="1">
 
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_gravity="center"
-                android:padding="3dp"
+                android:padding="2dp"
                 android:tint="@color/colorPrimary"
-                android:layout_margin="5dp"
-                android:src="@drawable/icon_data" />
+                android:layout_margin="2dp"
+                android:src="@drawable/icon_data"
+                android:layout_weight="0.06" />
 
             <TextView
                 android:id="@+id/text_idade"
@@ -50,14 +51,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/colorPrimaryDark"
-                android:text="13 anos, 8 meses e 10 dias"
+                android:text="13 anos"
                 android:textSize="18sp" />
 
+
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:layout_marginTop="3dp"
             android:baselineAligned="false">
 
@@ -158,34 +162,6 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="2dp"
-                android:layout_marginStart="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:tint="@color/colorPrimary"
-                    android:padding="4dp"
-                    android:src="@drawable/icon_imc" />
-
-                <TextView
-                    android:id="@+id/text_imc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="IMC: 22"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -303,7 +279,6 @@
                 android:textSize="20sp" />
 
         </LinearLayout>
-
 
         <TextView
             android:layout_width="wrap_content"
