@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,14 +15,12 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.io.FileOutputStream;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -129,9 +126,9 @@ public class PerfilActivity extends AppCompatActivity {
             textoEmail.setText(paciente.getEmail());
         }
 
-        textoIdade.setText(Calcula.idadeCompleta(paciente.getDataNascimento()));
+        textoIdade.setText(Calcula.idade(paciente.getDataNascimento()));
 
-        if (paciente.getGenero() == 0) {
+        if (paciente.getGenero() == Paciente.FEMININO) {
             textoGenero.setText(R.string.feminino);
         } else {
             textoGenero.setText(R.string.masculino);

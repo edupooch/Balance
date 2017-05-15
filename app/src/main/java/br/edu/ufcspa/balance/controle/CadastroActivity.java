@@ -11,7 +11,6 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,11 +21,10 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.Locale;
 
-import br.edu.ufcspa.balance.modelo.Paciente;
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class CadastroActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -86,12 +84,12 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
         EditText edTextDataDiagnostico = (EditText) findViewById(R.id.edTextDataDiagnostico);
         edTextDataDiagnostico.addTextChangedListener(new TextWatcherData(edTextDataDiagnostico));
 
-        ImageButton btDataNascimento = (ImageButton) findViewById(R.id.btDataNascimento);
-        btDataNascimento.setOnClickListener(new CalendarioListener(this));
-        ImageButton btDataAnamnese = (ImageButton) findViewById(R.id.btDataAnamnese);
-        btDataAnamnese.setOnClickListener(new CalendarioListener(this));
-        ImageButton btDataDiagnostico = (ImageButton) findViewById(R.id.btDataDiagnostico);
-        btDataDiagnostico.setOnClickListener(new CalendarioListener(this));
+        //ImageButton btDataNascimento = (ImageButton) findViewById(R.id.btDataNascimento);
+        //btDataNascimento.setOnClickListener(new CalendarioListener(this));
+        //ImageButton btDataAnamnese = (ImageButton) findViewById(R.id.btDataAnamnese);
+        //btDataAnamnese.setOnClickListener(new CalendarioListener(this));
+        //ImageButton btDataDiagnostico = (ImageButton) findViewById(R.id.btDataDiagnostico);
+        //btDataDiagnostico.setOnClickListener(new CalendarioListener(this));
     }
 
     @Override

@@ -48,8 +48,6 @@
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_perfil" />
-
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/btnPlayTeste"
         android:layout_width="wrap_content"
@@ -60,6 +58,8 @@
         app:backgroundTint="@color/colorAccent"
         app:layout_anchor="@id/app_bar_perfil"
         app:layout_anchorGravity="bottom|end" />
+
+    <include layout="@layout/content_perfil" />
 
 
 </android.support.design.widget.CoordinatorLayout>
