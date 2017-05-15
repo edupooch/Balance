@@ -164,6 +164,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
                         }
                 );
         // Create the AlertDialog object and show it
+        builder.setCancelable(false);
         builder.create().show();
 
     }
