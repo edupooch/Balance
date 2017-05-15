@@ -105,6 +105,14 @@ public class PerfilActivity extends AppCompatActivity {
         TextView textoIdade = (TextView) findViewById(R.id.text_idade);
         TextView textoGenero = (TextView) findViewById(R.id.text_genero);
         TextView textoObs = (TextView) findViewById(R.id.text_obs);
+       /* TextView textoDataAnamnsese = (TextView) findViewById(R.id.textDataAnamnese);
+        TextView textoDiagClinico = (TextView) findViewById(R.id.textDiagnostico);
+        TextView textoDataDiagnostico = (TextView) findViewById(R.id.textDataDiagnostico);
+        TextView textoHistDoencaAtual = (TextView) findViewById(R.id.textCurrentDisease);
+        TextView textoHistDoencaAnterior = (TextView) findViewById(R.id.textPreviousDisease);
+        TextView textoProcedimentosTerapeuticos = (TextView) findViewById(R.id.textProcedimentos);*/
+
+
 
         activity.setTitle(paciente.getNome());
         textoPeso.setText(String.format(Locale.US, "%.2f kg", paciente.getMassa()));
