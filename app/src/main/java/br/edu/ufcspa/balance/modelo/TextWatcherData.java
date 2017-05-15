@@ -1,4 +1,4 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.modelo;
 
 import android.text.Editable;
 import android.text.TextWatcher;

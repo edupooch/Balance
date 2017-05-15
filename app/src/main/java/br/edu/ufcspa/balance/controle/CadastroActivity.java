@@ -25,6 +25,7 @@ import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Paciente;
+import br.edu.ufcspa.balance.modelo.TextWatcherData;
 
 public class CadastroActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 

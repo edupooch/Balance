@@ -1,23 +1,17 @@
 package br.edu.ufcspa.balance.controle;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
-import java.io.FileOutputStream;
 import java.util.List;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.Util;
 
 
 /**

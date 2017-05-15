@@ -15,8 +15,11 @@ import java.util.GregorianCalendar;
 
 public class Calcula {
 
+    public static final int AO_QUADRADO = 2;
+
     /**
      * Calcula a idade em anos
+     *
      * @param dataNasc recebe a data de nascimento de paciente.getData()
      * @return idade em anos
      */
@@ -36,6 +39,7 @@ public class Calcula {
 
     /**
      * Retorna a idade em anos meses e dias como String para o perfil do paciente
+     *
      * @param dataNasc data de nascimento
      * @return Idade em anos meses e dias
      */
@@ -47,17 +51,17 @@ public class Calcula {
 
         Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
         String anos = period.getYears() + " anos, ";
-        if (period.getYears() == 1){
+        if (period.getYears() == 1) {
             anos = period.getYears() + " ano, ";
         }
 
         String meses = period.getMonths() + " meses e ";
-        if (period.getMonths() == 1){
+        if (period.getMonths() == 1) {
             meses = period.getMonths() + "mês  ";
         }
 
         String dias = period.getDays() + " dias";
-        if (period.getDays() == 1){
+        if (period.getDays() == 1) {
             dias = period.getDays() + " dia";
         }
 
@@ -68,13 +72,39 @@ public class Calcula {
     /**
      * Cálculo do imc do paciente
      *
-     * @param massa em kg
+     * @param massa    em kg
      * @param estatura em cm
      * @return imc
      */
 
     public static double imc(double massa, double estatura) {
         return massa / Math.pow(estatura / 100, 2);
+    }
+
+    /**
+     * Cálcula a coordenada da projeção no gráfico de dispersão
+     *
+     * @param dadoAcelerometro dado de um momento no tempo do acelerometro
+     * @param altura do paciente em m
+     *
+     * @return coordenada
+     */
+    public static Coordenada2D calculaCoordenada2D(DadoAcelerometro dadoAcelerometro, double altura) {
+        double resultanteA = Math.sqrt(
+                Math.pow(dadoAcelerometro.getX(), AO_QUADRADO) +
+                        Math.pow(dadoAcelerometro.getY(), AO_QUADRADO) +
+                        Math.pow(dadoAcelerometro.getZ(), AO_QUADRADO));
+
+        double cosAlfa = dadoAcelerometro.getX() / resultanteA;
+        double cosBeta = dadoAcelerometro.getY() / resultanteA;
+        double cosGama = dadoAcelerometro.getZ() / resultanteA;
+
+        double resultanteD = -altura / cosGama;
+
+        double dx = resultanteD * cosAlfa;
+        double dy = resultanteD * cosBeta;
+
+        return new Coordenada2D(dx, dy);
     }
 
 }

@@ -29,39 +29,8 @@
 
 
         <LinearLayout
-            android:layout_width="178dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/round_edge"
-            android:weightSum="1">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center"
-                android:padding="2dp"
-                android:tint="@color/colorPrimary"
-                android:layout_margin="2dp"
-                android:src="@drawable/icon_data"
-                android:layout_weight="0.06" />
-
-            <TextView
-                android:id="@+id/text_idade"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:text="13 anos"
-                android:textSize="18sp" />
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:layout_marginTop="3dp"
             android:baselineAligned="false">
 
@@ -79,8 +48,75 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:padding="3dp"
-                    android:tint="@color/colorPrimary"
-                    android:src="@drawable/icon_peso" />
+                    android:src="@drawable/icon_data"
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_idade"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="13 anos"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:src="@drawable/icon_genero"
+                    android:tint="@color/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/text_genero"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="Masculino"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
+            android:baselineAligned="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:padding="3dp"
+                    android:src="@drawable/icon_peso"
+                    android:tint="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/text_peso"
@@ -108,8 +144,8 @@
                     android:layout_gravity="center"
                     android:layout_margin="5dp"
                     android:padding="3dp"
-                    android:tint="@color/colorPrimary"
-                    android:src="@drawable/icon_altura" />
+                    android:src="@drawable/icon_altura"
+                    android:tint="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/text_altura"
@@ -126,43 +162,6 @@
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="3dp"
-            android:baselineAligned="false">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="center"
-                    android:layout_margin="5dp"
-                    android:tint="@color/colorPrimary"
-                    android:padding="3dp"
-                    android:src="@drawable/icon_genero" />
-
-                <TextView
-                    android:id="@+id/text_genero"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="Masculino"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/layout_observacoes"
@@ -177,8 +176,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
                 android:padding="3dp"
-                android:tint="@color/colorPrimary"
-                android:src="@drawable/icon_obs" />
+                android:src="@drawable/icon_obs"
+                android:tint="@color/colorPrimary" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -194,12 +193,10 @@
                     android:id="@+id/text_obs"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:text="Sem observações" />
+                    android:text="Sem observações"
+                    android:textColor="@color/colorPrimaryDark" />
 
             </LinearLayout>
-
-
 
 
         </LinearLayout>
@@ -233,8 +230,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
                 android:padding="3dp"
-                android:tint="@color/colorPrimary"
-                android:src="@drawable/icon_phone" />
+                android:src="@drawable/icon_phone"
+                android:tint="@color/colorPrimary" />
 
             <TextView
 
@@ -265,8 +262,8 @@
                 android:layout_gravity="center"
                 android:layout_margin="8dp"
                 android:padding="3dp"
-                android:tint="@color/colorPrimary"
-                android:src="@drawable/icon_mail" />
+                android:src="@drawable/icon_mail"
+                android:tint="@color/colorPrimary" />
 
             <TextView
                 android:id="@+id/text_email"
@@ -275,9 +272,9 @@
                 android:layout_gravity="center"
                 android:layout_marginEnd="5dp"
                 android:layout_marginRight="5dp"
-                android:textColor="@color/colorPrimaryDark"
                 android:gravity="center"
                 android:text="edupooch@gmail.com"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp" />
 
         </LinearLayout>
@@ -299,8 +296,8 @@
             android:id="@+id/text_sem_avaliacoes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginTop="10dp"
             android:gravity="center"
             android:text="Nenhuma avaliação realizada ainda."
             android:visibility="visible" />
@@ -315,8 +312,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
-                android:scrollbars="none"
-                >
+                android:scrollbars="none">
 
             </ListView>
         </LinearLayout>
@@ -331,10 +327,6 @@
             android:text="Ver mais"
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>
