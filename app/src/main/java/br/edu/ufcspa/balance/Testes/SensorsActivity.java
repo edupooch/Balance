@@ -27,7 +27,7 @@ import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.DadoGiroscopio;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
-public class SensorsActivity extends AppCompatActivity implements SensorEventListener{
+public class SensorsActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorsActivity This = this;
 
@@ -47,7 +47,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
     private ArrayList<DadoGiroscopio> dadosGiroscopio = new ArrayList<DadoGiroscopio>();
     private ArrayList<DadoAcelerometro> dadosAcelerometro = new ArrayList<DadoAcelerometro>();
-
+    private long tempoInicio;
 
 
     @Override
@@ -61,7 +61,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         paciente = (Paciente) intent.getSerializableExtra("paciente");
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
+        tempoInicio = System.currentTimeMillis();
         giroscopio = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
         acelerometro = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
@@ -88,53 +88,54 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
     @Override
     public void onSensorChanged(SensorEvent event) {
 
-        if(event.sensor.getType() == Sensor.TYPE_GYROSCOPE){
+        if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
 
-            txtx.setText("X: "+String.valueOf(Math.floor(x * 100) / 100));
-            txty.setText("Y: "+String.valueOf(Math.floor(y * 100) / 100));
-            txtz.setText("Z: "+String.valueOf(Math.floor(z * 100) / 100));
+            txtx.setText("X: " + String.valueOf(Math.floor(x * 100) / 100));
+            txty.setText("Y: " + String.valueOf(Math.floor(y * 100) / 100));
+            txtz.setText("Z: " + String.valueOf(Math.floor(z * 100) / 100));
 
-            dadosGiroscopio.add(new DadoGiroscopio(System.currentTimeMillis(),x,y,z));
+            dadosGiroscopio.add(new DadoGiroscopio(System.currentTimeMillis() - tempoInicio, x, y, z));
         }
 
-        if(event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
+        if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
         }
-            float ax = event.values[0];
-            float ay = event.values[1];
-            float az = event.values[2];
+        float ax = event.values[0];
+        float ay = event.values[1];
+        float az = event.values[2];
 
 
-        txtAx.setText("X: "+String.valueOf(Math.floor(ax * 100) / 100));
-        txtAy.setText("Y: "+String.valueOf(Math.floor(ay * 100) / 100));
-        txtAz.setText("Z: "+String.valueOf(Math.floor(az * 100) / 100));
+        txtAx.setText("X: " + String.valueOf(Math.floor(ax * 100) / 100));
+        txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
+        txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
 
 
-        dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis(),ax,ay,az));
+        dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
 
-        }
+    }
 
-    public void btn_Terminar_Click(View view){
+    public void btn_Terminar_Click(View view) {
 
         mSensorManager.unregisterListener(this);
         Log.d("GIROSCOPE", "GIROSCOPIO:");
 
-        for (DadoGiroscopio d :dadosGiroscopio) {
+        for (DadoGiroscopio d : dadosGiroscopio) {
 
-            Log.d("GIROSCOPE", "            X:"+String.valueOf(d.getX()));
-            Log.d("GIROSCOPE", "            Y:"+String.valueOf(d.getY()));
-            Log.d("GIROSCOPE", "            Z:"+String.valueOf(d.getZ()));
+            Log.d("GIROSCOPE", "            X:" + String.valueOf(d.getX()));
+            Log.d("GIROSCOPE", "            Y:" + String.valueOf(d.getY()));
+            Log.d("GIROSCOPE", "            Z:" + String.valueOf(d.getZ()));
         }
 
         Log.d("ACELEROMETER", "ACELEROMETRO:");
 
 
-        for (DadoAcelerometro d : dadosAcelerometro){
-            Log.d("ACELEROMETER", "            x:"+String.valueOf(d.getX()));
-            Log.d("ACELEROMETER", "            y:"+String.valueOf(d.getY()));
-            Log.d("ACELEROMETER", "            z:"+String.valueOf(d.getZ()));
+        for (DadoAcelerometro d : dadosAcelerometro) {
+            Log.d("ACELEROMETER", "            x:" + String.valueOf(d.getX()));
+            Log.d("ACELEROMETER", "            y:" + String.valueOf(d.getY()));
+            Log.d("ACELEROMETER", "            z:" + String.valueOf(d.getZ()));
+            Log.d("ACELEROMETER", "            time:" + String.valueOf(d.getTempo()));
 
 
         }
@@ -155,8 +156,8 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         avaliacao.setDadosAcelerometro(gson.toJson(dadosAcelerometro));
         avaliacao.setDadosGiroscopio(gson.toJson(dadosGiroscopio));
 
-        Log.d("-- -- -- GIROSCOPIO", ":"+String.valueOf(Arrays.deepToString(dadosGiroscopio.toArray())));
-        Log.d("-- -- -- ACELEROMETRO", ":"+String.valueOf(Arrays.deepToString(dadosAcelerometro.toArray())));
+        Log.d("-- -- -- GIROSCOPIO", ":" + String.valueOf(Arrays.deepToString(dadosGiroscopio.toArray())));
+        Log.d("-- -- -- ACELEROMETRO", ":" + String.valueOf(Arrays.deepToString(dadosAcelerometro.toArray())));
 
 
         avaliacao.save();
