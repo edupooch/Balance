@@ -15,6 +15,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -146,8 +148,12 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         avaliacao.setOlhos(Avaliacao.OLHOS_ABERTOS);
         avaliacao.setFrequencia(100);
         avaliacao.setArea(0.0);
-        avaliacao.setDadosAcelerometro(Arrays.deepToString(dadosAcelerometro.toArray()));
-        avaliacao.setDadosGiroscopio(Arrays.deepToString(dadosGiroscopio.toArray()));
+//        avaliacao.setDadosAcelerometro(Arrays.deepToString(dadosAcelerometro.toArray()));
+//        avaliacao.setDadosGiroscopio(Arrays.deepToString(dadosGiroscopio.toArray()));
+
+        Gson gson  = new Gson();
+        avaliacao.setDadosAcelerometro(gson.toJson(dadosAcelerometro));
+        avaliacao.setDadosGiroscopio(gson.toJson(dadosGiroscopio));
 
         Log.d("-- -- -- GIROSCOPIO", ":"+String.valueOf(Arrays.deepToString(dadosGiroscopio.toArray())));
         Log.d("-- -- -- ACELEROMETRO", ":"+String.valueOf(Arrays.deepToString(dadosAcelerometro.toArray())));
