@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -37,7 +36,7 @@ public class PerfilActivity extends AppCompatActivity {
     private PerfilActivity activity = this;
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
-    private static int TAMANHO_ITEM_AVALIACAO = 92 + 1;
+    private static int TAMANHO_ITEM_AVALIACAO = 92+1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +47,7 @@ public class PerfilActivity extends AppCompatActivity {
         //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         iniciaComponentes();
     }
+
 
 
     private void iniciaComponentes() {
@@ -105,13 +105,12 @@ public class PerfilActivity extends AppCompatActivity {
         TextView textoIdade = (TextView) findViewById(R.id.text_idade);
         TextView textoGenero = (TextView) findViewById(R.id.text_genero);
         TextView textoObs = (TextView) findViewById(R.id.text_obs);
-       /* TextView textoDataAnamnsese = (TextView) findViewById(R.id.textDataAnamnese);
-        TextView textoDiagClinico = (TextView) findViewById(R.id.textDiagnostico);
-        TextView textoDataDiagnostico = (TextView) findViewById(R.id.textDataDiagnostico);
-        TextView textoHistDoencaAtual = (TextView) findViewById(R.id.textCurrentDisease);
-        TextView textoHistDoencaAnterior = (TextView) findViewById(R.id.textPreviousDisease);
-        TextView textoProcedimentosTerapeuticos = (TextView) findViewById(R.id.textProcedimentos);*/
-
+        TextView textoDataAnamnsese = (TextView) findViewById(R.id.text_dtanamnese);
+        TextView textoDataDiagnostico = (TextView) findViewById(R.id.text_dtdiagnostico);
+        TextView textoDiagClinico = (TextView) findViewById(R.id.text_diag_clin);
+        TextView textoHistDoencaAtual = (TextView) findViewById(R.id.text_doenca_atual);
+        TextView textoHistDoencaAnterior = (TextView) findViewById(R.id.text_doencas_anteriores);
+        TextView textoProcedimentosTerapeuticos = (TextView) findViewById(R.id.text_proc_terapeuticos);
 
         activity.setTitle(paciente.getNome());
         textoPeso.setText(String.format(Locale.US, "%.2f kg", paciente.getMassa()));
