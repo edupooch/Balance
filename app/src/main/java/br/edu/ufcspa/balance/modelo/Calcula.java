@@ -10,7 +10,7 @@ import java.util.GregorianCalendar;
 
 /**
  * Created by edupooch on 12/06/2016.
- * Classe para efetuar os cálculos necessários durante o teste, como idade e fórmulas de dp estimada.
+ * Classe para efetuar os cálculos necessários durante o teste, como idadeEmAnos e fórmulas de dp estimada.
  */
 
 public class Calcula {
@@ -18,27 +18,25 @@ public class Calcula {
     public static final int AO_QUADRADO = 2;
 
     /**
-     * Calcula a idade em anos
+     * Calcula a idadeEmAnos em anos
      *
      * @param dataNasc recebe a data de nascimento de paciente.getData()
-     * @return idade em anos
+     * @return idadeEmAnos em anos
      */
-    public static int idade(java.util.Date dataNasc) {
+    public static String idadeEmAnos(java.util.Date dataNasc) {
+        LocalDate birthdate = new LocalDate(dataNasc);
+        LocalDate now = new LocalDate();
 
-        Calendar calDataNascimento = new GregorianCalendar();
-        calDataNascimento.setTime(dataNasc);
-        Calendar hoje = Calendar.getInstance();
-
-        int idadeAnos = hoje.get(Calendar.YEAR) - calDataNascimento.get(Calendar.YEAR);
-        calDataNascimento.add(Calendar.YEAR, idadeAnos);
-        if (hoje.before(calDataNascimento)) idadeAnos--;
-
-        return idadeAnos;
-
+        Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
+        String anos = period.getYears() + " anos";
+        if (period.getYears() == 1) {
+            anos = period.getYears() + " ano";
+        }
+        return anos;
     }
 
     /**
-     * Retorna a idade em anos meses e dias como String para o perfil do paciente
+     * Retorna a idadeEmAnos em anos meses e dias como String para o perfil do paciente
      *
      * @param dataNasc data de nascimento
      * @return Idade em anos meses e dias
@@ -85,8 +83,7 @@ public class Calcula {
      * Cálcula a coordenada da projeção no gráfico de dispersão
      *
      * @param dadoAcelerometro dado de um momento no tempo do acelerometro
-     * @param altura do paciente em m
-     *
+     * @param altura           do paciente em m
      * @return coordenada
      */
     public static Coordenada2D calculaCoordenada2D(DadoAcelerometro dadoAcelerometro, double altura) {

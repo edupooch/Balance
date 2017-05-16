@@ -59,6 +59,7 @@
     <string name="text_header_lista">Balance: Avaliação do Equilíbrio\nSelecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
     <string name="data_de_diagnostico">Data de Diagnóstico</string>
     <string name="infor_clinicas">INFORMAÇÕES CLÍNICAS</string>
+    <string name="titulo_avaliacao_activity">Resultados da Avaliação</string>
 
 
 </resources>

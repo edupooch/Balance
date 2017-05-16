@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -36,7 +37,7 @@ public class PerfilActivity extends AppCompatActivity {
     private PerfilActivity activity = this;
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
-    private static int TAMANHO_ITEM_AVALIACAO = 92+1;
+    private static int TAMANHO_ITEM_AVALIACAO = 92 + 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,6 @@ public class PerfilActivity extends AppCompatActivity {
         //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         iniciaComponentes();
     }
-
 
 
     private void iniciaComponentes() {
@@ -113,7 +113,6 @@ public class PerfilActivity extends AppCompatActivity {
         TextView textoProcedimentosTerapeuticos = (TextView) findViewById(R.id.textProcedimentos);*/
 
 
-
         activity.setTitle(paciente.getNome());
         textoPeso.setText(String.format(Locale.US, "%.2f kg", paciente.getMassa()));
         textoAltura.setText(String.format(Locale.US, "%.0f cm", paciente.getEstatura()));
@@ -133,7 +132,8 @@ public class PerfilActivity extends AppCompatActivity {
             textoEmail.setText(paciente.getEmail());
         }
 
-        textoIdade.setText(Calcula.idade(paciente.getDataNascimento()));
+
+        textoIdade.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
 
         if (paciente.getGenero() == Paciente.FEMININO) {
             textoGenero.setText(R.string.feminino);
@@ -199,18 +199,18 @@ public class PerfilActivity extends AppCompatActivity {
     private void carregaListaAvaliacoes() {
 
         try {
-            avaliacoes  = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?",String.valueOf(this.paciente.getId()));
-        }catch (Exception e){
+            avaliacoes = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?", String.valueOf(this.paciente.getId()));
+        } catch (Exception e) {
             e.printStackTrace();
             avaliacoes = new ArrayList<Avaliacao>();
         }
 
-        if(!avaliacoes.isEmpty()){
+        if (!avaliacoes.isEmpty()) {
             popularListaAvaliacoes(avaliacoes);
-            TextView  txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
+            TextView txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
             txtMsgVazio.setText("Clique na Avaliação para mais detalhes.");
-        }else{
-            TextView  txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
+        } else {
+            TextView txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
             txtMsgVazio.setText("Nenhuma avaliação realizada ainda.");
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
             txtVerMais.setVisibility(View.GONE);
@@ -218,17 +218,15 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     private void popularListaAvaliacoes(List<Avaliacao> avaliacoes) {
-
-        ListView listaAvaliacoes = (ListView) findViewById(R.id.lista_avaliacoes_anteriores);
-
+        final ListView listaAvaliacoes = (ListView) findViewById(R.id.lista_avaliacoes_anteriores);
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaAvaliacoes.getLayoutParams();
 
-        if(avaliacoes.size() < 3){
+        if (avaliacoes.size() < 3) {
             lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * avaliacoes.size(), getResources().getDisplayMetrics());
             listaAvaliacoes.setLayoutParams(lp);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
             txtVerMais.setVisibility(View.GONE);
-        }else{
+        } else {
             lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * 3, getResources().getDisplayMetrics());
             listaAvaliacoes.setLayoutParams(lp);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
@@ -238,10 +236,21 @@ public class PerfilActivity extends AppCompatActivity {
         AvaliacoesAdapter adapter = new AvaliacoesAdapter(this, avaliacoes);
         listaAvaliacoes.setAdapter(adapter);
 
+        listaAvaliacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Avaliacao avaliacao = (Avaliacao) listaAvaliacoes.getItemAtPosition(position);
+                Intent intentResultado = new Intent(PerfilActivity.this,ResultadoActivity.class);
+                intentResultado.putExtra("avaliação", avaliacao);
+                startActivity(intentResultado);
+
+            }
+        });
+
 
     }
 
-    public void txtVerMais_Click(View view){
+    public void txtVerMais_Click(View view) {
 
         Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, ListaAvaliacoesActivity.class);
         intentVaiPraListaDeAvaliacoes.putExtra("avaliacoes", avaliacoes);
@@ -250,20 +259,19 @@ public class PerfilActivity extends AppCompatActivity {
 
     }
 
-    public void btnComecarAvaliacao_Click(View view){
+    public void btnComecarAvaliacao_Click(View view) {
 
         Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, SensorsActivity.class);
-        intentVaiPraListaDeAvaliacoes.putExtra("paciente",paciente);
+        intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
         startActivity(intentVaiPraListaDeAvaliacoes);
 
     }
 
-    public void btnDeletarAvaliacao_Click(View view){
+    public void btnDeletarAvaliacao_Click(View view) {
 
         view = (View) view.getParent().getParent().getParent();
         TextView txtAvaliacao = (TextView) view.findViewById(R.id.text_id_avaliacao);
         final Long idAvalicao = Long.parseLong(txtAvaliacao.getText().toString());
-
 
 
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
