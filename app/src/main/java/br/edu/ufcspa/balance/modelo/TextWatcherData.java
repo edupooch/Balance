@@ -11,12 +11,12 @@ import java.util.Locale;
  * Created by edupooch on 05/05/2017.
  */
 
-class TextWatcherData implements TextWatcher {
+public class TextWatcherData implements TextWatcher {
     private final EditText editText;
     private String current = "";
     private Calendar cal = Calendar.getInstance();
 
-    TextWatcherData(EditText editText) {
+    public TextWatcherData(EditText editText) {
         this.editText = editText;
     }
 
