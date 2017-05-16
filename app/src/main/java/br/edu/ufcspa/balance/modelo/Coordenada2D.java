@@ -28,4 +28,9 @@ public class Coordenada2D {
     public void setY(double y) {
         this.y = y;
     }
+
+    @Override
+    public String toString() {
+        return "(" + x + "," + y + ")\n";
+    }
 }

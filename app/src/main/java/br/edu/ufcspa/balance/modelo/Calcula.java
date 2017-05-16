@@ -86,7 +86,7 @@ public class Calcula {
      * @param altura           do paciente em m
      * @return coordenada
      */
-    public static Coordenada2D calculaCoordenada2D(DadoAcelerometro dadoAcelerometro, double altura) {
+    public static Coordenada2D coordenada2D(DadoAcelerometro dadoAcelerometro, double altura) {
         double resultanteA = Math.sqrt(
                 Math.pow(dadoAcelerometro.getX(), AO_QUADRADO) +
                         Math.pow(dadoAcelerometro.getY(), AO_QUADRADO) +
