@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Date;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.controle.ResultadoActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.DadoGiroscopio;
@@ -30,7 +29,7 @@ import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class SensorsActivity extends AppCompatActivity implements SensorEventListener {
 
-    private SensorsActivity activity = this;
+    private SensorsActivity This = this;
 
     private Paciente paciente;
 
@@ -103,33 +102,27 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         }
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
-
-            float ax = event.values[0];
-            float ay = event.values[1];
-            float az = event.values[2];
-
-
-            try {
-            /*Caso o dado obtido seja diferente do anterior*/
-                if (ax != dadosAcelerometro.get(dadosAcelerometro.size()).getX() &&
-                        ay != dadosAcelerometro.get(dadosAcelerometro.size()).getY()) {
-
-                    dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
-
-                    txtAx.setText("X: " + String.valueOf(Math.floor(ax * 100) / 100));
-                    txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
-                    txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
-
-                }
-            } catch (Exception e) {
-                dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
-
-                txtAx.setText("X: " + String.valueOf(Math.floor(ax * 100) / 100));
-                txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
-                txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
-            }
         }
+        float ax = event.values[0];
+        float ay = event.values[1];
+        float az = event.values[2];
 
+
+        txtAx.setText("X: " + String.valueOf(Math.floor(ax * 100) / 100));
+        txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
+        txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
+
+        if (count > 0) {
+            DadoAcelerometro resultadoAnterior = dadosAcelerometro.get(count);
+
+            if (resultadoAnterior.getX() != ax && resultadoAnterior.getY() != ay) {
+                dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
+                count++;
+            }
+        } else{
+            dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
+            count++;
+        }
     }
 
     public void btn_Terminar_Click(View view) {
@@ -158,7 +151,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
 
         //Salva nova avaliação
-        final Avaliacao avaliacao = new Avaliacao();
+        Avaliacao avaliacao = new Avaliacao();
         avaliacao.setIdPaciente(paciente.id);
         avaliacao.setData(new Date(System.currentTimeMillis()));
         avaliacao.setPernas(Avaliacao.UMA_PERNA);
@@ -182,33 +175,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         builder.setMessage("Avaliação salva com sucesso!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                try {
-                                    /*Abre activity com o resultado*/
-                                    abrirResultado(avaliacao);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-
-                                    final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-                                    builder.setMessage("Não foi possível abrir a avaliação");
-
-                                    builder.setNegativeButton("ok", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    dialog.dismiss();
-                                                }
-                                            }
-                                    );
-
-                                    builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
-                                                public void onClick(DialogInterface dialog, int id) {
-                                                    dialog.dismiss();
-                                                }
-                                            }
-                                    );
-
-                                    // Create the AlertDialog object and show it
-                                    builder.create().show();
-                                }
-
+                                This.finish();
                             }
                         }
                 );
@@ -216,13 +183,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         builder.setCancelable(false);
         builder.create().show();
 
-    }
-
-    private void abrirResultado(Avaliacao avaliacao) {
-        Intent intentResultado = new Intent(SensorsActivity.this,ResultadoActivity.class);
-        intentResultado.putExtra("avaliação", avaliacao);
-        startActivity(intentResultado);
-        finish();
     }
 
     @Override
