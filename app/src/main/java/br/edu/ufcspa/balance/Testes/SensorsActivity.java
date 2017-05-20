@@ -112,8 +112,8 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
         txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
 
-        if (count > 0) {
-            DadoAcelerometro resultadoAnterior = dadosAcelerometro.get(count);
+        if (count > 1) {
+            DadoAcelerometro resultadoAnterior = dadosAcelerometro.get(count-1);
 
             if (resultadoAnterior.getX() != ax && resultadoAnterior.getY() != ay) {
                 dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
