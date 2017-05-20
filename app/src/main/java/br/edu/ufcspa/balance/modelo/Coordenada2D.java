@@ -5,29 +5,23 @@ package br.edu.ufcspa.balance.modelo;
  */
 
 public class Coordenada2D {
-    private double x;
-    private double y;
+    private float x;
+    private float y;
 
-    public Coordenada2D(double x, double y) {
+    public Coordenada2D(float x, float y) {
         this.x = x;
         this.y = y;
     }
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
-    public void setX(double x) {
-        this.x = x;
-    }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
-    public void setY(double y) {
-        this.y = y;
-    }
 
     @Override
     public String toString() {

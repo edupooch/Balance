@@ -48,6 +48,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
     private ArrayList<DadoGiroscopio> dadosGiroscopio = new ArrayList<DadoGiroscopio>();
     private ArrayList<DadoAcelerometro> dadosAcelerometro = new ArrayList<DadoAcelerometro>();
     private long tempoInicio;
+    private int count;
 
 
     @Override
@@ -111,9 +112,17 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
         txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
 
+        if (count > 0) {
+            DadoAcelerometro resultadoAnterior = dadosAcelerometro.get(count);
 
-        dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
-
+            if (resultadoAnterior.getX() != ax && resultadoAnterior.getY() != ay) {
+                dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
+                count++;
+            }
+        } else{
+            dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
+            count++;
+        }
     }
 
     public void btn_Terminar_Click(View view) {
@@ -152,7 +161,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 //        avaliacao.setDadosAcelerometro(Arrays.deepToString(dadosAcelerometro.toArray()));
 //        avaliacao.setDadosGiroscopio(Arrays.deepToString(dadosGiroscopio.toArray()));
 
-        Gson gson  = new Gson();
+        Gson gson = new Gson();
         avaliacao.setDadosAcelerometro(gson.toJson(dadosAcelerometro));
         avaliacao.setDadosGiroscopio(gson.toJson(dadosGiroscopio));
 

@@ -4,6 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.github.mikephil.charting.charts.ScatterChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.ScatterData;
+import com.github.mikephil.charting.data.ScatterDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -31,15 +37,27 @@ public class ResultadoActivity extends AppCompatActivity {
         }.getType();
         List<DadoAcelerometro> listaDadosAcelerometro = gson.fromJson(jsonArray, listType);
 
-        List<Coordenada2D> listaCoordenadas = new ArrayList<>(listaDadosAcelerometro.size());
+        ScatterChart scatterChart = (ScatterChart) findViewById(R.id.grafico_dispersao);
 
-        double alturaDoAparelho = 1.20;
+        ArrayList<Entry> entries = new ArrayList<>(listaDadosAcelerometro.size());
+        float alturaDoAparelho = 1.20f;
         for (DadoAcelerometro dado : listaDadosAcelerometro) {
-            listaCoordenadas.add(Calcula.coordenada2D(dado, alturaDoAparelho));
+            Coordenada2D coordenada2D = Calcula.coordenada2D(dado, alturaDoAparelho);
+            entries.add(new Entry(coordenada2D.getX(), coordenada2D.getY()));
         }
 
+        ScatterDataSet dataset = new ScatterDataSet(entries, "# of Calls");
 
-        Log.d("acelerometro", String.valueOf(listaCoordenadas));
+        ScatterData data = new ScatterData(dataset);
+        scatterChart.setData(data);
+
+        Description description = new Description();
+        description.setText("Dispersão");
+        scatterChart.setDescription(description);
+
+        dataset.setColors(ColorTemplate.PASTEL_COLORS); //
+        dataset.setScatterShapeSize(20);
+        dataset.setScatterShape(ScatterChart.ScatterShape.CIRCLE);
 
     }
 }

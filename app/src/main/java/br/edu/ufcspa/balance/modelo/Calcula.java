@@ -86,20 +86,20 @@ public class Calcula {
      * @param altura           do paciente em m
      * @return coordenada
      */
-    public static Coordenada2D coordenada2D(DadoAcelerometro dadoAcelerometro, double altura) {
-        double resultanteA = Math.sqrt(
+    public static Coordenada2D coordenada2D(DadoAcelerometro dadoAcelerometro, float altura) {
+        float resultanteA = (float) Math.sqrt(
                 Math.pow(dadoAcelerometro.getX(), AO_QUADRADO) +
                         Math.pow(dadoAcelerometro.getY(), AO_QUADRADO) +
                         Math.pow(dadoAcelerometro.getZ(), AO_QUADRADO));
 
-        double cosAlfa = dadoAcelerometro.getX() / resultanteA;
-        double cosBeta = dadoAcelerometro.getY() / resultanteA;
-        double cosGama = dadoAcelerometro.getZ() / resultanteA;
+        float cosAlfa = dadoAcelerometro.getX() / resultanteA;
+        float cosBeta = dadoAcelerometro.getY() / resultanteA;
+        float cosGama = dadoAcelerometro.getZ() / resultanteA;
 
-        double resultanteD = -altura / cosGama;
+        float resultanteD = -altura / cosGama;
 
-        double dx = resultanteD * cosAlfa;
-        double dy = resultanteD * cosBeta;
+        float dx = resultanteD * cosAlfa;
+        float dy = resultanteD * cosBeta;
 
         return new Coordenada2D(dx, dy);
     }

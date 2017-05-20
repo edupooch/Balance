@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:orientation="vertical"
     android:paddingEnd="16dp"
     android:paddingStart="16dp"
-
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.edu.ufcspa.balance.controle.ResultadoActivity"
     tools:showIn="@layout/activity_resultado">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/round_edge">
+        android:background="@drawable/round_edge"
+        android:padding="10dp">
+
+        <com.github.mikephil.charting.charts.ScatterChart
+            android:id="@+id/grafico_dispersao"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            android:layout_marginTop="10dp">
+
+
+        </com.github.mikephil.charting.charts.ScatterChart>
+
     </LinearLayout>
 
 
