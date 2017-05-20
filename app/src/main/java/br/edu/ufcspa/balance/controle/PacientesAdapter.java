@@ -16,6 +16,7 @@ import java.util.List;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.Banco;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 
@@ -63,7 +64,7 @@ public class PacientesAdapter extends BaseAdapter {
         textNome.setText(paciente.getNome());
 
         TextView textNumeroDeAvaliacoes = (TextView) view.findViewById(R.id.textNumeroDeAvaliacoes);
-        int nAvaliacoes = getNumeroDeAvaliacoes(paciente);
+        Long nAvaliacoes = Banco.countAvaliacoes(paciente);
         textNumeroDeAvaliacoes.setText(String.valueOf(nAvaliacoes));//nTestes
         TextView textAvaliacoes = (TextView) view.findViewById(R.id.text_avaliacoes);
         if (nAvaliacoes == 1) textAvaliacoes.setText(R.string.avaliacao_singular);
@@ -98,8 +99,4 @@ public class PacientesAdapter extends BaseAdapter {
         campoFoto.setImageBitmap(bm);
         campoFoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
     }
-
-    private int getNumeroDeAvaliacoes(Paciente paciente) {
-        return (int) Paciente.count(Avaliacao.class, "id_Paciente = " + paciente.getId(), null);
     }
-}

@@ -28,6 +28,7 @@ import java.util.Locale;
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.Testes.SensorsActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.Banco;
 import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
@@ -37,7 +38,8 @@ public class PerfilActivity extends AppCompatActivity {
     private PerfilActivity activity = this;
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
-    private static int TAMANHO_ITEM_AVALIACAO = 92+1;
+    private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
+    private static int TAMANHO_ITEM_AVALIACAO = 101 + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +47,7 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        //getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+
         iniciaComponentes();
     }
 
@@ -100,7 +102,6 @@ public class PerfilActivity extends AppCompatActivity {
 
         TextView textoPeso = (TextView) findViewById(R.id.text_peso);
         TextView textoAltura = (TextView) findViewById(R.id.text_altura);
-        //TextView textoIMC = (TextView) findViewById(R.id.text_imc);
         TextView textoTelefone = (TextView) findViewById(R.id.text_telefone);
         TextView textoEmail = (TextView) findViewById(R.id.text_email);
         TextView textoIdade = (TextView) findViewById(R.id.text_idade);
@@ -116,7 +117,6 @@ public class PerfilActivity extends AppCompatActivity {
         activity.setTitle(paciente.getNome());
         textoPeso.setText(String.format(Locale.US, "%.2f kg", paciente.getMassa()));
         textoAltura.setText(String.format(Locale.US, "%.0f cm", paciente.getEstatura()));
-        //textoIMC.setText(String.format(Locale.US, "IMC %.2f", Calcula.imc(paciente.getMassa(), paciente.getEstatura())));
         if (paciente.getTelefone().isEmpty()) {
             if (paciente.getEmail().isEmpty()) {//tirar o titulo contato se não tem telefone nem email
                 findViewById(R.id.titulo_contato).setVisibility(View.GONE);
@@ -146,9 +146,6 @@ public class PerfilActivity extends AppCompatActivity {
         } else {
             textoObs.setText(paciente.getObs());
         }
-
-//        String[] arrayData = paciente.getDataNascimento().toString().split("-");
-//        String strData = arrayData[2] + "/" + arrayData[1] + "/" + arrayData[0];
     }
 
     @Override
@@ -198,12 +195,7 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void carregaListaAvaliacoes() {
 
-        try {
-            avaliacoes = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?", String.valueOf(this.paciente.getId()));
-        } catch (Exception e) {
-            e.printStackTrace();
-            avaliacoes = new ArrayList<Avaliacao>();
-        }
+        avaliacoes = Banco.getAvaliacoes(paciente);
 
         if (!avaliacoes.isEmpty()) {
             popularListaAvaliacoes(avaliacoes);
@@ -221,7 +213,7 @@ public class PerfilActivity extends AppCompatActivity {
         final ListView listaAvaliacoes = (ListView) findViewById(R.id.lista_avaliacoes_anteriores);
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaAvaliacoes.getLayoutParams();
 
-        if (avaliacoes.size() < 3) {
+        if (avaliacoes.size() <= 3) {
             lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * avaliacoes.size(), getResources().getDisplayMetrics());
             listaAvaliacoes.setLayoutParams(lp);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
@@ -239,10 +231,37 @@ public class PerfilActivity extends AppCompatActivity {
         listaAvaliacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Avaliacao avaliacao = (Avaliacao) listaAvaliacoes.getItemAtPosition(position);
-                Intent intentResultado = new Intent(PerfilActivity.this,ResultadoActivity.class);
-                intentResultado.putExtra("avaliação", avaliacao);
-                startActivity(intentResultado);
+
+                Avaliacao avaliacao = null;
+                try {
+                    avaliacao = (Avaliacao) listaAvaliacoes.getItemAtPosition(position);
+                    Intent intentResultado = new Intent(PerfilActivity.this,ResultadoActivity.class);
+                    intentResultado.putExtra("avaliação", avaliacao);
+                    startActivity(intentResultado);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    builder.setMessage("Não foi possível abrir a avaliação");
+
+                    builder.setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            }
+                    );
+
+                    builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            }
+                    );
+
+                    // Create the AlertDialog object and show it
+                    builder.create().show();
+                }
+;
 
             }
         });
@@ -324,4 +343,5 @@ public class PerfilActivity extends AppCompatActivity {
         super.onResume();
         carregaListaAvaliacoes();
     }
+
 }

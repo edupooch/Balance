@@ -61,6 +61,7 @@
     <string name="infor_clinicas">INFORMAÇÕES CLÍNICAS</string>
     <string name="titulo_avaliacao_activity">Resultados da Avaliação</string>
     <string name="avaliacao_singular">avaliação</string>
+    <string name="ver_mais">Ver mais</string>
 
 
 </resources>

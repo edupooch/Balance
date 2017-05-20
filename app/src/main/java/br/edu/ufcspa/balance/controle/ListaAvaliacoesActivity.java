@@ -26,7 +26,7 @@ public class ListaAvaliacoesActivity extends AppCompatActivity {
     private ArrayList<Avaliacao> avaliacoes;
     private ListView listaAvaliacoes;
     private Paciente paciente;
-    private static int TAMANHO_ITEM_AVALIACAO = 92+1;
+    private static int TAMANHO_ITEM_AVALIACAO = 101+1;
 
 
     @Override

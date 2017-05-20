@@ -13,7 +13,7 @@ public class Util {
 
 
     public static String converterDate(Date date){
-        SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy",Locale.getDefault());
+        SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy HH:mm",Locale.getDefault());
         return simpleDate.format(date);
     }
 }
