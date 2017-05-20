@@ -207,6 +207,7 @@ public class PerfilActivity extends AppCompatActivity {
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
             txtVerMais.setVisibility(View.GONE);
         }
+
     }
 
     private void popularListaAvaliacoes(List<Avaliacao> avaliacoes) {
