@@ -160,4 +160,6 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
     public void setDadosAcelerometro(String dadosAcelerometro) {
         this.dadosAcelerometro = dadosAcelerometro;
     }
+
+
 }

@@ -15,13 +15,13 @@ import java.io.FileOutputStream;
 import java.util.List;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.modelo.Calcula;
+import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 
 /**
  * Created by edupooch on 14/05/16.
- *
+ * <p>
  * Classe Adapter criada para fazer uma lista de paciente mais interativa e com mais informações.
  */
 
@@ -55,46 +55,51 @@ public class PacientesAdapter extends BaseAdapter {
         Paciente paciente = pacientes.get(position);
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = convertView;
-        if (view == null) { //usa-se o convertView para otimizar o carregamento de listas muito grandes
+        if (view == null) { //convertView otimiza o carregamento de listas muito grandes
             view = inflater.inflate(R.layout.list_item_pacientes, parent, false);
         }
-//        TesteDAO dao = new TesteDAO(context);
-//        int nTestes = dao.contarTestesDoPaciente(paciente);
-//        dao.close();
 
         TextView textNome = (TextView) view.findViewById(R.id.textNomePacienteLista);
         textNome.setText(paciente.getNome());
 
-        TextView textTestes = (TextView) view.findViewById(R.id.textNumeroTestesLista);
-        textTestes.setText(String.valueOf(0));//nTestes
-
-        TextView textPlural = (TextView) view.findViewById(R.id.textTestesPluralLista);
-        //if (nTestes == 1) textPlural.setText(R.string.teste_singular);
+        TextView textNumeroDeAvaliacoes = (TextView) view.findViewById(R.id.textNumeroDeAvaliacoes);
+        int nAvaliacoes = getNumeroDeAvaliacoes(paciente);
+        textNumeroDeAvaliacoes.setText(String.valueOf(nAvaliacoes));//nTestes
+        TextView textAvaliacoes = (TextView) view.findViewById(R.id.text_avaliacoes);
+        if (nAvaliacoes == 1) textAvaliacoes.setText(R.string.avaliacao_singular);
 
         ImageView campoFoto = (ImageView) view.findViewById(R.id.imagem_item);
         String caminhoFoto = paciente.getCaminhoFoto();
         if (caminhoFoto != null) {
-            final BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
-            Bitmap bm = BitmapFactory.decodeFile(caminhoFoto, options);
-            if (bm.getWidth() > bm.getHeight()) {
-                bm = Bitmap.createScaledBitmap(bm, 150, 100, false);
-                //foto vertical
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-                FileOutputStream out = null;
-
-            } else {
-                //horizontal
-                bm = Bitmap.createScaledBitmap(bm, 150, 100, false);
-            }
-
-
-            campoFoto.setImageBitmap(bm);
-            campoFoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            configuraFoto(campoFoto, caminhoFoto);
         }
 
         return view;
+    }
+
+    private void configuraFoto(ImageView campoFoto, String caminhoFoto) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 8;
+        Bitmap bm = BitmapFactory.decodeFile(caminhoFoto, options);
+        if (bm.getWidth() > bm.getHeight()) {
+            bm = Bitmap.createScaledBitmap(bm, 150, 100, false);
+            //foto vertical
+            Matrix matrix = new Matrix();
+            matrix.postRotate(90);
+            bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
+            FileOutputStream out = null;
+
+        } else {
+            //horizontal
+            bm = Bitmap.createScaledBitmap(bm, 150, 100, false);
+        }
+
+
+        campoFoto.setImageBitmap(bm);
+        campoFoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    }
+
+    private int getNumeroDeAvaliacoes(Paciente paciente) {
+        return (int) Paciente.count(Avaliacao.class, "id_Paciente = " + paciente.getId(), null);
     }
 }

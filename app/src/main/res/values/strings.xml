@@ -23,9 +23,9 @@
     <string name="atencao_deletar">Deletar Paciente</string>
 
     <string name="configura_es">Configurações</string>
-    <string name="testes">testes</string>
+    <string name="avaliacoes">avaliações</string>
     <string name="divisor">|</string>
-    <string name="testes_anteriores">TESTES ANTERIORES</string>
+    <string name="avaliacoes_anteriores">AVALIAÇÕES ANTERIORES</string>
     <string name="o_paciente_ainda_n_o_realizou_nenhum_teste">Não há exames cadastrados</string>
     <string name="dados_do_paciente">DADOS CADASTRAIS</string>
     <string name="masculino">Masculino</string>
@@ -60,6 +60,7 @@
     <string name="data_de_diagnostico">Data de Diagnóstico</string>
     <string name="infor_clinicas">INFORMAÇÕES CLÍNICAS</string>
     <string name="titulo_avaliacao_activity">Resultados da Avaliação</string>
+    <string name="avaliacao_singular">avaliação</string>
 
 
 </resources>
