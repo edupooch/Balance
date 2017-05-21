@@ -17,6 +17,7 @@ import java.util.List;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.Banco;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class ListaAvaliacoesActivity extends AppCompatActivity {
@@ -26,8 +27,8 @@ public class ListaAvaliacoesActivity extends AppCompatActivity {
     private ArrayList<Avaliacao> avaliacoes;
     private ListView listaAvaliacoes;
     private Paciente paciente;
-    private static int TAMANHO_ITEM_AVALIACAO = 101+1;
-
+    private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
+    private static int TAMANHO_ITEM_AVALIACAO = 102 + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +55,7 @@ public class ListaAvaliacoesActivity extends AppCompatActivity {
         AvaliacoesAdapter adapter = new AvaliacoesAdapter(this, avaliacoes);
         listaAvaliacoes.setAdapter(adapter);
 
-        //Coloca o tamanho da lista em dp de acordo com o numero de pacientes (75dp por paciente)
+        //Coloca o tamanho da lista em dp de acordo com o numero de pacientes
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaAvaliacoes.getLayoutParams();
         lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * avaliacoes.size(), getResources().getDisplayMetrics());;
         listaAvaliacoes.setLayoutParams(lp);
@@ -78,13 +79,7 @@ public class ListaAvaliacoesActivity extends AppCompatActivity {
                         Avaliacao avaliacao = Avaliacao.findById(Avaliacao.class, idAvalicao);
                         avaliacao.delete();
 
-                        try {
-                            This.avaliacoes  = (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = ?",String.valueOf(This.paciente.getId()));
-                        }catch (Exception e){
-                            e.printStackTrace();
-                            This.avaliacoes = new ArrayList<Avaliacao>();
-                        }
-
+                        This.avaliacoes = Banco.getAvaliacoes(paciente);
                         This.carregaListaAvaliacoes(This.avaliacoes);
                     }
                 }

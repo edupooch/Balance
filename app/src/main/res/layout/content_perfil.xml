@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:orientation="vertical">
 
@@ -398,7 +398,6 @@
         </LinearLayout>
 
 
-
         <TextView
             android:id="@+id/titulo_contato"
             android:layout_width="wrap_content"
@@ -517,11 +516,14 @@
 
             </ListView>
 
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10dp" />
+
             <TextView
                 android:id="@+id/text_ver_mais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:onClick="txtVerMais_Click"
                 android:text="@string/ver_mais"
@@ -530,6 +532,10 @@
                 android:textStyle="bold"
                 android:visibility="visible"
                 tools:text="@string/ver_mais" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="25dp" />
 
         </LinearLayout>
 

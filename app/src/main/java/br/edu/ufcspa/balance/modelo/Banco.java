@@ -12,7 +12,7 @@ public class Banco {
 
     public static ArrayList<Avaliacao> getAvaliacoes(Paciente paciente){
         try {
-            return  (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = " + paciente.getId(), null);
+            return  (ArrayList<Avaliacao>) Avaliacao.find(Avaliacao.class, "id_Paciente = " + paciente.getId(), null, null, "data DESC", null);
         } catch (Exception e) {
             e.printStackTrace();
             return  new ArrayList<Avaliacao>();

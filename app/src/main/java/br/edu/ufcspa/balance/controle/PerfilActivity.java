@@ -39,7 +39,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
     private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
-    private static int TAMANHO_ITEM_AVALIACAO = 101 + TAMANHO_ESPACO_ENTRE_ITENS;
+    private static int TAMANHO_ITEM_AVALIACAO = 102 + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -214,7 +214,7 @@ public class PerfilActivity extends AppCompatActivity {
         final ListView listaAvaliacoes = (ListView) findViewById(R.id.lista_avaliacoes_anteriores);
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaAvaliacoes.getLayoutParams();
 
-        if (avaliacoes.size() <= 3) {
+        if (avaliacoes.size() <= 3 ) {
             lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * avaliacoes.size(), getResources().getDisplayMetrics());
             listaAvaliacoes.setLayoutParams(lp);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
