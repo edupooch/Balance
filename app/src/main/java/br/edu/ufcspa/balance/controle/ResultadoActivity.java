@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
+import com.androidplot.xy.PanZoom;
 import com.androidplot.xy.RectRegion;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
@@ -85,6 +86,7 @@ public class ResultadoActivity extends AppCompatActivity {
         plot.addSeries(series, series1Format);
         // reduce the number of range labels
         plot.setLinesPerRangeLabel(3);
+        PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.MIN_TICKS);
 
     }
 

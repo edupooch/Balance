@@ -18,21 +18,31 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <RelativeLayout
+
+        <com.androidplot.xy.XYPlot
+            android:id="@+id/android_plot"
+            style="@style/APDefacto.Light"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.androidplot.xy.XYPlot
-                android:id="@+id/android_plot"
-                style="@style/APDefacto.Light"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                app:paddingRight="10dp"
-                app:lineLabelRotationBottom="-45"
-                app:lineLabels="left|bottom"
-                />
-        </RelativeLayout>
-
+            android:layout_height="360dp"
+            app:domainOriginLineColor="@color/ap_gray"
+            app:domainOriginLineThickness="1dp"
+            app:gridBackgroundColor="@color/off_white"
+            app:legendVisible="false"
+            app:lineLabelRotationBottom="-45"
+            app:lineLabelTextColorBottom="@color/textColor"
+            app:lineLabelTextColorLeft="@color/textColor"
+            app:lineLabelTextSizeBottom="12sp"
+            app:lineLabelTextSizeLeft="12sp"
+            app:lineLabels="left|bottom"
+            app:paddingLeft="10dp"
+            app:paddingRight="10dp"
+            app:paddingTop="18dp"
+            app:pieBorderThickness="0dp"
+            app:rangeOriginLineColor="@color/ap_gray"
+            app:rangeOriginLineThickness="1dp"
+            app:title="Projeção do movimento"
+            app:titleTextColor="@color/textColor"
+            app:titleTextSize="16sp" />
 
 
     </LinearLayout>
