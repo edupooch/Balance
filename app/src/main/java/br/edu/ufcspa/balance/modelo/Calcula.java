@@ -1,5 +1,7 @@
 package br.edu.ufcspa.balance.modelo;
 
+import android.util.Log;
+
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
