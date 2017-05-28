@@ -11,6 +11,12 @@ import com.androidplot.xy.RectRegion;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.androidplot.xy.XYSeries;
+import com.github.mikephil.charting.charts.ScatterChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.ScatterData;
+import com.github.mikephil.charting.data.ScatterDataSet;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -67,8 +73,8 @@ public class ResultadoActivity extends AppCompatActivity {
 
         // ANDROIDPLOT
         XYPlot plot = (XYPlot) findViewById(R.id.android_plot);
-        plot.setDomainBoundaries(-maiorX - 2, maiorX + 2, BoundaryMode.FIXED);
-        plot.setRangeBoundaries(-maiorY - 2, maiorY + 2, BoundaryMode.FIXED);
+        plot.setDomainBoundaries(-maiorX * 1.1, maiorX * 1.1, BoundaryMode.FIXED);
+        plot.setRangeBoundaries(-maiorY * 1.1, maiorY * 1.1, BoundaryMode.FIXED);
 
         // create formatters to use for drawing a series using LineAndPointRenderer
         // and configure them from xml:
@@ -79,6 +85,7 @@ public class ResultadoActivity extends AppCompatActivity {
         plot.addSeries(series, series1Format);
         // reduce the number of range labels
         plot.setLinesPerRangeLabel(3);
+
     }
 
 }

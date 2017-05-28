@@ -1,13 +1,8 @@
 package br.edu.ufcspa.balance.modelo;
 
-import android.util.Log;
-
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 
 /**
@@ -18,6 +13,7 @@ import java.util.GregorianCalendar;
 public class Calcula {
 
     public static final int AO_QUADRADO = 2;
+    public static final int M_PARA_CM = 100;
 
     /**
      * Calcula a idadeEmAnos em anos
@@ -100,8 +96,8 @@ public class Calcula {
 
         float resultanteD = -altura / cosGama;
 
-        float dx = resultanteD * cosAlfa;
-        float dy = resultanteD * cosBeta;
+        float dx = resultanteD * cosAlfa * M_PARA_CM;
+        float dy = resultanteD * cosBeta * M_PARA_CM;
 
         return new Coordenada2D(dx, dy);
     }
