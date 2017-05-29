@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -48,50 +49,20 @@ public class ResultadoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resultado);
-        avaliacao = (Avaliacao) getIntent().getSerializableExtra("avaliação");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        iniciaComponentes();
+
+    }
+
+    private void iniciaComponentes() {
+        avaliacao = (Avaliacao) getIntent().getSerializableExtra("avaliação");
         criaGrafico();
         findViews();
         escreveTextos();
-
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_resultado, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-            case R.id.action_deletar:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setCancelable(false);
-                builder.setTitle(getString(R.string.atencao_deletar));
-                builder.setMessage(getString(R.string.dialog_deletar_avaliacao));
-                builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Avaliacao avaliacaoBanco = Avaliacao.findById(Avaliacao.class, avaliacao.getId());
-                        avaliacaoBanco.delete();
-                        finish();
-                    }
-                });
-                builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-                AlertDialog alert = builder.create();
-                alert.show();
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     private void escreveTextos() {
         Paciente paciente = Paciente.findById(Paciente.class, avaliacao.getIdPaciente());
@@ -102,14 +73,14 @@ public class ResultadoActivity extends AppCompatActivity {
         textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
         textArea.setText(String.valueOf(avaliacao.getArea()));
 
-        if(avaliacao.getOlhos() == OLHOS_ABERTOS)
+        if (avaliacao.getOlhos() == OLHOS_ABERTOS)
             textOlhos.setText("Abertos");
-        if(avaliacao.getOlhos() == OLHOS_FECHADOS)
+        if (avaliacao.getOlhos() == OLHOS_FECHADOS)
             textOlhos.setText("Fechados");
 
-        if(avaliacao.getPernas() == UMA_PERNA)
+        if (avaliacao.getPernas() == UMA_PERNA)
             textPernas.setText("Uma Perna");
-        if(avaliacao.getPernas() == DUAS_PERNAS)
+        if (avaliacao.getPernas() == DUAS_PERNAS)
             textOlhos.setText("Duas Pernas");
 
 
@@ -159,4 +130,43 @@ public class ResultadoActivity extends AppCompatActivity {
         textOlhos = (TextView) findViewById(R.id.text_olhos);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_resultado, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_deletar:
+                criaAlertDialog();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void criaAlertDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle(getString(R.string.atencao_deletar));
+        builder.setMessage(getString(R.string.dialog_deletar_avaliacao));
+        builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Avaliacao avaliacaoBanco = Avaliacao.findById(Avaliacao.class, avaliacao.getId());
+                avaliacaoBanco.delete();
+                finish();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
