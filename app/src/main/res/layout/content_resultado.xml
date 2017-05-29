@@ -13,7 +13,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/round_edge"
         android:orientation="vertical">
 
@@ -209,23 +209,23 @@
                         android:id="@+id/text_pernas"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textStyle="bold" />
+                        android:textStyle="bold"
+                        tools:text="Sem informação" />
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="@string/olhos"
-                        android:textSize="12sp"
-                        android:visibility="gone" />
+                        android:text="Olhos:"
+                        android:textSize="12sp" />
 
                     <TextView
                         android:id="@+id/text_olhos"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textStyle="bold"
-                        android:visibility="gone" />
+                        tools:text="Sem informação" />
 
                 </LinearLayout>
 

@@ -57,16 +57,6 @@ public class PerfilActivity extends AppCompatActivity {
         escreveDados();
         carregaListaAvaliacoes();
 
-//        FloatingActionButton btIniciarTeste = (FloatingActionButton) findViewById(R.id.btnComecarAvaliacao);
-//        btIniciarTeste.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intentVaiProPreTeste = new Intent(PerfilActivity.this, ListaPacientesActivity.class);
-//                //intentVaiProPreTeste.putExtra("paciente", paciente);
-//                startActivity(intentVaiProPreTeste);
-//            }
-//        });
-
 
         ImageView campoFoto = (ImageView) findViewById(R.id.foto_paciente);
         String caminhoFoto = paciente.getCaminhoFoto();
@@ -170,7 +160,7 @@ public class PerfilActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setCancelable(false);
                 builder.setTitle(getString(R.string.atencao_deletar));
-                builder.setMessage(getString(R.string.dialog_deletar));
+                builder.setMessage(getString(R.string.dialog_deletar_paciente));
                 builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
 
                     @Override
@@ -286,63 +276,11 @@ public class PerfilActivity extends AppCompatActivity {
         startActivity(intentVaiPraListaDeAvaliacoes);
 
     }
-
-    public void btnDeletarAvaliacao_Click(View view) {
-
-        view = (View) view.getParent().getParent().getParent();
-        TextView txtAvaliacao = (TextView) view.findViewById(R.id.text_id_avaliacao);
-        final Long idAvalicao = Long.parseLong(txtAvaliacao.getText().toString());
-
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Deseja excluir esta avaliação?");
-
-        builder.setNegativeButton("Excluir", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-
-                        Avaliacao avaliacao = Avaliacao.findById(Avaliacao.class, idAvalicao);
-                        avaliacao.delete();
-                        carregaListaAvaliacoes();
-                    }
-                }
-        );
-
-        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                }
-        );
-
-        // Create the AlertDialog object and show it
-        builder.create().show();
-    }
-
-
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-//        MenuItem deletar = menu.add("Deletar Avaliacao");
-//        deletar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//
-//                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
-//                Avaliacao teste  = (Avaliacao) listaTestes.getItemAtPosition(info.position);
-//                TesteDAO dao = new TesteDAO(PerfilActivity.this);
-//
-//                dao.deleta(teste);
-//                dao.close();
-//
-//                carregaLista();
-//                return false;
-//            }
-//        });
-//    }
-
+    
     @Override
     protected void onResume() {
         super.onResume();
-        carregaListaAvaliacoes();
+        iniciaComponentes();
     }
 
 }

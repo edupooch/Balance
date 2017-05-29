@@ -53,16 +53,6 @@
                 android:textAlignment="textEnd"
                 android:textSize="14sp" />
 
-            <ImageView
-                android:id="@+id/btnDeletarAvaliacao"
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:onClick="btnDeletarAvaliacao_Click"
-                android:padding="4dp"
-                android:src="@drawable/delete"
-                android:tint="@color/colorAccent" />
-
         </LinearLayout>
 
         <LinearLayout

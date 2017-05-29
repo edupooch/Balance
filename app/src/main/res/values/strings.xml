@@ -19,7 +19,8 @@
     <string name="anos">anos</string>
     <string name="editar">Editar</string>
     <string name="deletar">Deletar</string>
-    <string name="dialog_deletar">Deseja deletar este paciente e todos os seus exames? Esta ação não poderá ser desfeita.</string>
+    <string name="dialog_deletar_paciente">Deseja deletar este paciente e todos os seus exames? Esta ação não poderá ser desfeita.</string>
+    <string name="dialog_deletar_avaliacao">Deseja deletar esta avaliação? Esta ação não poderá ser desfeita.</string>
     <string name="atencao_deletar">Deletar Paciente</string>
 
     <string name="configura_es">Configurações</string>
