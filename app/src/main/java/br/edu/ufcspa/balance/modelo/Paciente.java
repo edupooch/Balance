@@ -22,14 +22,14 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
     private String email;
     private double massa;
     private double estatura;
-    private Date dataNascimento;
+    private String dataNascimento;
     private int genero;
     private String obs;
     private String caminhoFoto;
 
-    private Date anamnesisDate;
+    private String anamnesisDate;
     private String diagnostico;
-    private Date dataDiagnostico;
+    private String dataDiagnostico;
     private String historicoDoencaAtual;
     private String historicoDoencasAnteriores;
     private String procedimentosTerapeuticos;
@@ -96,14 +96,6 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
         this.estatura = estatura;
     }
 
-    public Date getDataNascimento() {
-        return dataNascimento;
-    }
-
-    public void setDataNascimento(Date dataNascimento) {
-        this.dataNascimento = dataNascimento;
-    }
-
     @Override
     public String toString() {
         return getNome();
@@ -125,13 +117,6 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
         this.obs = obs;
     }
 
-    public Date getAnamnesisDate() {
-        return anamnesisDate;
-    }
-
-    public void setAnamnesisDate(Date anamnesisDate) {
-        this.anamnesisDate = anamnesisDate;
-    }
 
     public String getDiagnostico() {
         return diagnostico;
@@ -141,13 +126,6 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
         this.diagnostico = diagnostico;
     }
 
-    public Date getDataDiagnostico() {
-        return dataDiagnostico;
-    }
-
-    public void setDataDiagnostico(Date dataDiagnostico) {
-        this.dataDiagnostico = dataDiagnostico;
-    }
 
     public String getHistoricoDoencaAtual() {
         return historicoDoencaAtual;
@@ -171,6 +149,30 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
 
     public void setProcedimentosTerapeuticos(String procedimentosTerapeuticos) {
         this.procedimentosTerapeuticos = procedimentosTerapeuticos;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getAnamnesisDate() {
+        return anamnesisDate;
+    }
+
+    public void setAnamnesisDate(String anamnesisDate) {
+        this.anamnesisDate = anamnesisDate;
+    }
+
+    public String getDataDiagnostico() {
+        return dataDiagnostico;
+    }
+
+    public void setDataDiagnostico(String dataDiagnostico) {
+        this.dataDiagnostico = dataDiagnostico;
     }
 
     public List<Avaliacao> getAvaliacoes() {

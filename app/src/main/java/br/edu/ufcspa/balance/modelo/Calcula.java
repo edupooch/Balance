@@ -1,8 +1,17 @@
 package br.edu.ufcspa.balance.modelo;
 
+import android.util.Log;
+
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 
 /**
@@ -21,13 +30,20 @@ public class Calcula {
      * @param dataNasc recebe a data de nascimento de paciente.getData()
      * @return idadeEmAnos em anos
      */
-    public static String idadeEmAnos(java.util.Date dataNasc) {
-        LocalDate birthdate = new LocalDate(dataNasc);
+    public static String idadeEmAnos(String dataNasc) {
+        if (dataNasc.isEmpty()) {
+            return null;
+        }
+        final DateTimeFormatter dtf = DateTimeFormat.forPattern("dd/MM/yyyy");
+
+        LocalDate birthdate = dtf.parseLocalDate(dataNasc);
         LocalDate now = new LocalDate();
 
         Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
         String anos = period.getYears() + " anos";
-        if (period.getYears() == 1) {
+        if (period.getYears() == 1)
+
+        {
             anos = period.getYears() + " ano";
         }
         return anos;

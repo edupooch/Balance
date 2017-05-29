@@ -27,4 +27,9 @@ public class Coordenada2D {
     public String toString() {
         return "(" + x + "," + y + ")\n";
     }
+
+    public boolean isValido() {
+        return !(Double.isInfinite(getX()) || Double.isInfinite(getY()) ||
+                Double.isNaN(getX()) || Double.isNaN(getY()));
+    }
 }

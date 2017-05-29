@@ -68,7 +68,7 @@ class CadastroHelper {
 
         if (id != null) paciente.setId(id);
         paciente.setNome(edTextNomePaciente.getText().toString());
-        paciente.setDataNascimento(getDataFromEditText(edTextDataNascimento));
+        paciente.setDataNascimento(edTextDataNascimento.getText().toString());
 
         if (!edTextAltura.getText().toString().isEmpty())
             paciente.setEstatura(Double.valueOf(edTextAltura.getText().toString()));
@@ -79,9 +79,9 @@ class CadastroHelper {
         paciente.setEmail(edTextEmail.getText().toString());
         paciente.setObs(edTextObs.getText().toString());
 
-        paciente.setAnamnesisDate(getDataFromEditText(edTextDataAnamnese));
+        paciente.setAnamnesisDate(edTextDataAnamnese.getText().toString());
         paciente.setDiagnostico(edTextDiagnostico.getText().toString());
-        paciente.setDataDiagnostico(getDataFromEditText(edTextDataDiagnostico));
+        paciente.setDataDiagnostico(edTextDataDiagnostico.getText().toString());
 
         paciente.setHistoricoDoencaAtual(edTextCurrentDisease.getText().toString());
         paciente.setHistoricoDoencasAnteriores(edTextPreviousDisease.getText().toString());
@@ -96,30 +96,10 @@ class CadastroHelper {
         return paciente;
     }
 
-    @Nullable
-    private Date getDataFromEditText(EditText edTextData) {
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-        String strData;
-        if (!edTextData.getText().toString().isEmpty()) {
-            strData = edTextData.getText().toString();
-        } else {
-            strData = Paciente.DATA_NULA; //Se um date for null o framework do banco da erro
-        }
-
-        try {
-            return (new java.sql.Date(format.parse(strData).getTime()));
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
 
     void preencheFormulário(Paciente paciente) {
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-
         edTextNomePaciente.setText(paciente.getNome());
-        edTextDataNascimento.setText(dateFormat.format(paciente.getDataNascimento()));
+        edTextDataNascimento.setText(paciente.getDataNascimento());
         edTextDataNascimento.setFocusable(false);
 
         if (paciente.getGenero() == 0) {
@@ -135,9 +115,9 @@ class CadastroHelper {
         edTextEmail.setText(paciente.getEmail());
         edTextObs.setText(paciente.getObs());
 
-        edTextDataAnamnese.setText(dateFormat.format(paciente.getAnamnesisDate()));
+        edTextDataAnamnese.setText(paciente.getAnamnesisDate());
         edTextDiagnostico.setText(paciente.getDiagnostico());
-        edTextDataDiagnostico.setText(dateFormat.format(paciente.getDataDiagnostico()));
+        edTextDataDiagnostico.setText(paciente.getDataDiagnostico());
         edTextCurrentDisease.setText(paciente.getHistoricoDoencaAtual());
         edTextPreviousDisease.setText(paciente.getHistoricoDoencasAnteriores());
         edTextProcedimentos.setText(paciente.getProcedimentosTerapeuticos());
