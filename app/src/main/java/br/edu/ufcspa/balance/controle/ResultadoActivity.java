@@ -51,6 +51,7 @@ public class ResultadoActivity extends AppCompatActivity {
     private void escreveTextos() {
         Paciente paciente = Paciente.findById(Paciente.class, avaliacao.getIdPaciente());
         textNomePaciente.setText(paciente.getNome());
+        textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
 
     }
 
