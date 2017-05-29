@@ -89,7 +89,6 @@ public class ResultadoActivity extends AppCompatActivity {
                 });
                 AlertDialog alert = builder.create();
                 alert.show();
-
         }
         return super.onOptionsItemSelected(item);
     }
