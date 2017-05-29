@@ -41,9 +41,7 @@ public class Calcula {
 
         Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
         String anos = period.getYears() + " anos";
-        if (period.getYears() == 1)
-
-        {
+        if (period.getYears() == 1) {
             anos = period.getYears() + " ano";
         }
         return anos;
