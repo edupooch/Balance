@@ -100,7 +100,6 @@ class CadastroHelper {
     void preencheFormulário(Paciente paciente) {
         edTextNomePaciente.setText(paciente.getNome());
         edTextDataNascimento.setText(paciente.getDataNascimento());
-        edTextDataNascimento.setFocusable(false);
 
         if (paciente.getGenero() == 0) {
             btnFeminino.setChecked(true);
