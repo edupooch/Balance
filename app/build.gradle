@@ -17,6 +17,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    configurations.all {
+        resolutionStrategy.force 'com.google.code.findbugs:jsr305:1.3.9'
+    }
 }
 
 dependencies {
@@ -35,6 +39,7 @@ dependencies {
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.google.code.gson:gson:2.7'
     compile 'com.github.lecho:hellocharts-library:1.5.8@aar'
-    compile "com.androidplot:androidplot-core:1.4.3"
+    compile 'com.androidplot:androidplot-core:1.4.3'
+    compile 'com.google.guava:guava:22.0-android'
     testCompile 'junit:junit:4.12'
 }

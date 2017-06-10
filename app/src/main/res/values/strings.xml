@@ -60,7 +60,7 @@
     <string name="text_header_lista">Balance: Avaliação do Equilíbrio\nSelecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
     <string name="data_de_diagnostico">Data de Diagnóstico</string>
     <string name="infor_clinicas">INFORMAÇÕES CLÍNICAS</string>
-    <string name="titulo_resultados">Resultados da Avaliação</string>
+    <string name="titulo_resultados">Análise da Avaliação</string>
     <string name="avaliacao_singular">avaliação</string>
     <string name="ver_mais">Ver mais</string>
     <string name="nome">Nome</string>
@@ -68,6 +68,8 @@
     <string name="area">Área de dispersão</string>
     <string name="duracao">Duração</string>
     <string name="olhos">Olhos</string>
+    <string name="exportar">Exportar</string>
+    <string name="exportar_csv">Exportar (csv)</string>
 
 
 </resources>

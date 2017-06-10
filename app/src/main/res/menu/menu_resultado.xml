@@ -4,10 +4,17 @@
     tools:context="br.edu.ufcspa.tc6m.controle.PerfilActivity">
 
     <item
+        android:id="@+id/action_exportar"
+        android:orderInCategory="100"
+        android:title="@string/exportar_csv"
+        app:showAsAction="never"
+        android:icon="@drawable/icon_delete" />
+
+    <item
         android:id="@+id/action_deletar"
         android:orderInCategory="100"
         android:title="@string/deletar"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         android:icon="@drawable/icon_delete" />
 
 </menu>
