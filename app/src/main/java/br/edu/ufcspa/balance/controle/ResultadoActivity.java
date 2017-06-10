@@ -1,16 +1,20 @@
 package br.edu.ufcspa.balance.controle;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
-import android.support.annotation.Nullable;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
@@ -154,16 +158,16 @@ public class ResultadoActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_deletar:
-                criaAlertDialog();
+                criaDeletarDialog();
                 break;
             case R.id.action_exportar:
-                exportaCSV();
+                exportarCSV();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void exportaCSV() {
+    private void exportarCSV() {
         String nomePaciente = textNomePaciente.getText().toString();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm", Locale.getDefault());
         String fileName = nomePaciente.replace(" ", "").toLowerCase() + "-" + sdf.format(avaliacao.getData()) + ".csv";
@@ -190,29 +194,69 @@ public class ResultadoActivity extends AppCompatActivity {
 
         try {
             Files.asCharSink(file, Charsets.UTF_8).write(stringBuilder.toString());
+            criaExportarDialog(file);
+
         } catch (IOException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Falha ao salvar arquivo " + file.getPath(), Toast.LENGTH_LONG).show();
         }
 
-        try {
-            Log.d("FILE", String.valueOf(Files.readLines(file, Charsets.UTF_8)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
     }
 
+    private void criaExportarDialog(final File file) {
+        final Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.email_dialog);
+
+        View btAparelho = dialog.findViewById(R.id.layout_aparelho);
+        View btEmail = dialog.findViewById(R.id.layout_email);
+
+        btAparelho.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),
+                        "O arquivo foi salvo em: " + file.getPath(), Toast.LENGTH_LONG).show();
+                dialog.dismiss();
+            }
+        });
+
+        btEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                enviarEmail(file);
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+
     private File criaDiretorio() {
-        //DIRETORIO_PADRAO = pasta de mais fácil acesso para o usuário
         File dir = new File(DIRETORIO_PADRÃO);
-        boolean criou = dir.mkdir();
-        if (!criou) { //RETORNA DIRETORIO PADRÃO DO APP
-            return getFilesDir();
-        }
+        //noinspection ResultOfMethodCallIgnored
+        dir.mkdir();
         return dir;
     }
 
-    private void criaAlertDialog() {
+    public void enviarEmail(File file) {
+        String[] emails = {""};
+        String assunto = "Avaliação de " + textNomePaciente.getText().toString();
+        Intent intentEmail = new Intent(Intent.ACTION_SENDTO);
+        intentEmail.setData(Uri.parse("mailto:"));
+        intentEmail.putExtra(Intent.EXTRA_EMAIL, emails);
+        intentEmail.putExtra(Intent.EXTRA_SUBJECT, assunto);
+
+        Uri uri = Uri.fromFile(file);
+        intentEmail.putExtra(Intent.EXTRA_STREAM, uri);
+
+        if (intentEmail.resolveActivity(getPackageManager()) != null) {
+            startActivity(intentEmail);
+        }
+    }
+
+    private void criaDeletarDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
         builder.setTitle(getString(R.string.atencao_deletar));
