@@ -4,19 +4,18 @@
     tools:context="br.edu.ufcspa.tc6m.controle.PerfilActivity">
 
     <item
-        android:id="@+id/action_deletar"
-        android:orderInCategory="100"
-        android:title="@string/deletar"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/icon_delete" />
-
-    <item
         android:id="@+id/action_editar"
+        android:icon="@drawable/icon_edit"
         android:orderInCategory="100"
         android:title="@string/editar"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/icon_edit" />
+        app:showAsAction="never" />
 
+    <item
+        android:id="@+id/action_deletar"
+        android:icon="@drawable/icon_delete"
+        android:orderInCategory="100"
+        android:title="@string/deletar"
+        app:showAsAction="never" />
 
 
 </menu>
