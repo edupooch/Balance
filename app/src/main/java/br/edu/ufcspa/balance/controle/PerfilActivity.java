@@ -39,7 +39,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
     private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
-    private static int TAMANHO_ITEM_AVALIACAO = 90 + TAMANHO_ESPACO_ENTRE_ITENS;
+    private static int TAMANHO_ITEM_AVALIACAO = 91  + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

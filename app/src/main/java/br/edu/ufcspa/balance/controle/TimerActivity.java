@@ -6,20 +6,22 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.Testes.SensorsActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.InputFilterMinMax;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class TimerActivity extends AppCompatActivity {
@@ -104,7 +106,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 60;
                 dialog.dismiss();
-                iniciarTimer();
+                mostrarDialogTimer();
             }
         });
 
@@ -113,7 +115,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 45;
                 dialog.dismiss();
-                iniciarTimer();
+                mostrarDialogTimer();
             }
         });
 
@@ -122,7 +124,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 30;
                 dialog.dismiss();
-                iniciarTimer();
+                mostrarDialogTimer();
             }
         });
 
@@ -131,7 +133,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 15;
                 dialog.dismiss();
-                iniciarTimer();
+                mostrarDialogTimer();
             }
         });
 
@@ -169,6 +171,31 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+    }
+
+    private void mostrarDialogTimer(){
+        final Dialog dialog = new Dialog(This);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.timer_dialog);
+
+        final View btnIniciarAvaliacao = dialog.findViewById(R.id.text_iniciar_avaliacao);
+        final EditText pickerTimer = (EditText) dialog.findViewById(R.id.picker_timer);
+
+        pickerTimer.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "60")});
+
+        btnIniciarAvaliacao.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                segundosTimer = Integer.valueOf(pickerTimer.getText().toString());
+                dialog.dismiss();
+                iniciarTimer();
+            }
+        });
+
+        dialog.show();
+
+
     }
 
     public void iniciarTimer(){

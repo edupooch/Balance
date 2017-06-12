@@ -82,6 +82,9 @@
     <string name="title_activity_timer">TimerActivity</string>
     <string name="prepare_se">Prepare-se...</string>
     <string name="realizando_avalia_o">Realizando Avaliação...</string>
+    <string name="iniciar_avalia_o">Iniciar Avaliação</string>
+    <string name="selecione_o_tempo_para_prepara_o">Selecione o tempo para preparação:</string>
+    <string name="vamos_come_ar">Vamos começar!</string>
 
 
 </resources>

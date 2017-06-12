@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -28,7 +29,7 @@ public class ListaAvaliacoesActivity extends AppCompatActivity {
     private ListView listaAvaliacoes;
     private Paciente paciente;
     private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
-    private static int TAMANHO_ITEM_AVALIACAO = 90 + TAMANHO_ESPACO_ENTRE_ITENS;
+    private static int TAMANHO_ITEM_AVALIACAO = 91 + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +60,44 @@ public class ListaAvaliacoesActivity extends AppCompatActivity {
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaAvaliacoes.getLayoutParams();
         lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * avaliacoes.size(), getResources().getDisplayMetrics());;
         listaAvaliacoes.setLayoutParams(lp);
+
+        listaAvaliacoes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Avaliacao avaliacao = null;
+                try {
+                    avaliacao = (Avaliacao) listaAvaliacoes.getItemAtPosition(position);
+                    Intent intentResultado = new Intent(ListaAvaliacoesActivity.this,ResultadoActivity.class);
+                    intentResultado.putExtra("avaliação", avaliacao);
+                    startActivity(intentResultado);
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(This);
+                    builder.setMessage("Não foi possível abrir a avaliação");
+
+                    builder.setNegativeButton("ok", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            }
+                    );
+
+                    builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.dismiss();
+                                }
+                            }
+                    );
+
+                    // Create the AlertDialog object and show it
+                    builder.create().show();
+                }
+                ;
+
+            }
+        });
 
     }
 
