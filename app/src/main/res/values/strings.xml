@@ -73,6 +73,15 @@
     <string name="gravar_no_aparelho">Salvar no aparelho</string>
     <string name="enviar_por_e_mail">Enviar por e-mail</string>
     <string name="como_deseja_gravar_o_arquivo">Como deseja gravar o arquivo?</string>
+    <string name="quantas_pernas">Quantas Pernas?</string>
+    <string name="uma_perna">Uma perna</string>
+    <string name="duas_pernas">Duas Pernas</string>
+    <string name="qual_o_estado_dos_olhos">Qual o estado dos olhos?</string>
+    <string name="olhos_abertos">Olhos Abertos</string>
+    <string name="olhos_fechados">Olhos Fechados</string>
+    <string name="title_activity_timer">TimerActivity</string>
+    <string name="prepare_se">Prepare-se...</string>
+    <string name="realizando_avalia_o">Realizando Avaliação...</string>
 
 
 </resources>

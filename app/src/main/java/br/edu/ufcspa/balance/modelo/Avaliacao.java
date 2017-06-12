@@ -12,10 +12,10 @@ import java.util.List;
 public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
 
     public static final String DATA_NULA = "01/01/1800";
-    public static final Integer OLHOS_ABERTOS = 1;
-    public static final Integer OLHOS_FECHADOS = 2;
-    public static final Integer UMA_PERNA = 1;
-    public static final Integer DUAS_PERNAS = 2;
+    public static final int OLHOS_ABERTOS = 1;
+    public static final int OLHOS_FECHADOS = 2;
+    public static final int UMA_PERNA = 1;
+    public static final int DUAS_PERNAS = 2;
 
 
     public Long id = null;
@@ -29,6 +29,7 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
     private Integer frequencia = null;
     private Double area = null;
     private String observacoes = null;
+    private Integer Duracao = null;
 
 
     private Double cetro_X = null;
@@ -161,5 +162,11 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
         this.dadosAcelerometro = dadosAcelerometro;
     }
 
+    public Integer getDuracao() {
+        return Duracao;
+    }
 
+    public void setDuracao(Integer duracao) {
+        Duracao = duracao;
+    }
 }

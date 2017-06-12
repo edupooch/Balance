@@ -65,10 +65,14 @@
             android:name=".Testes.SensorsActivity"
             android:label="@string/title_activity_sensors"
             android:theme="@style/AppTheme.NoActionBar" />
-
-        <activity android:name=".controle.ResultadoActivity"
+        <activity
+            android:name=".controle.ResultadoActivity"
             android:label="@string/titulo_resultados"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controle.TimerActivity"
+            android:label="@string/title_activity_timer"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

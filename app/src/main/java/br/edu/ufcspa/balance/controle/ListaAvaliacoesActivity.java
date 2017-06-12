@@ -28,7 +28,7 @@ public class ListaAvaliacoesActivity extends AppCompatActivity {
     private ListView listaAvaliacoes;
     private Paciente paciente;
     private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
-    private static int TAMANHO_ITEM_AVALIACAO = 102 + TAMANHO_ESPACO_ENTRE_ITENS;
+    private static int TAMANHO_ITEM_AVALIACAO = 90 + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

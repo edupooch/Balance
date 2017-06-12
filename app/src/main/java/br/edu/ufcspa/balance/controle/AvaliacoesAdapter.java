@@ -66,9 +66,9 @@ public class AvaliacoesAdapter extends BaseAdapter {
         TextView txtArea = (TextView) view.findViewById(R.id.text_area);
         txtArea.setText(String.valueOf(avaliacao.getArea()) + "cm^2");
 
-        //FREQUÊNCIA
-        TextView txtFrequencia = (TextView) view.findViewById(R.id.text_frequencia);
-        txtFrequencia.setText(String.valueOf(avaliacao.getFrequencia()) + "Hz");
+        //DURAÇÃO
+        TextView txtDuracao = (TextView) view.findViewById(R.id.text_duracao);
+        txtDuracao.setText(String.valueOf(avaliacao.getDuracao()) + " segundos");
 
         //POSIÇÃO
         TextView txtPosicao = (TextView) view.findViewById(R.id.text_posicao);

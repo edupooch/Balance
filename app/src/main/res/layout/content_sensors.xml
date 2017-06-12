@@ -4,94 +4,111 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_vertical|center_horizontal"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.edu.ufcspa.balance.Testes.SensorsActivity"
     tools:showIn="@layout/activity_sensors">
 
+    <!--<TextView-->
+    <!--android:id="@+id/label_giroscopio"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Dados Giroscópio"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="24sp" />-->
+
+    <!--<Space-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="25dp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_x"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="X: "-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="30sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_y"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Y: "-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="30sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_z"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Z:"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="30sp" />-->
+
+    <!--<Space-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="25dp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/label_acelerometro"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Dados Acelerômetro:"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="24sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_ax"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="X:"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="30sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_ay"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Y:"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="30sp" />-->
+
+    <!--<TextView-->
+    <!--android:id="@+id/txt_az"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="Z:"-->
+    <!--android:textAlignment="center"-->
+    <!--android:textSize="30sp" />-->
+
+    <!--<Space-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="25dp" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/btn_terminar"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:onClick="btn_Terminar_Click"-->
+    <!--android:text="Terminar"-->
+    <!--android:textAlignment="center" />-->
+
     <TextView
-        android:id="@+id/label_giroscopio"
+        android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dados Giroscópio"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/realizando_avalia_o"
         android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="25dp" />
+        android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/txt_x"
+        android:id="@+id/text_timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="X: "
+        android:text="0"
         android:textAlignment="center"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/txt_y"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Y: "
-        android:textAlignment="center"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/txt_z"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Z:"
-        android:textAlignment="center"
-        android:textSize="30sp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="25dp" />
-
-    <TextView
-        android:id="@+id/label_acelerometro"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Dados Acelerômetro:"
-        android:textAlignment="center"
-        android:textSize="24sp" />
-
-    <TextView
-        android:id="@+id/txt_ax"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="X:"
-        android:textAlignment="center"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/txt_ay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Y:"
-        android:textAlignment="center"
-        android:textSize="30sp" />
-
-    <TextView
-        android:id="@+id/txt_az"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Z:"
-        android:textAlignment="center"
-        android:textSize="30sp" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="25dp" />
-
-    <Button
-        android:id="@+id/btn_terminar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="btn_Terminar_Click"
-        android:text="Terminar"
-        android:textAlignment="center" />
-
+        android:textColor="@color/colorPrimary"
+        android:textSize="120sp" />
 </LinearLayout>

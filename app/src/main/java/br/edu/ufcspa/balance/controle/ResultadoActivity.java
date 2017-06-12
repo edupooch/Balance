@@ -43,10 +43,6 @@ import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class ResultadoActivity extends AppCompatActivity {
 
-    public static final Integer OLHOS_ABERTOS = 1;
-    public static final Integer OLHOS_FECHADOS = 2;
-    public static final Integer UMA_PERNA = 1;
-    public static final Integer DUAS_PERNAS = 2;
     public static final String DIRETORIO_PADRÃO = "/storage/emulated/0/Balance/";
     public static final String SEPARADOR = ";";
 
@@ -86,16 +82,17 @@ public class ResultadoActivity extends AppCompatActivity {
         textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
         textArea.setText(String.valueOf(avaliacao.getArea()));
 
-        if (avaliacao.getOlhos() == OLHOS_ABERTOS)
+        if (avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
             textOlhos.setText("Abertos");
-        if (avaliacao.getOlhos() == OLHOS_FECHADOS)
+        if (avaliacao.getOlhos() == Avaliacao.OLHOS_FECHADOS)
             textOlhos.setText("Fechados");
 
-        if (avaliacao.getPernas() == UMA_PERNA)
+        if (avaliacao.getPernas() == Avaliacao.UMA_PERNA)
             textPernas.setText("Uma Perna");
-        if (avaliacao.getPernas() == DUAS_PERNAS)
-            textOlhos.setText("Duas Pernas");
+        if (avaliacao.getPernas() == Avaliacao.DUAS_PERNAS)
+            textPernas.setText("Duas Pernas");
 
+        textDuracao.setText(avaliacao.getDuracao() + " segundos");
 
     }
 

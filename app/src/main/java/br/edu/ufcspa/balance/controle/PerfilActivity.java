@@ -39,7 +39,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
     private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
-    private static int TAMANHO_ITEM_AVALIACAO = 102 + TAMANHO_ESPACO_ENTRE_ITENS;
+    private static int TAMANHO_ITEM_AVALIACAO = 90 + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -271,9 +271,15 @@ public class PerfilActivity extends AppCompatActivity {
 
     public void btnComecarAvaliacao_Click(View view) {
 
-        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, SensorsActivity.class);
+//        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, SensorsActivity.class);
+//        intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
+//        startActivity(intentVaiPraListaDeAvaliacoes);
+
+        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, TimerActivity.class);
         intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
         startActivity(intentVaiPraListaDeAvaliacoes);
+
+
 
     }
     
