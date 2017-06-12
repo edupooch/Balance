@@ -201,6 +201,7 @@ public class TimerActivity extends AppCompatActivity {
                     iniciaAvaliação();
                     This.finish();
                 }
+
             }.start();
     }
 
