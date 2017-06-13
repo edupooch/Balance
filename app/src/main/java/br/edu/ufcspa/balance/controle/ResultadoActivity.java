@@ -36,6 +36,7 @@ import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.Banco;
 import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Coordenada2D;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
@@ -262,8 +263,19 @@ public class ResultadoActivity extends AppCompatActivity {
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Avaliacao avaliacaoBanco = Avaliacao.findById(Avaliacao.class, avaliacao.getId());
-                avaliacaoBanco.delete();
+
+                if(avaliacao.getId() != null){
+                    Avaliacao avaliacaoBanco = Avaliacao.findById(Avaliacao.class, avaliacao.getId());
+                    avaliacaoBanco.delete();
+                }else{
+                    Paciente paciente = new Paciente();
+                    paciente.setId(avaliacao.getIdPaciente());
+                    List<Avaliacao> avaliacoesBanco = Banco.getAvaliacoes(paciente);
+
+                    Avaliacao avaliacaoBanco = avaliacoesBanco.get(avaliacoesBanco.size()-1);
+                    avaliacaoBanco.delete();
+                }
+
                 finish();
             }
         });

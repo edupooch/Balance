@@ -1,25 +1,26 @@
 package br.edu.ufcspa.balance.controle;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.InputFilter;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.Testes.SensorsActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.InputFilterMinMax;
 import br.edu.ufcspa.balance.modelo.Paciente;
@@ -35,8 +36,13 @@ public class TimerActivity extends AppCompatActivity {
     int duracao;
     int segundosTimer;
 
+    int backCounter = 0;
+
 
     TextView txtTimer;
+    TextView txtPrepare;
+
+    CountDownTimer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +50,12 @@ public class TimerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_timer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        setTitle("");
         //TODO default
         segundosTimer = 10;
 
         txtTimer = (TextView) findViewById(R.id.text_timer);
+        txtPrepare = (TextView) findViewById(R.id.text_prepare);
 
         Intent intent = getIntent();
         paciente = (Paciente) intent.getSerializableExtra("paciente");
@@ -88,6 +95,18 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    mostrarDialogVoltar();
+                }
+                return true;
+            }
+        });
     }
 
     public void mostrarDialogDuracao(){
@@ -138,6 +157,18 @@ public class TimerActivity extends AppCompatActivity {
         });
 
         dialog.show();
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    mostrarDialogVoltar();
+                }
+                return true;
+            }
+        });
     }
 
     public void mostrarDialogOlhos(){
@@ -171,6 +202,18 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    mostrarDialogVoltar();
+                }
+                return true;
+            }
+        });
     }
 
     private void mostrarDialogTimer(){
@@ -194,15 +237,27 @@ public class TimerActivity extends AppCompatActivity {
         });
 
         dialog.show();
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    mostrarDialogVoltar();
+                }
+                return true;
+            }
+        });
 
     }
 
     public void iniciarTimer(){
 
-            Log.d("Debug", (segundosTimer+"").toString());
+        txtTimer.setVisibility(View.VISIBLE);
+        txtPrepare.setVisibility(View.VISIBLE);
 
-            new CountDownTimer((segundosTimer)*1000, 1000) {
+         timer = new CountDownTimer((segundosTimer)*1000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
                     txtTimer.setText(""+millisUntilFinished / 1000);
@@ -228,7 +283,6 @@ public class TimerActivity extends AppCompatActivity {
                     iniciaAvaliação();
                     This.finish();
                 }
-
             }.start();
     }
 
@@ -250,6 +304,46 @@ public class TimerActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if(timer != null)
+            timer.cancel();
+    }
+
+    private void mostrarDialogVoltar() {
+
+        if(backCounter >= 1)
+            return;
+
+        backCounter++;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Voltar");
+        builder.setMessage("Deseja cancelar esta avaliação?");
+        builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                if(timer != null)
+                    timer.cancel();
+
+                This.finish();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                backCounter = 0;
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
 }

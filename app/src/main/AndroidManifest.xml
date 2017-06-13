@@ -62,7 +62,7 @@
             android:label="@string/title_activity_lista_avaliacoes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Testes.SensorsActivity"
+            android:name=".controle.SensorsActivity"
             android:label="@string/title_activity_sensors"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -72,7 +72,11 @@
         <activity
             android:name=".controle.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controle.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

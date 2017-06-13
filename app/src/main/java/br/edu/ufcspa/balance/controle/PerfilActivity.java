@@ -26,7 +26,6 @@ import java.util.List;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.Testes.SensorsActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.Banco;
 import br.edu.ufcspa.balance.modelo.Calcula;
@@ -56,7 +55,6 @@ public class PerfilActivity extends AppCompatActivity {
     private void iniciaComponentes() {
         escreveDados();
         carregaListaAvaliacoes();
-
 
         ImageView campoFoto = (ImageView) findViewById(R.id.foto_paciente);
         String caminhoFoto = paciente.getCaminhoFoto();
@@ -190,10 +188,11 @@ public class PerfilActivity extends AppCompatActivity {
         if (!avaliacoes.isEmpty()) {
             popularListaAvaliacoes(avaliacoes);
             TextView txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
-            txtMsgVazio.setText("Clique na Avaliação para mais detalhes.");
+            txtMsgVazio.setText(R.string.clique_na_avaliacao_para_mais_detalhes);
         } else {
+            popularListaAvaliacoes(avaliacoes);
             TextView txtMsgVazio = (TextView) findViewById(R.id.text_sem_avaliacoes);
-            txtMsgVazio.setText("Nenhuma avaliação realizada ainda.");
+            txtMsgVazio.setText(R.string.nenhuma_avaliacao_realizada_ainda);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
             txtVerMais.setVisibility(View.GONE);
         }

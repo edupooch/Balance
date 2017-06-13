@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.edu.ufcspa.balance.Testes.SensorsActivity"
+    tools:context="br.edu.ufcspa.balance.controle.SensorsActivity"
     tools:showIn="@layout/activity_sensors">
 
     <!--<TextView-->
@@ -94,13 +95,14 @@
     <!--android:textAlignment="center" />-->
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/text_realizando_avaliacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"
         android:layout_marginTop="30dp"
         android:text="@string/realizando_avalia_o"
         android:textAlignment="center"
+        android:textColor="@color/ap_white"
         android:textSize="25sp" />
 
     <TextView
@@ -109,6 +111,6 @@
         android:layout_height="wrap_content"
         android:text="0"
         android:textAlignment="center"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@color/ap_white"
         android:textSize="120sp" />
 </LinearLayout>

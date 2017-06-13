@@ -1,4 +1,4 @@
-package br.edu.ufcspa.balance.Testes;
+package br.edu.ufcspa.balance.controle;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -15,7 +15,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -25,10 +24,8 @@ import java.util.Arrays;
 import java.util.Date;
 
 import br.edu.ufcspa.balance.R;
-import br.edu.ufcspa.balance.controle.OlhosDialog;
-import br.edu.ufcspa.balance.controle.PernasDialog;
-import br.edu.ufcspa.balance.controle.ResultadoActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.Banco;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.DadoGiroscopio;
 import br.edu.ufcspa.balance.modelo.Paciente;
@@ -43,16 +40,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
     private int duracao;
 
     private SensorManager mSensorManager;
-    private Sensor giroscopio;
-    private Sensor acelerometro;
-
-//    private TextView txtx;
-//    private TextView txty;
-//    private TextView txtz;
-//
-//    private TextView txtAx;
-//    private TextView txtAy;
-//    private TextView txtAz;
 
     private ArrayList<DadoGiroscopio> dadosGiroscopio = new ArrayList<DadoGiroscopio>();
     private ArrayList<DadoAcelerometro> dadosAcelerometro = new ArrayList<DadoAcelerometro>();
@@ -66,6 +53,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
         setContentView(R.layout.activity_sensors);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("");
 
         Intent intent = getIntent();
         paciente = (Paciente) intent.getSerializableExtra("paciente");
@@ -75,8 +63,8 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         tempoInicio = System.currentTimeMillis();
-        giroscopio = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
-        acelerometro = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        Sensor giroscopio = mSensorManager.getDefaultSensor(Sensor.TYPE_GYROSCOPE);
+        Sensor acelerometro = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
 
         mSensorManager.registerListener(this, giroscopio, SensorManager.SENSOR_DELAY_NORMAL);
         mSensorManager.registerListener(this, acelerometro, SensorManager.SENSOR_DELAY_NORMAL);
@@ -104,16 +92,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
             }
         }.start();
 
-
-//        txtx = (TextView) findViewById(R.id.txt_x);
-//        txty = (TextView) findViewById(R.id.txt_y);
-//        txtz = (TextView) findViewById(R.id.txt_z);
-//
-//        txtAx = (TextView) findViewById(R.id.txt_ax);
-//        txtAy = (TextView) findViewById(R.id.txt_ay);
-//        txtAz = (TextView) findViewById(R.id.txt_az);
-//        //
-
     }
 
     protected void onPause() {
@@ -128,10 +106,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
             float x = event.values[0];
             float y = event.values[1];
             float z = event.values[2];
-
-//            txtx.setText("X: " + String.valueOf(Math.floor(x * 100) / 100));
-//            txty.setText("Y: " + String.valueOf(Math.floor(y * 100) / 100));
-//            txtz.setText("Z: " + String.valueOf(Math.floor(z * 100) / 100));
 
             dadosGiroscopio.add(new DadoGiroscopio(System.currentTimeMillis() - tempoInicio, x, y, z));
         }
@@ -149,18 +123,9 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
                         ay != dadosAcelerometro.get(dadosAcelerometro.size()).getY()) {
 
                     dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
-
-//                    txtAx.setText("X: " + String.valueOf(Math.floor(ax * 100) / 100));
-//                    txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
-//                    txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
-
                 }
             } catch (Exception e) {
                 dadosAcelerometro.add(new DadoAcelerometro(System.currentTimeMillis() - tempoInicio, ax, ay, az));
-
-//                txtAx.setText("X: " + String.valueOf(Math.floor(ax * 100) / 100));
-//                txtAy.setText("Y: " + String.valueOf(Math.floor(ay * 100) / 100));
-//                txtAz.setText("Z: " + String.valueOf(Math.floor(az * 100) / 100));
             }
         }
 
@@ -262,5 +227,29 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // do nothing
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setTitle("Voltar");
+        builder.setMessage("Deseja cancelar esta avaliação?");
+        builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                activity.finish();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
