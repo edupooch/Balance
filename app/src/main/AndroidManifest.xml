@@ -64,7 +64,8 @@
         <activity
             android:name=".controle.SensorsActivity"
             android:label="@string/title_activity_sensors"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".controle.ResultadoActivity"
             android:label="@string/titulo_resultados"
@@ -72,7 +73,8 @@
         <activity
             android:name=".controle.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".controle.SettingsActivity"
             android:label="@string/title_activity_settings"

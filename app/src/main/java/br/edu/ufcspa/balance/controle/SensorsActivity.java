@@ -231,25 +231,33 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(false);
-        builder.setTitle("Voltar");
-        builder.setMessage("Deseja cancelar esta avaliação?");
-        builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
 
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        /*
+        *
+        * O dialog abre fecha, muda de activity e não finaliza a activity
+        * por isso foi deixado só a finalização, que funciona normalmente
+        *
+        */
+
+//        super.onBackPressed();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        builder.setCancelable(false);
+//        builder.setTitle("Voltar");
+//        builder.setMessage("Deseja cancelar esta avaliação?");
+//        builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
+//
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
                 activity.finish();
-            }
-        });
-        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
+//            }
+//        });
+//        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.cancel();
+//            }
+//        });
+//        AlertDialog alert = builder.create();
+//        alert.show();
     }
 }

@@ -217,15 +217,44 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     private void mostrarDialogTimer(){
+
         final Dialog dialog = new Dialog(This);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         dialog.setContentView(R.layout.timer_dialog);
 
         final View btnIniciarAvaliacao = dialog.findViewById(R.id.text_iniciar_avaliacao);
-        final EditText pickerTimer = (EditText) dialog.findViewById(R.id.picker_timer);
+        final TextView pickerTimer = (TextView) dialog.findViewById(R.id.picker_timer);
+        TextView btnMenos = (TextView) dialog.findViewById(R.id.btn_menos);
+        TextView btnMais = (TextView) dialog.findViewById(R.id.btn_mais);
 
-        pickerTimer.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "60")});
+
+        //pickerTimer.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "60")});
+
+        /* Diminui timer*/
+        btnMenos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int time = Integer.parseInt(pickerTimer.getText().toString());
+                if(time >= 10){
+                    time -= 5;
+                    pickerTimer.setText(time+"");
+                }
+            }
+        });
+
+        /* Aumenta timer*/
+        btnMais.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int time = Integer.parseInt(pickerTimer.getText().toString());
+                if(time <=50){
+                    time+=5;
+                    pickerTimer.setText(time+"");
+                }
+            }
+        });
+
 
         btnIniciarAvaliacao.setOnClickListener(new View.OnClickListener() {
             @Override
