@@ -161,6 +161,7 @@
     <string name="tempo_para_se_preparar_cont">Tempo de espera para se preparar antes de começar a avaliação do paciente</string>
     <string name="clique_na_avaliacao_para_mais_detalhes">Clique na Avaliação para mais detalhes.</string>
     <string name="nenhuma_avaliacao_realizada_ainda">Nenhuma avaliação realizada ainda.</string>
+    <string name="title_activity_grafico">GraficoActivity</string>
 
 
 </resources>

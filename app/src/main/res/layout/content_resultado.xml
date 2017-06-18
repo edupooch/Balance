@@ -181,7 +181,8 @@
             android:layout_marginLeft="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
-            android:padding="5dp">
+            android:padding="5dp"
+            android:onClick="grafico_Click">
 
             <ImageView
                 android:layout_width="20dp"
@@ -199,7 +200,15 @@
                 android:text="Gráfico de Dispersão"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/icon_olho_aberto"
+                android:tint="@color/ap_gray" />
 
 
         </LinearLayout>
@@ -214,28 +223,35 @@
             android:layout_marginStart="5dp"
             android:background="#8b949494" />
 
-        <com.androidplot.xy.XYPlot
-            android:id="@+id/android_plot"
-            style="@style/APDefacto.Light"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="360dp"
-            app:borderColor="@color/off_white"
-            app:borderThickness="3dp"
-            app:domainOriginLineColor="@color/ap_gray"
-            app:domainOriginLineThickness="1dp"
-            app:gridBackgroundColor="@color/off_white"
-            app:legendVisible="false"
-            app:lineLabelRotationBottom="-45"
-            app:lineLabelTextColorBottom="@color/textColor"
-            app:lineLabelTextColorLeft="@color/textColor"
-            app:lineLabelTextSizeBottom="12sp"
-            app:lineLabelTextSizeLeft="12sp"
-            app:lineLabels="left|bottom"
-            app:paddingLeft="2dp"
-            app:paddingRight="10dp"
-            app:pieBorderThickness="0dp"
-            app:rangeOriginLineColor="@color/ap_gray"
-            app:rangeOriginLineThickness="1dp" />
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            >
+
+            <com.androidplot.xy.XYPlot
+                android:id="@+id/android_plot"
+                style="@style/APDefacto.Light"
+                android:layout_width="match_parent"
+                android:layout_height="360dp"
+                app:borderColor="@color/off_white"
+                app:borderThickness="3dp"
+                app:domainOriginLineColor="@color/ap_gray"
+                app:domainOriginLineThickness="1dp"
+                app:gridBackgroundColor="@color/off_white"
+                app:legendVisible="false"
+                app:lineLabelRotationBottom="-45"
+                app:lineLabelTextColorBottom="@color/textColor"
+                app:lineLabelTextColorLeft="@color/textColor"
+                app:lineLabelTextSizeBottom="12sp"
+                app:lineLabelTextSizeLeft="12sp"
+                app:lineLabels="left|bottom"
+                app:paddingLeft="2dp"
+                app:paddingRight="10dp"
+                app:pieBorderThickness="0dp"
+                app:rangeOriginLineColor="@color/ap_gray"
+                app:rangeOriginLineThickness="1dp" />
+        </LinearLayout>
 
 
     </LinearLayout>

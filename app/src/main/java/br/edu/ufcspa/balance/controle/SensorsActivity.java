@@ -1,5 +1,7 @@
 package br.edu.ufcspa.balance.controle;
 
+import android.app.Activity;
+import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -71,7 +74,6 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         final TextView txtTimer = (TextView) findViewById(R.id.text_timer);
 
-        //TODO Mostrar outra coisa mais legal
         new CountDownTimer((duracao+1)*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -91,6 +93,9 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
                 terminar();
             }
         }.start();
+
+        /*Desabilita o bloqueio da tela por timeout*/
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
     }
 
@@ -112,9 +117,11 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
+            /*Troca do Y pelo Z pela inversão do celular*/
+
             float ax = event.values[0];
-            float ay = event.values[1];
-            float az = event.values[2];
+            float ay = event.values[2]; // antigo 1
+            float az = event.values[1]; // antigo 2
 
 
             try {

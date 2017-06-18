@@ -1,6 +1,8 @@
 package br.edu.ufcspa.balance.controle;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.app.KeyguardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -16,6 +18,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -228,9 +231,6 @@ public class TimerActivity extends AppCompatActivity {
         TextView btnMenos = (TextView) dialog.findViewById(R.id.btn_menos);
         TextView btnMais = (TextView) dialog.findViewById(R.id.btn_mais);
 
-
-        //pickerTimer.setFilters(new InputFilter[]{ new InputFilterMinMax("1", "60")});
-
         /* Diminui timer*/
         btnMenos.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -248,7 +248,7 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int time = Integer.parseInt(pickerTimer.getText().toString());
-                if(time <=50){
+                if(time <=55){
                     time+=5;
                     pickerTimer.setText(time+"");
                 }
@@ -282,6 +282,9 @@ public class TimerActivity extends AppCompatActivity {
     }
 
     public void iniciarTimer(){
+
+        /*Desabilita o bloqueio da tela por timeout*/
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         txtTimer.setVisibility(View.VISIBLE);
         txtPrepare.setVisibility(View.VISIBLE);

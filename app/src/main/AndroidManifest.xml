@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
 
     <application
         android:name="com.orm.SugarApp"
@@ -64,8 +65,8 @@
         <activity
             android:name=".controle.SensorsActivity"
             android:label="@string/title_activity_sensors"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".controle.ResultadoActivity"
             android:label="@string/titulo_resultados"
@@ -73,12 +74,16 @@
         <activity
             android:name=".controle.TimerActivity"
             android:label="@string/title_activity_timer"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".controle.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controle.GraficoActivity"
+            android:label="@string/title_activity_grafico"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

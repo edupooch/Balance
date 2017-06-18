@@ -28,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,6 +55,7 @@ public class ResultadoActivity extends AppCompatActivity {
     private TextView textPernas;
     private TextView textOlhos;
     private Avaliacao avaliacao;
+    XYPlot plot;
 
 
     @Override
@@ -98,7 +100,7 @@ public class ResultadoActivity extends AppCompatActivity {
     }
 
     private void criaGrafico() {
-        List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
+        final List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
 
         float alturaDoAparelho = 1.20f;
         float maiorX = 0;
@@ -117,7 +119,7 @@ public class ResultadoActivity extends AppCompatActivity {
 
         }
 
-        XYPlot plot = (XYPlot) findViewById(R.id.android_plot);
+        plot = (XYPlot) findViewById(R.id.android_plot);
         plot.setDomainBoundaries(-maiorX * 1.1, maiorX * 1.1, BoundaryMode.FIXED);
         plot.setRangeBoundaries(-maiorY * 1.1, maiorY * 1.1, BoundaryMode.FIXED);
 
@@ -125,7 +127,16 @@ public class ResultadoActivity extends AppCompatActivity {
                 new LineAndPointFormatter(this, R.xml.point_formatter);
         plot.addSeries(pontos, layoutPontos);
 
-        PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.OUTER);
+        PanZoom.attach(plot, PanZoom.Pan.NONE, PanZoom.Zoom.NONE, PanZoom.ZoomLimit.OUTER);
+    }
+
+    public void grafico_Click(View view){
+
+        final List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
+        Intent intentVaiProGrafico = new Intent(ResultadoActivity.this, GraficoActivity.class);
+        intentVaiProGrafico.putExtra("listaDadosAcelerometro", new Gson().toJson(listaDadosAcelerometro));
+        startActivity(intentVaiProGrafico);
+
     }
 
     private List<DadoAcelerometro> getDadosAcelerometro() {
