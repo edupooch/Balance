@@ -81,15 +81,17 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
             }
 
             public void onFinish() {
-                txtTimer.setText("0");
-                ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
-                try {
-                    Thread.sleep(80);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
+//                txtTimer.setText("0");
+//                ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
+//                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
+//                try {
+//                    Thread.sleep(80);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
+                ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 1000);
                 terminar();
             }
         }.start();
@@ -140,6 +142,10 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
     public void terminar() {
 
+        /*Toca 1 beep longo*/
+        //ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 1500);
+        //toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 1500);
+
         mSensorManager.unregisterListener(this);
         Log.d("GIROSCOPE", "GIROSCOPIO:");
 
@@ -184,7 +190,11 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         avaliacao.save(); // Salva a avaliação no banco
 
+
+
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Sucesso!");
         builder.setMessage("Avaliação salva com sucesso!")
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {

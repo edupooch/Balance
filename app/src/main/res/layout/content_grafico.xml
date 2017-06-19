@@ -4,14 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="br.edu.ufcspa.balance.controle.GraficoActivity"
     tools:showIn="@layout/activity_grafico">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_edge_cinza"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="4dp"
+        android:layout_weight="1">
 
         <com.androidplot.xy.XYPlot
             android:id="@+id/android_plot"
@@ -36,5 +49,12 @@
             app:rangeOriginLineColor="@color/ap_gray"
             app:rangeOriginLineThickness="1dp" />
 
+    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="Escala em centímetros"
+            android:textAlignment="center" />
     </LinearLayout>
 </LinearLayout>

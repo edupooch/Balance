@@ -74,7 +74,7 @@ public class GraficoActivity extends AppCompatActivity {
                 new LineAndPointFormatter(this, R.xml.point_formatter);
         plot.addSeries(pontos, layoutPontos);
 
-        PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.STRETCH_BOTH, PanZoom.ZoomLimit.OUTER);
+        PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.SCALE, PanZoom.ZoomLimit.OUTER);
     }
 
 }

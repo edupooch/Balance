@@ -83,7 +83,7 @@ public class ResultadoActivity extends AppCompatActivity {
         textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
 
         textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
-        textArea.setText(String.valueOf(avaliacao.getArea()));
+        textArea.setText(String.valueOf(avaliacao.getArea())+"cm²");
 
         if (avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
             textOlhos.setText("Abertos");

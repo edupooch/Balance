@@ -302,21 +302,14 @@ public class TimerActivity extends AppCompatActivity {
                 }
 
                 public void onFinish() {
-
-                    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
-                    try {
-                        Thread.sleep(80);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
-
                     iniciaAvaliação();
+                    ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 1000);
                     This.finish();
                 }
             }.start();
     }
+
 
     private void iniciaAvaliação() {
         Intent intentVaiPraListaDeAvaliacoes = new Intent(TimerActivity.this, SensorsActivity.class);

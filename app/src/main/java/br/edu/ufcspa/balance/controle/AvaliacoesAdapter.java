@@ -62,9 +62,11 @@ public class AvaliacoesAdapter extends BaseAdapter {
         TextView txtData = (TextView) view.findViewById(R.id.text_data);
         txtData.setText(Util.converterDate(avaliacao.getData()));
 
+
         //AREA
         TextView txtArea = (TextView) view.findViewById(R.id.text_area);
-        txtArea.setText(String.valueOf(avaliacao.getArea()) + "cm^2");
+        txtArea.setText(String.valueOf(avaliacao.getArea()) + "cm²");
+
 
         //DURAÇÃO
         TextView txtDuracao = (TextView) view.findViewById(R.id.text_duracao);
