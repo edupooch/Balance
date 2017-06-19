@@ -2,25 +2,21 @@ package br.edu.ufcspa.balance.controle;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -38,7 +34,7 @@ public class PerfilActivity extends AppCompatActivity {
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
     private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
-    private static int TAMANHO_ITEM_AVALIACAO = 102  + TAMANHO_ESPACO_ENTRE_ITENS;
+    private static int TAMANHO_ITEM_AVALIACAO = 102 + TAMANHO_ESPACO_ENTRE_ITENS;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,93 +42,102 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        iniciaComponentes();
-    }
-
-
-
-    private void iniciaComponentes() {
         escreveDados();
-        carregaListaAvaliacoes();
-
-        ImageView campoFoto = (ImageView) findViewById(R.id.foto_paciente);
-        String caminhoFoto = paciente.getCaminhoFoto();
-        if (caminhoFoto != null) {
-            findViewById(R.id.icone_user).setVisibility(View.GONE);
-            final BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inSampleSize = 8;
-            Bitmap bm = BitmapFactory.decodeFile(caminhoFoto, options);
-            if (bm.getWidth() > bm.getHeight()) {
-                bm = Bitmap.createScaledBitmap(bm, 400, 250, false);
-                //foto vertical
-                Matrix matrix = new Matrix();
-                matrix.postRotate(90);
-                bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-                FileOutputStream out = null;
-
-            } else {
-                //horizontal
-                bm = Bitmap.createScaledBitmap(bm, 400, 250, false);
-            }
-
-
-            campoFoto.setImageBitmap(bm);
-            campoFoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        }
-
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregaListaAvaliacoes();
+    }
+
 
     private void escreveDados() {
-
         Intent intent = getIntent();
         paciente = (Paciente) intent.getSerializableExtra("paciente");
-
-        TextView textoPeso = (TextView) findViewById(R.id.text_peso);
-        TextView textoAltura = (TextView) findViewById(R.id.text_altura);
-        TextView textoTelefone = (TextView) findViewById(R.id.text_telefone);
-        TextView textoEmail = (TextView) findViewById(R.id.text_email);
-        TextView textoIdade = (TextView) findViewById(R.id.text_idade);
-        TextView textoGenero = (TextView) findViewById(R.id.text_genero);
-        TextView textoObs = (TextView) findViewById(R.id.text_obs);
-        TextView textoDataAnamnsese = (TextView) findViewById(R.id.text_dtanamnese);
-        TextView textoDataDiagnostico = (TextView) findViewById(R.id.text_dtdiagnostico);
-        TextView textoDiagClinico = (TextView) findViewById(R.id.text_diag_clin);
-        TextView textoHistDoencaAtual = (TextView) findViewById(R.id.text_doenca_atual);
-        TextView textoHistDoencaAnterior = (TextView) findViewById(R.id.text_doencas_anteriores);
-        TextView textoProcedimentosTerapeuticos = (TextView) findViewById(R.id.text_proc_terapeuticos);
-
         activity.setTitle(paciente.getNome());
-        textoPeso.setText(String.format(Locale.US, "%.2f kg", paciente.getMassa()));
-        textoAltura.setText(String.format(Locale.US, "%.0f cm", paciente.getEstatura()));
-        if (paciente.getTelefone().isEmpty()) {
-            if (paciente.getEmail().isEmpty()) {//tirar o titulo contato se não tem telefone nem email
-                findViewById(R.id.titulo_contato).setVisibility(View.GONE);
-                findViewById(R.id.titulo_contato_sublinhado).setVisibility(View.GONE);
-            }
-            findViewById(R.id.layout_telefone).setVisibility(View.GONE);
-        } else {
-            textoTelefone.setText(paciente.getTelefone());
-        }
-        if (paciente.getEmail().isEmpty()) {
-            findViewById(R.id.layout_email).setVisibility(View.GONE);
-        } else {
-            textoEmail.setText(paciente.getEmail());
-        }
 
+        escreveDadosCadastrais();
+        escreveDadosContato();
+        escreveInfoClinicas();
+    }
 
-        textoIdade.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
+    private void escreveDadosCadastrais() {
+        boolean temDadosPessoais = preparaCampo(paciente.getMassa(), R.id.layout_peso, R.id.text_peso) |
+                preparaCampo(paciente.getAltura(), R.id.layout_altura, R.id.text_altura) |
+                preparaCampo(paciente.getObs(), R.id.layout_observacoes, R.id.text_obs) |
+                preparaCampo(Calcula.idadeEmAnos(paciente.getDataNascimento()), R.id.layout_idade, R.id.text_idade);
 
-        if (paciente.getGenero() == Paciente.FEMININO) {
+        if (paciente.getGenero() == null) {
+            findViewById(R.id.layout_genero).setVisibility(View.GONE);
+        } else if (paciente.getGenero() == Paciente.FEMININO) {
+            TextView textoGenero = (TextView) findViewById(R.id.text_genero);
             textoGenero.setText(R.string.feminino);
-        } else {
+            temDadosPessoais = true;
+        } else if (paciente.getGenero() == Paciente.MASCULINO) {
+            TextView textoGenero = (TextView) findViewById(R.id.text_genero);
             textoGenero.setText(R.string.masculino);
+            temDadosPessoais = true;
         }
+        if (!temDadosPessoais) {
+            findViewById(R.id.titulo_dados_cadastrais).setVisibility(View.GONE);
+        }
+    }
 
-        if (paciente.getObs().isEmpty()) {
-            findViewById(R.id.layout_observacoes).setVisibility(View.GONE);
+    private void escreveDadosContato() {
+        boolean temContato = preparaCampo(paciente.getEmail(), R.id.layout_email, R.id.text_email) |
+                preparaCampo(paciente.getTelefone(), R.id.layout_telefone, R.id.text_telefone);
+        if (!temContato) {
+            findViewById(R.id.titulo_contato).setVisibility(View.GONE);
+        }
+    }
+
+    private void escreveInfoClinicas() {
+        boolean temInfoClinicas = preparaCampo(paciente.getDataAnamnese(), R.id.layout_data_anamnese,
+                R.id.text_data_anamnese) |
+                preparaCampo(paciente.getDataDiagnostico(), R.id.layout_data_diagnostico,
+                        R.id.text_data_diagnostico) |
+                preparaCampo(paciente.getDiagnostico(), R.id.layout_diagnostico,
+                        R.id.text_diagnostico) |
+                preparaCampo(paciente.getHistoricoDoencaAtual(), R.id.layout_historico_atual,
+                        R.id.text_doenca_atual) |
+                preparaCampo(paciente.getHistoricoDoencasAnteriores(),
+                        R.id.layout_historico_anteriores, R.id.text_doencas_anteriores) |
+                preparaCampo(paciente.getProcedimentosTerapeuticos(), R.id.layout_procedimentos,
+                        R.id.text_proc_terapeuticos);
+        if (!temInfoClinicas) {
+            findViewById(R.id.titulo_info_clinicas).setVisibility(View.GONE);
+        }
+    }
+
+
+    private boolean preparaCampo(String texto, int resIdLayout, int resIdTextView) {
+        if (texto == null || texto.isEmpty()) {
+            findViewById(resIdLayout).setVisibility(View.GONE);
+            return false;
         } else {
-            textoObs.setText(paciente.getObs());
+            Log.d("texto", texto);
+            TextView textView = (TextView) findViewById(resIdTextView);
+            String textoBase = textView.getText().toString();
+            textView.setText(textoBase + texto);
+            return true;
+        }
+    }
+
+    private boolean preparaCampo(Double numero, int resIdLayout, int resIdTextView) {
+        if (numero == null || numero == 0) {
+            findViewById(resIdLayout).setVisibility(View.GONE);
+            return false;
+        } else {
+            TextView textView = (TextView) findViewById(resIdTextView);
+            String formato;
+            if (resIdTextView == R.id.text_altura) {
+                formato = "%.0f cm";
+            } else {
+                formato = "%.0f kg";
+            }
+            textView.setText(String.format(Locale.US, formato, numero));
+            return true;
         }
     }
 
@@ -203,7 +208,7 @@ public class PerfilActivity extends AppCompatActivity {
         final ListView listaAvaliacoes = (ListView) findViewById(R.id.lista_avaliacoes_anteriores);
         LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) listaAvaliacoes.getLayoutParams();
 
-        if (avaliacoes.size() <= 3 ) {
+        if (avaliacoes.size() <= 3) {
             lp.height = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, TAMANHO_ITEM_AVALIACAO * avaliacoes.size(), getResources().getDisplayMetrics());
             listaAvaliacoes.setLayoutParams(lp);
             TextView txtVerMais = (TextView) findViewById(R.id.text_ver_mais);
@@ -222,10 +227,10 @@ public class PerfilActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Avaliacao avaliacao = null;
+                Avaliacao avaliacao;
                 try {
                     avaliacao = (Avaliacao) listaAvaliacoes.getItemAtPosition(position);
-                    Intent intentResultado = new Intent(PerfilActivity.this,ResultadoActivity.class);
+                    Intent intentResultado = new Intent(PerfilActivity.this, ResultadoActivity.class);
                     intentResultado.putExtra("avaliação", avaliacao);
                     startActivity(intentResultado);
                 } catch (Exception e) {
@@ -247,11 +252,9 @@ public class PerfilActivity extends AppCompatActivity {
                                 }
                             }
                     );
-
                     // Create the AlertDialog object and show it
                     builder.create().show();
                 }
-;
 
             }
         });
@@ -260,7 +263,6 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     public void txtVerMais_Click(View view) {
-
         Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, ListaAvaliacoesActivity.class);
         intentVaiPraListaDeAvaliacoes.putExtra("avaliacoes", avaliacoes);
         intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
@@ -269,23 +271,10 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     public void btnComecarAvaliacao_Click(View view) {
-
-//        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, SensorsActivity.class);
-//        intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
-//        startActivity(intentVaiPraListaDeAvaliacoes);
-
         Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, TimerActivity.class);
         intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
         startActivity(intentVaiPraListaDeAvaliacoes);
-
-
-
     }
-    
-    @Override
-    protected void onResume() {
-        super.onResume();
-        iniciaComponentes();
-    }
+
 
 }

@@ -66,7 +66,6 @@ public class ResultadoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         iniciaComponentes();
-
     }
 
     private void iniciaComponentes() {
@@ -82,8 +81,7 @@ public class ResultadoActivity extends AppCompatActivity {
         textNomePaciente.setText(paciente.getNome());
         textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
 
-        textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
-        textArea.setText(String.valueOf(avaliacao.getArea())+"cm²");
+        textArea.setText(String.valueOf(avaliacao.getArea()) + "cm²");
 
         if (avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
             textOlhos.setText("Abertos");
@@ -127,10 +125,15 @@ public class ResultadoActivity extends AppCompatActivity {
                 new LineAndPointFormatter(this, R.xml.point_formatter);
         plot.addSeries(pontos, layoutPontos);
 
-        PanZoom.attach(plot, PanZoom.Pan.NONE, PanZoom.Zoom.NONE, PanZoom.ZoomLimit.OUTER);
+        plot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                grafico_Click(v);
+            }
+        });
     }
 
-    public void grafico_Click(View view){
+    public void grafico_Click(View view) {
 
         final List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
         Intent intentVaiProGrafico = new Intent(ResultadoActivity.this, GraficoActivity.class);
@@ -204,7 +207,6 @@ public class ResultadoActivity extends AppCompatActivity {
         try {
             Files.asCharSink(file, Charsets.UTF_8).write(stringBuilder.toString());
             criaExportarDialog(file);
-
         } catch (IOException e) {
             e.printStackTrace();
             Toast.makeText(this, "Falha ao salvar arquivo " + file.getPath(), Toast.LENGTH_LONG).show();
@@ -275,15 +277,15 @@ public class ResultadoActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if(avaliacao.getId() != null){
+                if (avaliacao.getId() != null) {
                     Avaliacao avaliacaoBanco = Avaliacao.findById(Avaliacao.class, avaliacao.getId());
                     avaliacaoBanco.delete();
-                }else{
+                } else {
                     Paciente paciente = new Paciente();
                     paciente.setId(avaliacao.getIdPaciente());
                     List<Avaliacao> avaliacoesBanco = Banco.getAvaliacoes(paciente);
 
-                    Avaliacao avaliacaoBanco = avaliacoesBanco.get(avaliacoesBanco.size()-1);
+                    Avaliacao avaliacaoBanco = avaliacoesBanco.get(avaliacoesBanco.size() - 1);
                     avaliacaoBanco.delete();
                 }
 

@@ -1,12 +1,9 @@
 package br.edu.ufcspa.balance.controle;
 
-import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,13 +11,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.Toast;
 
-import java.io.File;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
@@ -29,11 +23,8 @@ import br.edu.ufcspa.balance.modelo.TextWatcherData;
 
 public class CadastroActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
-
-    public static final int REQUEST_CODE_CAMERA = 123;
     private CadastroHelper helper;
     private Long idPaciente;
-    private String caminhoFoto;
 
 
     @Override
@@ -62,27 +53,14 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
         }
 
         configuraCampoDatas();
-
-        //INICIA O BOTÃO DA CAMERA
-        ImageButton btFoto = (ImageButton) findViewById(R.id.btFoto);
-        btFoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intentCamera = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                caminhoFoto = getExternalFilesDir(null) + "/" + System.currentTimeMillis() + ".jpg";
-                File arquivoFoto = new File(caminhoFoto);
-                intentCamera.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(arquivoFoto));
-                startActivityForResult(intentCamera, REQUEST_CODE_CAMERA);
-            }
-        });
     }
 
     private void configuraCampoDatas() {
         EditText edTextDataNascimento = (EditText) findViewById(R.id.edTextDataNascimento);
         edTextDataNascimento.addTextChangedListener(new TextWatcherData(edTextDataNascimento));
-        EditText edTextDataAnamnese = (EditText) findViewById(R.id.edTextDataAnamnese);
+        EditText edTextDataAnamnese = (EditText) findViewById(R.id.edtext_data_anamnese);
         edTextDataAnamnese.addTextChangedListener(new TextWatcherData(edTextDataAnamnese));
-        EditText edTextDataDiagnostico = (EditText) findViewById(R.id.edTextDataDiagnostico);
+        EditText edTextDataDiagnostico = (EditText) findViewById(R.id.edtext_data_diagnostico);
         edTextDataDiagnostico.addTextChangedListener(new TextWatcherData(edTextDataDiagnostico));
 
         //ImageButton btDataNascimento = (ImageButton) findViewById(R.id.btDataNascimento);
@@ -91,17 +69,6 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
         //btDataAnamnese.setOnClickListener(new CalendarioListener(this));
         //ImageButton btDataDiagnostico = (ImageButton) findViewById(R.id.btDataDiagnostico);
         //btDataDiagnostico.setOnClickListener(new CalendarioListener(this));
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == Activity.RESULT_OK) {
-            //se a ação nao foi cancelada
-            if (requestCode == REQUEST_CODE_CAMERA) {
-                //Abre a foto tirada
-                helper.carregaImagem(caminhoFoto);
-            }
-        }
     }
 
     @Override
@@ -117,7 +84,6 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
             case R.id.menu_formulario:
                 if (helper.validateFields()) {
                     Paciente paciente = helper.pegaInfoDosCampos(idPaciente);
-//                    PacienteDAO dao = new PacienteDAO(this);
 
                     if (idPaciente == null) {
                         paciente.save();
@@ -145,21 +111,6 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
         pacienteBanco.save();
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        savedInstanceState.putString("caminho_foto", caminhoFoto);
-        super.onSaveInstanceState(savedInstanceState);
-    }
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        caminhoFoto = savedInstanceState.getString("caminho_foto");
-        if (caminhoFoto != null) {
-            System.out.println("foto" + savedInstanceState.getString("caminho_foto"));
-            helper.carregaImagem(caminhoFoto);
-        }
-    }
 
 
     @Override

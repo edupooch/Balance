@@ -1,16 +1,17 @@
 package br.edu.ufcspa.balance.modelo;
 
+import android.support.annotation.NonNull;
+
 import com.orm.SugarRecord;
 import com.orm.dsl.Ignore;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by edupooch on 21/12/15.
  */
-public class Paciente extends SugarRecord<Paciente> implements Serializable {
+public class Paciente extends SugarRecord<Paciente> implements Serializable, Comparable<Paciente> {
 
     public static final int MASCULINO = 1;
     public static final int FEMININO = 2;
@@ -20,10 +21,10 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
     private String nome;
     private String telefone;
     private String email;
-    private double massa;
-    private double estatura;
+    private Double massa;
+    private Double estatura;
     private String dataNascimento;
-    private int genero;
+    private Integer genero;
     private String obs;
     private String caminhoFoto;
 
@@ -80,19 +81,19 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
         this.email = email;
     }
 
-    public double getMassa() {
+    public Double getMassa() {
         return massa;
     }
 
-    public void setMassa(double massa) {
+    public void setMassa(Double massa) {
         this.massa = massa;
     }
 
-    public double getEstatura() {
+    public Double getAltura() {
         return estatura;
     }
 
-    public void setEstatura(double estatura) {
+    public void setEstatura(Double estatura) {
         this.estatura = estatura;
     }
 
@@ -101,11 +102,11 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
         return getNome();
     }
 
-    public int getGenero() {
+    public Integer getGenero() {
         return genero;
     }
 
-    public void setGenero(int genero) {
+    public void setGenero(Integer genero) {
         this.genero = genero;
     }
 
@@ -159,7 +160,7 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
         this.dataNascimento = dataNascimento;
     }
 
-    public String getAnamnesisDate() {
+    public String getDataAnamnese() {
         return anamnesisDate;
     }
 
@@ -186,19 +187,24 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable {
     public void copy(Paciente pacienteAlterado) {
         this.nome = pacienteAlterado.getNome();
         this.massa = pacienteAlterado.getMassa();
-        this.estatura = pacienteAlterado.getEstatura();
+        this.estatura = pacienteAlterado.getAltura();
         this.email = pacienteAlterado.getEmail();
         this.obs = pacienteAlterado.getObs();
         this.telefone = pacienteAlterado.getTelefone();
         this.dataNascimento = pacienteAlterado.getDataNascimento();
         this.genero = pacienteAlterado.getGenero();
         this.caminhoFoto = pacienteAlterado.getCaminhoFoto();
-        this.anamnesisDate = pacienteAlterado.getAnamnesisDate();
+        this.anamnesisDate = pacienteAlterado.getDataAnamnese();
         this.diagnostico = pacienteAlterado.getDiagnostico();
         this.dataDiagnostico = pacienteAlterado.getDataDiagnostico();
         this.historicoDoencaAtual = pacienteAlterado.getHistoricoDoencaAtual();
         this.historicoDoencasAnteriores = pacienteAlterado.getHistoricoDoencasAnteriores();
         this.procedimentosTerapeuticos = pacienteAlterado.getProcedimentosTerapeuticos();
         this.avaliacoes = pacienteAlterado.getAvaliacoes();
+    }
+
+    @Override
+    public int compareTo(@NonNull Paciente paciente) {
+        return this.getNome().compareTo(paciente.getNome());
     }
 }

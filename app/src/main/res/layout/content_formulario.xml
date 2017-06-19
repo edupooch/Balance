@@ -197,7 +197,7 @@
                 android:contentDescription="@string/description_calendario" />
 
             <EditText
-                android:id="@+id/edTextDataAnamnese"
+                android:id="@+id/edtext_data_anamnese"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -241,7 +241,7 @@
                 android:contentDescription="@string/description_calendario" />
 
             <EditText
-                android:id="@+id/edTextDataDiagnostico"
+                android:id="@+id/edtext_data_diagnostico"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -303,7 +303,7 @@
                 android:tint="#9f9f9f" />
 
             <EditText
-                android:id="@+id/edTextProcedimentos"
+                android:id="@+id/edtext_procedimentos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Procedimentos Terapêuticos" />

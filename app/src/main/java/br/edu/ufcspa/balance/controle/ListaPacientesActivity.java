@@ -14,10 +14,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import br.edu.ufcspa.balance.R;
@@ -78,9 +80,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
             e.printStackTrace();
             pacientes = new ArrayList<>();
         }
-        //Collections.sort(pacientes);
-        //ArrayAdapter<Paciente> adapter = new ArrayAdapter<Paciente>(this, R.layout.list_item_pacientes, pacientes);
-
+        Collections.sort(pacientes);// Coloca em ordem alfabética
         PacientesAdapter adapter = new PacientesAdapter(this, pacientes);
         listaPacientes.setAdapter(adapter);
 

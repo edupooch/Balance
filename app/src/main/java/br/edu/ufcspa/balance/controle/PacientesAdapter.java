@@ -69,34 +69,7 @@ public class PacientesAdapter extends BaseAdapter {
         TextView textAvaliacoes = (TextView) view.findViewById(R.id.text_avaliacoes);
         if (nAvaliacoes == 1) textAvaliacoes.setText(R.string.avaliacao_singular);
 
-        ImageView campoFoto = (ImageView) view.findViewById(R.id.imagem_item);
-        String caminhoFoto = paciente.getCaminhoFoto();
-        if (caminhoFoto != null) {
-            configuraFoto(campoFoto, caminhoFoto);
-        }
-
         return view;
     }
 
-    private void configuraFoto(ImageView campoFoto, String caminhoFoto) {
-        final BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 8;
-        Bitmap bm = BitmapFactory.decodeFile(caminhoFoto, options);
-        if (bm.getWidth() > bm.getHeight()) {
-            bm = Bitmap.createScaledBitmap(bm, 150, 100, false);
-            //foto vertical
-            Matrix matrix = new Matrix();
-            matrix.postRotate(90);
-            bm = Bitmap.createBitmap(bm, 0, 0, bm.getWidth(), bm.getHeight(), matrix, true);
-            FileOutputStream out = null;
-
-        } else {
-            //horizontal
-            bm = Bitmap.createScaledBitmap(bm, 150, 100, false);
-        }
-
-
-        campoFoto.setImageBitmap(bm);
-        campoFoto.setScaleType(ImageView.ScaleType.CENTER_CROP);
-    }
-    }
+}
