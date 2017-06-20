@@ -15,12 +15,16 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp">
 
 
         <LinearLayout
+            android:padding="5dp"
+            android:background="#ededed"
             android:id="@+id/layout_aparelho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -44,14 +48,10 @@
                 android:text="@string/gravar_no_aparelho" />
         </LinearLayout>
 
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            android:layout_marginTop="20dp"
-            android:background="#e0e0e0" />
 
         <LinearLayout
+            android:padding="5dp"
+            android:background="#f4f4f4"
             android:id="@+id/layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,14 +62,16 @@
                 android:id="@+id/icon_email"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
+                android:padding="4dp"
                 android:contentDescription="@string/enviar_por_e_mail"
-                android:src="@drawable/icon_mail" />
+                android:tint="#757575"
+                android:src="@drawable/icon_export" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/enviar_por_e_mail" />
+                android:text="Aplicação Externa" />
 
         </LinearLayout>
 

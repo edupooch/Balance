@@ -70,9 +70,9 @@
     <string name="olhos">Olhos</string>
     <string name="exportar">Exportar</string>
     <string name="exportar_csv">Exportar (csv)</string>
-    <string name="gravar_no_aparelho">Salvar no aparelho</string>
+    <string name="gravar_no_aparelho">Gravar no aparelho</string>
     <string name="enviar_por_e_mail">Enviar por e-mail</string>
-    <string name="como_deseja_gravar_o_arquivo">Como deseja gravar o arquivo?</string>
+    <string name="como_deseja_gravar_o_arquivo">Como deseja salvar o arquivo?</string>
     <string name="quantas_pernas">Quantas Pernas?</string>
     <string name="uma_perna">Uma perna</string>
     <string name="duas_pernas">Duas Pernas</string>

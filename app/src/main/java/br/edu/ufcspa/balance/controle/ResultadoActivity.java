@@ -3,7 +3,9 @@ package br.edu.ufcspa.balance.controle;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,7 +20,6 @@ import android.widget.Toast;
 
 import com.androidplot.xy.BoundaryMode;
 import com.androidplot.xy.LineAndPointFormatter;
-import com.androidplot.xy.PanZoom;
 import com.androidplot.xy.SimpleXYSeries;
 import com.androidplot.xy.XYPlot;
 import com.google.common.base.Charsets;
@@ -28,7 +29,6 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -42,6 +42,7 @@ import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Coordenada2D;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.Paciente;
+import br.edu.ufcspa.balance.modelo.PermissoesHandler;
 
 public class ResultadoActivity extends AppCompatActivity {
 
@@ -173,7 +174,13 @@ public class ResultadoActivity extends AppCompatActivity {
                 criaDeletarDialog();
                 break;
             case R.id.action_exportar:
-                exportarCSV();
+                PermissoesHandler permissoes = new PermissoesHandler(this);
+                if (permissoes.verificaPermissaoArquivos()) {
+                    exportarCSV();
+                } else {
+                    permissoes.pedePermissãoArquivos();
+                }
+
                 break;
         }
         return super.onOptionsItemSelected(item);
@@ -206,6 +213,7 @@ public class ResultadoActivity extends AppCompatActivity {
 
         try {
             Files.asCharSink(file, Charsets.UTF_8).write(stringBuilder.toString());
+
             criaExportarDialog(file);
         } catch (IOException e) {
             e.printStackTrace();
@@ -219,7 +227,7 @@ public class ResultadoActivity extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.email_dialog);
+        dialog.setContentView(R.layout.dialog_exportar);
 
         View btAparelho = dialog.findViewById(R.id.layout_aparelho);
         View btEmail = dialog.findViewById(R.id.layout_email);
@@ -236,7 +244,7 @@ public class ResultadoActivity extends AppCompatActivity {
         btEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                enviarEmail(file);
+                compartilhar(file);
                 dialog.dismiss();
             }
         });
@@ -249,6 +257,21 @@ public class ResultadoActivity extends AppCompatActivity {
         //noinspection ResultOfMethodCallIgnored
         dir.mkdir();
         return dir;
+    }
+
+    public void compartilhar(File file) {
+        Intent intentShareFile = new Intent(Intent.ACTION_SEND);
+
+        if (file.exists()) {
+            intentShareFile.setType("application/csv");
+            intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getPath()));
+            String assunto = "Avaliação de " + textNomePaciente.getText().toString();
+            intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
+                    "Assunto");
+            intentShareFile.putExtra(Intent.EXTRA_TEXT, file.getName());
+
+            startActivity(Intent.createChooser(intentShareFile, "Exportar arquivo csv"));
+        }
     }
 
     public void enviarEmail(File file) {
@@ -301,4 +324,21 @@ public class ResultadoActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[],
+                                           @NonNull int[] grantResults) {
+        if (requestCode == PermissoesHandler.CODIGO_ARQUIVOS) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                exportarCSV();
+            } else {
+                Toast.makeText(this, "Permissão negada para escrever o arquivo.",
+                        Toast.LENGTH_SHORT).show();
+            }
+
+        }
+    }
+
+
 }

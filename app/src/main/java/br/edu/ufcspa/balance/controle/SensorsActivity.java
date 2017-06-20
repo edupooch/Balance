@@ -74,7 +74,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
 
         final TextView txtTimer = (TextView) findViewById(R.id.text_timer);
 
-        new CountDownTimer((duracao+1)*1000, 1000) {
+        new CountDownTimer((duracao)*1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 txtTimer.setText(""+millisUntilFinished / 1000);

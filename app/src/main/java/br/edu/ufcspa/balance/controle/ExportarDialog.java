@@ -5,9 +5,7 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import br.edu.ufcspa.balance.R;
 
@@ -31,7 +29,7 @@ public class ExportarDialog {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.email_dialog);
+        dialog.setContentView(R.layout.dialog_exportar);
 
         View btAparelho = dialog.findViewById(R.id.layout_aparelho);
         View btEmail = dialog.findViewById(R.id.layout_email);
