@@ -32,10 +32,6 @@
         <activity
             android:name=".controle.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".controle.ListaPacientesActivity"
-            android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -44,44 +40,40 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".controle.CadastroActivity"
+            android:name=".controle.cadastro.CadastroActivity"
             android:label="@string/title_activity_formulario"
-            android:parentActivityName=".controle.ListaPacientesActivity"
+            android:parentActivityName=".controle.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".controle.PerfilActivity"
+            android:name=".controle.perfil.PerfilActivity"
             android:label="@string/title_activity_perfil"
-            android:parentActivityName=".controle.ListaPacientesActivity"
+            android:parentActivityName=".controle.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="controle.ListaPacientesActivity" />
+            android:value=".controle.MainActivity" />
 
         <activity
-            android:name=".controle.ListaAvaliacoesActivity"
+            android:name=".controle.perfil.ListaAvaliacoesActivity"
             android:label="@string/title_activity_lista_avaliacoes"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".controle.SensorsActivity"
+            android:name=".controle.avaliacao.SensoresActivity"
             android:label="@string/title_activity_sensors"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".controle.ResultadoActivity"
+            android:name=".controle.avaliacao.ResultadoActivity"
             android:label="@string/titulo_resultados"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".controle.TimerActivity"
+            android:name=".controle.avaliacao.TimerActivity"
             android:label="@string/title_activity_timer"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".controle.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".controle.GraficoActivity"
+            android:name=".controle.avaliacao.GraficoActivity"
             android:label="@string/title_activity_grafico"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

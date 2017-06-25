@@ -1,18 +1,19 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.cadastro;
 
 import android.widget.EditText;
 import android.widget.RadioButton;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.controle.cadastro.CadastroActivity;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 /**
+ * Classe que realiza as operações de pegar os dados dos campos na tela de
+ * <p>
  * Created by edupooch on 17/02/16.
  */
 
 class CadastroHelper {
-
-
 
     private EditText edTextNomePaciente;
     private EditText edTextDataNascimento;
@@ -86,14 +87,18 @@ class CadastroHelper {
         edTextNomePaciente.setText(paciente.getNome());
         edTextDataNascimento.setText(paciente.getDataNascimento());
 
-        if (paciente.getGenero() == 0) {
-            btnFeminino.setChecked(true);
-        } else {
-            btnMasculino.setChecked(true);
-        }
 
-        edTextPeso.setText(String.valueOf(paciente.getMassa()));
-        edTextAltura.setText(String.valueOf(paciente.getAltura()));
+        if (paciente.getGenero() != null) {
+            if (paciente.getGenero() == Paciente.FEMININO) {
+                btnFeminino.setChecked(true);
+            } else {
+                btnMasculino.setChecked(true);
+            }
+        }
+        if (paciente.getMassa() != null)
+            edTextPeso.setText(String.valueOf(paciente.getMassa()));
+        if (paciente.getAltura() != null)
+            edTextAltura.setText(String.valueOf(paciente.getAltura()));
         edTextTelefone.setText(paciente.getTelefone());
 
         edTextEmail.setText(paciente.getEmail());

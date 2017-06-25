@@ -1,4 +1,4 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.avaliacao;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -37,7 +37,7 @@ import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
-import br.edu.ufcspa.balance.modelo.Banco;
+import br.edu.ufcspa.balance.modelo.OperacoesBanco;
 import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Coordenada2D;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
@@ -306,7 +306,7 @@ public class ResultadoActivity extends AppCompatActivity {
                 } else {
                     Paciente paciente = new Paciente();
                     paciente.setId(avaliacao.getIdPaciente());
-                    List<Avaliacao> avaliacoesBanco = Banco.getAvaliacoes(paciente);
+                    List<Avaliacao> avaliacoesBanco = OperacoesBanco.getAvaliacoes(paciente);
 
                     Avaliacao avaliacaoBanco = avaliacoesBanco.get(avaliacoesBanco.size() - 1);
                     avaliacaoBanco.delete();

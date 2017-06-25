@@ -1,28 +1,23 @@
 package br.edu.ufcspa.balance.modelo;
 
-import android.util.Log;
-
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
 
 /**
+ * Classe que realiza cálculos como o de idade a partir da data de nascimento e o cálculo da
+ * projeção no chão a partir dos valores do acelerometro
+ * <p>
  * Created by edupooch on 12/06/2016.
- * Classe para efetuar os cálculos necessários durante o teste, como idadeEmAnos e fórmulas de dp estimada.
  */
 
 public class Calcula {
 
-    public static final int AO_QUADRADO = 2;
-    public static final int M_PARA_CM = 100;
+    private static final int AO_QUADRADO = 2;
+    private static final int M_PARA_CM = 100;
 
     /**
      * Calcula a idadeEmAnos em anos
@@ -45,50 +40,6 @@ public class Calcula {
             anos = period.getYears() + " ano";
         }
         return anos;
-    }
-
-    /**
-     * Retorna a idadeEmAnos em anos meses e dias como String para o perfil do paciente
-     *
-     * @param dataNasc data de nascimento
-     * @return Idade em anos meses e dias
-     */
-
-    public static String idadeCompleta(java.util.Date dataNasc) {
-
-        LocalDate birthdate = new LocalDate(dataNasc);
-        LocalDate now = new LocalDate();
-
-        Period period = new Period(birthdate, now, PeriodType.yearMonthDay());
-        String anos = period.getYears() + " anos, ";
-        if (period.getYears() == 1) {
-            anos = period.getYears() + " ano, ";
-        }
-
-        String meses = period.getMonths() + " meses e ";
-        if (period.getMonths() == 1) {
-            meses = period.getMonths() + "mês  ";
-        }
-
-        String dias = period.getDays() + " dias";
-        if (period.getDays() == 1) {
-            dias = period.getDays() + " dia";
-        }
-
-        return anos + meses + dias;
-
-    }
-
-    /**
-     * Cálculo do imc do paciente
-     *
-     * @param massa    em kg
-     * @param estatura em cm
-     * @return imc
-     */
-
-    public static double imc(double massa, double estatura) {
-        return massa / Math.pow(estatura / 100, 2);
     }
 
     /**

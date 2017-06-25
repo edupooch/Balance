@@ -1,7 +1,5 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.avaliacao;
 
-import android.app.Activity;
-import android.app.KeyguardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,14 +26,13 @@ import java.util.Date;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
-import br.edu.ufcspa.balance.modelo.Banco;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.DadoGiroscopio;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
-public class SensorsActivity extends AppCompatActivity implements SensorEventListener {
+public class SensoresActivity extends AppCompatActivity implements SensorEventListener {
 
-    private SensorsActivity activity = this;
+    private SensoresActivity activity = this;
 
     private Paciente paciente;
     private int modoPernas;
@@ -235,7 +232,7 @@ public class SensorsActivity extends AppCompatActivity implements SensorEventLis
     }
 
     private void abrirResultado(Avaliacao avaliacao) {
-        Intent intentResultado = new Intent(SensorsActivity.this,ResultadoActivity.class);
+        Intent intentResultado = new Intent(SensoresActivity.this,ResultadoActivity.class);
         intentResultado.putExtra("avaliação", avaliacao);
         startActivity(intentResultado);
         finish();

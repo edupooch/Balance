@@ -3,38 +3,32 @@ package br.edu.ufcspa.balance.modelo;
 import com.orm.SugarRecord;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 
 
 public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
 
-    public static final String DATA_NULA = "01/01/1800";
     public static final int OLHOS_ABERTOS = 1;
     public static final int OLHOS_FECHADOS = 2;
     public static final int UMA_PERNA = 1;
     public static final int DUAS_PERNAS = 2;
 
+    public Long id;
+    private Long idPaciente;
+    private Date data;
 
-    public Long id = null;
-    private Long idPaciente = null;
-    private Date data = null;
+    private Integer olhos;
+    private Double altura;
+    private Integer pernas;
+    private Integer mitigacao;
+    private Integer frequencia;
+    private Double area;
+    private String observacoes;
+    private Integer Duracao;
 
-    private Integer olhos = null;
-    private Double altura = null;
-    private Integer pernas = null;
-    private Integer mitigacao = null;
-    private Integer frequencia = null;
-    private Double area = null;
-    private String observacoes = null;
-    private Integer Duracao = null;
-
-
-    private Double cetro_X = null;
-    private Double cetro_Y = null;
-    private Double cetro_Z = null;
+    private Double centro_X;
+    private Double centro_Y;
+    private Double centro_Z;
 
     private String dadosGiroscopio;
     private String dadosAcelerometro;
@@ -114,28 +108,28 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
         this.area = area;
     }
 
-    public Double getCetro_X() {
-        return cetro_X;
+    public Double getCentro_X() {
+        return centro_X;
     }
 
-    public void setCetro_X(Double cetro_X) {
-        this.cetro_X = cetro_X;
+    public void setCentro_X(Double centro_X) {
+        this.centro_X = centro_X;
     }
 
-    public Double getCetro_Y() {
-        return cetro_Y;
+    public Double getCentro_Y() {
+        return centro_Y;
     }
 
-    public void setCetro_Y(Double cetro_Y) {
-        this.cetro_Y = cetro_Y;
+    public void setCentro_Y(Double centro_Y) {
+        this.centro_Y = centro_Y;
     }
 
-    public Double getCetro_Z() {
-        return cetro_Z;
+    public Double getCentro_Z() {
+        return centro_Z;
     }
 
-    public void setCetro_Z(Double cetro_Z) {
-        this.cetro_Z = cetro_Z;
+    public void setCentro_Z(Double centro_Z) {
+        this.centro_Z = centro_Z;
     }
 
     public String getObservacoes() {

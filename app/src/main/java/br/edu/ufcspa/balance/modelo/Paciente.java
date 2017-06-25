@@ -9,13 +9,14 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * Classe modelo do paciente com seus atributos e operações.
+ *
  * Created by edupooch on 21/12/15.
  */
 public class Paciente extends SugarRecord<Paciente> implements Serializable, Comparable<Paciente> {
 
     public static final int MASCULINO = 1;
     public static final int FEMININO = 2;
-    public static final String DATA_NULA = "01/01/1800";
 
     public Long id = null;
     private String nome;
@@ -26,7 +27,6 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable, Com
     private String dataNascimento;
     private Integer genero;
     private String obs;
-    private String caminhoFoto;
 
     private String anamnesisDate;
     private String diagnostico;
@@ -38,15 +38,10 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable, Com
     @Ignore
     private List<Avaliacao> avaliacoes;
 
+    /**
+     * Construtor vazio obrigatório pelo SugarORM
+     */
     public Paciente() {
-    }
-
-    public String getCaminhoFoto() {
-        return caminhoFoto;
-    }
-
-    public void setCaminhoFoto(String caminhoFoto) {
-        this.caminhoFoto = caminhoFoto;
     }
 
     public Long getId() {
@@ -176,12 +171,8 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable, Com
         this.dataDiagnostico = dataDiagnostico;
     }
 
-    public List<Avaliacao> getAvaliacoes() {
+    private List<Avaliacao> getAvaliacoes() {
         return avaliacoes;
-    }
-
-    public void setAvaliacoes(List<Avaliacao> avaliacoes) {
-        this.avaliacoes = avaliacoes;
     }
 
     public void copy(Paciente pacienteAlterado) {
@@ -193,7 +184,6 @@ public class Paciente extends SugarRecord<Paciente> implements Serializable, Com
         this.telefone = pacienteAlterado.getTelefone();
         this.dataNascimento = pacienteAlterado.getDataNascimento();
         this.genero = pacienteAlterado.getGenero();
-        this.caminhoFoto = pacienteAlterado.getCaminhoFoto();
         this.anamnesisDate = pacienteAlterado.getDataAnamnese();
         this.diagnostico = pacienteAlterado.getDiagnostico();
         this.dataDiagnostico = pacienteAlterado.getDataDiagnostico();

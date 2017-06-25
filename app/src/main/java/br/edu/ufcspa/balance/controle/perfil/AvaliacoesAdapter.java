@@ -1,4 +1,4 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.perfil;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -15,17 +15,15 @@ import br.edu.ufcspa.balance.modelo.Util;
 
 
 /**
- * Created by edupooch on 14/05/16.
- *
  * Classe Adapter criada para fazer uma lista de paciente mais interativa e com mais informações.
  */
 
-public class AvaliacoesAdapter extends BaseAdapter {
+class AvaliacoesAdapter extends BaseAdapter {
 
     private final List<Avaliacao> avaliacoes;
     private final Context context;
 
-    public AvaliacoesAdapter(Context context, List<Avaliacao> avaliacoes) {
+    AvaliacoesAdapter(Context context, List<Avaliacao> avaliacoes) {
         this.context = context;
         this.avaliacoes = avaliacoes;
     }
@@ -53,41 +51,34 @@ public class AvaliacoesAdapter extends BaseAdapter {
         if (view == null) { //usa-se o convertView para otimizar o carregamento de listas muito grandes
             view = inflater.inflate(R.layout.list_item_avaliacao, parent, false);
         }
-
         //ID
         TextView txtId = (TextView) view.findViewById(R.id.text_id_avaliacao);
         txtId.setText(String.valueOf(avaliacao.id));
-
         //DATA
         TextView txtData = (TextView) view.findViewById(R.id.text_data);
         txtData.setText(Util.converterDate(avaliacao.getData()));
-
-
         //AREA
         TextView txtArea = (TextView) view.findViewById(R.id.text_area);
         txtArea.setText(String.valueOf(avaliacao.getArea()) + "cm²");
-
-
         //DURAÇÃO
         TextView txtDuracao = (TextView) view.findViewById(R.id.text_duracao);
         txtDuracao.setText(String.valueOf(avaliacao.getDuracao()) + " segundos");
-
         //POSIÇÃO
         TextView txtPosicao = (TextView) view.findViewById(R.id.text_posicao);
 
-        if(avaliacao.getPernas() == Avaliacao.UMA_PERNA)
+        if (avaliacao.getPernas() == Avaliacao.UMA_PERNA)
             txtPosicao.setText(" Uma perna");
 
-        if(avaliacao.getPernas() == Avaliacao.DUAS_PERNAS)
+        if (avaliacao.getPernas() == Avaliacao.DUAS_PERNAS)
             txtPosicao.setText(" Duas pernas");
 
         //OLHOS
         TextView txtOlhos = (TextView) view.findViewById(R.id.text_olhos);
 
-        if(avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
+        if (avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
             txtOlhos.setText(" Abertos");
 
-        if(avaliacao.getOlhos() == Avaliacao.OLHOS_FECHADOS)
+        if (avaliacao.getOlhos() == Avaliacao.OLHOS_FECHADOS)
             txtOlhos.setText(" Fechados");
 
         return view;

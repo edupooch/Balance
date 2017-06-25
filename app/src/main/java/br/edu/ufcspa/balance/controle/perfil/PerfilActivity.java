@@ -1,4 +1,4 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.perfil;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -22,8 +22,11 @@ import java.util.List;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.controle.avaliacao.ResultadoActivity;
+import br.edu.ufcspa.balance.controle.avaliacao.TimerActivity;
+import br.edu.ufcspa.balance.controle.cadastro.CadastroActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
-import br.edu.ufcspa.balance.modelo.Banco;
+import br.edu.ufcspa.balance.modelo.OperacoesBanco;
 import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
@@ -188,7 +191,7 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void carregaListaAvaliacoes() {
 
-        avaliacoes = Banco.getAvaliacoes(paciente);
+        avaliacoes = OperacoesBanco.getAvaliacoes(paciente);
 
         if (!avaliacoes.isEmpty()) {
             popularListaAvaliacoes(avaliacoes);

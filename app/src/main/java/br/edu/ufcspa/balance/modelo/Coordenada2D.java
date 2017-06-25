@@ -8,7 +8,7 @@ public class Coordenada2D {
     private float x;
     private float y;
 
-    public Coordenada2D(float x, float y) {
+    Coordenada2D(float x, float y) {
         this.x = x;
         this.y = y;
     }

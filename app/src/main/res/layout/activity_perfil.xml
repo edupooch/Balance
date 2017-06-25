@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="br.edu.ufcspa.balance.controle.PerfilActivity">
+    tools:context="br.edu.ufcspa.balance.controle.perfil.PerfilActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_perfil"
@@ -25,7 +25,6 @@
 
             <ImageView
                 android:scaleType="centerCrop"
-                android:id="@+id/foto_paciente"
                 android:layout_width="match_parent"
                 android:layout_height="300dp" />
 
@@ -39,7 +38,6 @@
                 />
 
             <ImageView
-                android:id="@+id/icone_user"
                 android:layout_width="75dp"
                 android:layout_height="70dp"
                 android:layout_gravity="center"
@@ -49,7 +47,6 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnComecarAvaliacao"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/fab_margin"

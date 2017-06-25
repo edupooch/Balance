@@ -1,10 +1,9 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.cadastro;
 
 import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,8 +17,8 @@ import android.widget.Toast;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.controle.perfil.PerfilActivity;
 import br.edu.ufcspa.balance.modelo.Paciente;
-import br.edu.ufcspa.balance.modelo.TextWatcherData;
 
 public class CadastroActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
 
@@ -37,9 +36,6 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
     private void iniciaComponentes() {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        ActionBar supportActionBar = getSupportActionBar();
-        assert supportActionBar != null;
-        supportActionBar.setDefaultDisplayHomeAsUpEnabled(true);
 
         idPaciente = null;
         helper = new CadastroHelper(this);
@@ -62,13 +58,6 @@ public class CadastroActivity extends AppCompatActivity implements DatePickerDia
         edTextDataAnamnese.addTextChangedListener(new TextWatcherData(edTextDataAnamnese));
         EditText edTextDataDiagnostico = (EditText) findViewById(R.id.edtext_data_diagnostico);
         edTextDataDiagnostico.addTextChangedListener(new TextWatcherData(edTextDataDiagnostico));
-
-        //ImageButton btDataNascimento = (ImageButton) findViewById(R.id.btDataNascimento);
-        //btDataNascimento.setOnClickListener(new CalendarioListener(this));
-        //ImageButton btDataAnamnese = (ImageButton) findViewById(R.id.btDataAnamnese);
-        //btDataAnamnese.setOnClickListener(new CalendarioListener(this));
-        //ImageButton btDataDiagnostico = (ImageButton) findViewById(R.id.btDataDiagnostico);
-        //btDataDiagnostico.setOnClickListener(new CalendarioListener(this));
     }
 
     @Override

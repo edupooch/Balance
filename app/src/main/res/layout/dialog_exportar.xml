@@ -32,7 +32,6 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/icon_aparelho"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:paddingTop="10dp"
@@ -59,7 +58,6 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/icon_email"
                 android:layout_width="match_parent"
                 android:layout_height="110dp"
                 android:padding="4dp"

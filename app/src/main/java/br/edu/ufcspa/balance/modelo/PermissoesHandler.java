@@ -16,7 +16,7 @@ import android.widget.Toast;
 public class PermissoesHandler {
 
     public static final int CODIGO_ARQUIVOS = 1;
-    Activity activity;
+    private Activity activity;
 
     public PermissoesHandler(Activity activity) {
         this.activity = activity;

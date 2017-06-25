@@ -1,4 +1,4 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.avaliacao;
 
 import android.content.Intent;
 import android.os.Bundle;

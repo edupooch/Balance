@@ -7,7 +7,7 @@
     android:background="@color/colorPrimary"
     android:orientation="vertical"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="br.edu.ufcspa.balance.controle.SensorsActivity"
+    tools:context="br.edu.ufcspa.balance.controle.avaliacao.SensoresActivity"
     tools:showIn="@layout/activity_sensors">
 
     <!--<TextView-->
@@ -95,7 +95,6 @@
     <!--android:textAlignment="center" />-->
 
     <TextView
-        android:id="@+id/text_realizando_avaliacao"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="15dp"

@@ -1,8 +1,6 @@
-package br.edu.ufcspa.balance.controle;
+package br.edu.ufcspa.balance.controle.avaliacao;
 
-import android.app.Activity;
 import android.app.Dialog;
-import android.app.KeyguardManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioManager;
@@ -13,19 +11,15 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputFilter;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
-import br.edu.ufcspa.balance.modelo.InputFilterMinMax;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class TimerActivity extends AppCompatActivity {
@@ -312,7 +306,7 @@ public class TimerActivity extends AppCompatActivity {
 
 
     private void iniciaAvaliação() {
-        Intent intentVaiPraListaDeAvaliacoes = new Intent(TimerActivity.this, SensorsActivity.class);
+        Intent intentVaiPraListaDeAvaliacoes = new Intent(TimerActivity.this, SensoresActivity.class);
         intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
         intentVaiPraListaDeAvaliacoes.putExtra("modoPernas", modoPernas);
         intentVaiPraListaDeAvaliacoes.putExtra("modoOlhos", modoOlhos);

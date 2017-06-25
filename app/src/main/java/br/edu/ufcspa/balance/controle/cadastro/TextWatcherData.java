@@ -1,4 +1,4 @@
-package br.edu.ufcspa.balance.modelo;
+package br.edu.ufcspa.balance.controle.cadastro;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -8,15 +8,18 @@ import java.util.Calendar;
 import java.util.Locale;
 
 /**
+ * Classe para controlar o campo de data, para que a data fique no formato dd/mm/aaaa enquanto o
+ * usuário digita na tela de cadastrar paciente.
+ *
  * Created by edupooch on 05/05/2017.
  */
 
-public class TextWatcherData implements TextWatcher {
+class TextWatcherData implements TextWatcher {
     private final EditText editText;
     private String current = "";
     private Calendar cal = Calendar.getInstance();
 
-    public TextWatcherData(EditText editText) {
+    TextWatcherData(EditText editText) {
         this.editText = editText;
     }
 
