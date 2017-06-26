@@ -22,7 +22,7 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
     private Integer pernas;
     private Integer mitigacao;
     private Integer frequencia;
-    private Double area;
+    private Double velocidade;
     private String observacoes;
     private Integer Duracao;
 
@@ -100,12 +100,12 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
         this.frequencia = frequencia;
     }
 
-    public Double getArea() {
-        return area;
+    public Double getVelocidade() {
+        return velocidade;
     }
 
-    public void setArea(Double area) {
-        this.area = area;
+    public void setVelocidade(Double velocidade) {
+        this.velocidade = velocidade;
     }
 
     public Double getCentro_X() {

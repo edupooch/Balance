@@ -71,8 +71,8 @@ public class ResultadoActivity extends AppCompatActivity {
 
     private void iniciaComponentes() {
         avaliacao = (Avaliacao) getIntent().getSerializableExtra("avaliação");
-        criaGrafico();
         findViews();
+        criaGrafico();
         escreveTextos();
     }
 
@@ -81,8 +81,6 @@ public class ResultadoActivity extends AppCompatActivity {
         Paciente paciente = Paciente.findById(Paciente.class, avaliacao.getIdPaciente());
         textNomePaciente.setText(paciente.getNome());
         textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
-
-        textArea.setText(String.valueOf(avaliacao.getArea()) + "cm²");
 
         if (avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
             textOlhos.setText("Abertos");
@@ -117,7 +115,6 @@ public class ResultadoActivity extends AppCompatActivity {
             }
 
         }
-
         plot = (XYPlot) findViewById(R.id.android_plot);
         plot.setDomainBoundaries(-maiorX * 1.1, maiorX * 1.1, BoundaryMode.FIXED);
         plot.setRangeBoundaries(-maiorY * 1.1, maiorY * 1.1, BoundaryMode.FIXED);
@@ -132,10 +129,12 @@ public class ResultadoActivity extends AppCompatActivity {
                 grafico_Click(v);
             }
         });
+        float distancia = Calcula.distanciaTotal(pontos);
+        avaliacao.setVelocidade((double) (distancia / avaliacao.getDuracao()));
+        textArea.setText(String.format(Locale.getDefault(), "%.2f m/s", avaliacao.getVelocidade()));
     }
 
     public void grafico_Click(View view) {
-
         final List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
         Intent intentVaiProGrafico = new Intent(ResultadoActivity.this, GraficoActivity.class);
         intentVaiProGrafico.putExtra("listaDadosAcelerometro", new Gson().toJson(listaDadosAcelerometro));
@@ -267,28 +266,13 @@ public class ResultadoActivity extends AppCompatActivity {
             intentShareFile.putExtra(Intent.EXTRA_STREAM, Uri.parse("file://" + file.getPath()));
             String assunto = "Avaliação de " + textNomePaciente.getText().toString();
             intentShareFile.putExtra(Intent.EXTRA_SUBJECT,
-                    "Assunto");
+                    assunto);
             intentShareFile.putExtra(Intent.EXTRA_TEXT, file.getName());
 
             startActivity(Intent.createChooser(intentShareFile, "Exportar arquivo csv"));
         }
     }
 
-    public void enviarEmail(File file) {
-        String[] emails = {""};
-        String assunto = "Avaliação de " + textNomePaciente.getText().toString();
-        Intent intentEmail = new Intent(Intent.ACTION_SENDTO);
-        intentEmail.setData(Uri.parse("mailto:"));
-        intentEmail.putExtra(Intent.EXTRA_EMAIL, emails);
-        intentEmail.putExtra(Intent.EXTRA_SUBJECT, assunto);
-
-        Uri uri = Uri.fromFile(file);
-        intentEmail.putExtra(Intent.EXTRA_STREAM, uri);
-
-        if (intentEmail.resolveActivity(getPackageManager()) != null) {
-            startActivity(intentEmail);
-        }
-    }
 
     private void criaDeletarDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

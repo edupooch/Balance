@@ -1,5 +1,7 @@
 package br.edu.ufcspa.balance.modelo;
 
+import com.androidplot.xy.SimpleXYSeries;
+
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
@@ -18,6 +20,7 @@ public class Calcula {
 
     private static final int AO_QUADRADO = 2;
     private static final int M_PARA_CM = 100;
+    private static final int CM_PARA_M = 100;
 
     /**
      * Calcula a idadeEmAnos em anos
@@ -66,5 +69,22 @@ public class Calcula {
 
         return new Coordenada2D(dx, dy);
     }
+
+    public static float distanciaTotal(SimpleXYSeries pontos) {
+        float distTotal = 0;
+        for (int i = 1; i < pontos.size(); i++) {
+            distTotal += distanciaEuclidiana(
+                    pontos.getX(i).floatValue(), pontos.getX(i - 1).floatValue(),
+                    pontos.getY(i).floatValue(), pontos.getY(i - 1).floatValue());
+        }
+        return distTotal;
+    }
+
+    private static double distanciaEuclidiana(float x1, float x2, float y1, float y2) {
+        float dx = x1/CM_PARA_M - x2/CM_PARA_M;
+        float dy = y1/CM_PARA_M - y2/CM_PARA_M;
+        return Math.sqrt((dx * dx) + (dy * dy));
+    }
+
 
 }

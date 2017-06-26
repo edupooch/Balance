@@ -95,7 +95,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="@string/area"
+                        android:text="@string/velocidade"
                         android:textSize="13sp" />
 
                     <TextView

@@ -87,7 +87,6 @@ class CadastroHelper {
         edTextNomePaciente.setText(paciente.getNome());
         edTextDataNascimento.setText(paciente.getDataNascimento());
 
-
         if (paciente.getGenero() != null) {
             if (paciente.getGenero() == Paciente.FEMININO) {
                 btnFeminino.setChecked(true);

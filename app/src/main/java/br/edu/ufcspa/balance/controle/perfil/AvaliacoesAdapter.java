@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
@@ -62,7 +63,7 @@ class AvaliacoesAdapter extends BaseAdapter {
         txtData.setText(Util.converterDate(avaliacao.getData()));
         //vm
         TextView txtVelocidadeMedia = (TextView) view.findViewById(R.id.text_velocidade_media);
-        txtVelocidadeMedia.setText(String.valueOf(avaliacao.getArea()) + " m/s");
+        txtVelocidadeMedia.setText((String.format(Locale.getDefault(), "%.2f m/s", avaliacao.getVelocidade())));
 
         return view;
     }

@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 
@@ -174,7 +175,7 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
         avaliacao.setOlhos(modoOlhos);
         avaliacao.setDuracao(duracao);
         avaliacao.setFrequencia(100);
-        avaliacao.setArea(0.0);
+        avaliacao.setVelocidade(0.0);
 
         /*Salva os dados dos sensores como JSON*/
         Gson gson = new Gson();
@@ -186,6 +187,7 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
         Log.d("-- -- -- ACELEROMETRO", ":" + String.valueOf(Arrays.deepToString(dadosAcelerometro.toArray())));
 
         avaliacao.save(); // Salva a avaliação no banco
+        Toast.makeText(activity, "ID = " +avaliacao.getId() , Toast.LENGTH_SHORT).show();avaliacao.getId();
 
 
 
