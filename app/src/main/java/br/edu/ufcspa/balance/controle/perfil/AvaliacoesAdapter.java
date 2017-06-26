@@ -15,7 +15,7 @@ import br.edu.ufcspa.balance.modelo.Util;
 
 
 /**
- * Classe Adapter criada para fazer uma lista de paciente mais interativa e com mais informações.
+ * Classe adapter para a lista de avaliações utilizada no perfil do paciente
  */
 
 class AvaliacoesAdapter extends BaseAdapter {
@@ -54,32 +54,15 @@ class AvaliacoesAdapter extends BaseAdapter {
         //ID
         TextView txtId = (TextView) view.findViewById(R.id.text_id_avaliacao);
         txtId.setText(String.valueOf(avaliacao.id));
+        //TITULO
+        TextView textTitulo = (TextView) view.findViewById(R.id.text_titulo_avaliacao);
+        textTitulo.setText("Avaliação " + String.valueOf(getCount() - position));
         //DATA
-        TextView txtData = (TextView) view.findViewById(R.id.text_data);
+        TextView txtData = (TextView) view.findViewById(R.id.text_data_avaliacao);
         txtData.setText(Util.converterDate(avaliacao.getData()));
-        //AREA
-        TextView txtArea = (TextView) view.findViewById(R.id.text_area);
-        txtArea.setText(String.valueOf(avaliacao.getArea()) + "cm²");
-        //DURAÇÃO
-        TextView txtDuracao = (TextView) view.findViewById(R.id.text_duracao);
-        txtDuracao.setText(String.valueOf(avaliacao.getDuracao()) + " segundos");
-        //POSIÇÃO
-        TextView txtPosicao = (TextView) view.findViewById(R.id.text_posicao);
-
-        if (avaliacao.getPernas() == Avaliacao.UMA_PERNA)
-            txtPosicao.setText(" Uma perna");
-
-        if (avaliacao.getPernas() == Avaliacao.DUAS_PERNAS)
-            txtPosicao.setText(" Duas pernas");
-
-        //OLHOS
-        TextView txtOlhos = (TextView) view.findViewById(R.id.text_olhos);
-
-        if (avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
-            txtOlhos.setText(" Abertos");
-
-        if (avaliacao.getOlhos() == Avaliacao.OLHOS_FECHADOS)
-            txtOlhos.setText(" Fechados");
+        //vm
+        TextView txtVelocidadeMedia = (TextView) view.findViewById(R.id.text_velocidade_media);
+        txtVelocidadeMedia.setText(String.valueOf(avaliacao.getArea()) + " m/s");
 
         return view;
     }

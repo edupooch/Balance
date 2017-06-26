@@ -2,147 +2,64 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#FFFFFF"
+    android:background="@drawable/round_edge_branco"
     android:orientation="horizontal"
-    android:padding="5dp">
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:src="@drawable/icon_circulo"
+        android:tint="@color/colorPrimary" />
 
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="vertical">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/text_titulo_avaliacao"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="10dp"
-            android:paddingRight="1dp">
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:text="Avaliação 5"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:padding="4dp"
-                android:src="@drawable/icon_data"
-                 />
 
-            <TextView
-                android:id="@+id/text_data"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.6"
-                android:fontFamily="sans-serif-light"
-                android:paddingLeft="2dp"
-                android:paddingRight="2dp"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="2dp"
-                android:layout_height="wrap_content" />
-
-            <TextView
-                android:id="@+id/text_area"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:textSize="14sp" />
-
-        </LinearLayout>
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/text_data_avaliacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
+            android:layout_marginLeft="1dp"
+            android:layout_marginStart="1dp"
+            android:text="Duração: 15s"
+            android:textColor="#bf294869" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:paddingLeft="2dp"
-                android:text="Posição:"
-                android:textColor="?attr/colorButtonNormal" />
-
-            <TextView
-                android:id="@+id/text_posicao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:layout_marginRight="3dp"
-                android:text="PERNAS"
-                android:textColor="?attr/colorButtonNormal" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:paddingLeft="2dp"
-                android:text="Olhos:"
-                android:textColor="?attr/colorButtonNormal" />
-
-            <TextView
-                android:id="@+id/text_olhos"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_weight="1"
-                android:text="OLHOS"
-                android:textColor="?attr/colorButtonNormal" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_weight="1"
-                android:paddingLeft="2dp"
-                android:text="Duração:"
-                android:textColor="?attr/colorButtonNormal" />
-
-            <TextView
-                android:id="@+id/text_duracao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="3dp"
-                android:layout_marginRight="3dp"
-                android:layout_weight="1"
-                android:text="FREQ"
-                android:textColor="?attr/colorButtonNormal" />
-        </LinearLayout>
     </LinearLayout>
 
     <TextView
-        android:id="@+id/text_id_avaliacao"
+        android:id="@+id/text_velocidade_media"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginEnd="15dp"
+        android:layout_marginRight="15dp"
         android:layout_weight="1"
-        android:fontFamily="sans-serif-light"
-        android:paddingLeft="2dp"
-        android:paddingRight="2dp"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:gravity="center_vertical|end"
+        android:text="0 m/s"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text_id_avaliacao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
 </LinearLayout>

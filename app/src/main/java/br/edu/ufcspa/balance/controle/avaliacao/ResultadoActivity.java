@@ -154,7 +154,7 @@ public class ResultadoActivity extends AppCompatActivity {
     private void findViews() {
         textNomePaciente = (TextView) findViewById(R.id.text_nome_paciente);
         textIdadePaciente = (TextView) findViewById(R.id.text_idade_paciente);
-        textArea = (TextView) findViewById(R.id.text_area);
+        textArea = (TextView) findViewById(R.id.text_velocidade_media);
         textDuracao = (TextView) findViewById(R.id.text_duracao);
         textPernas = (TextView) findViewById(R.id.text_pernas);
         textOlhos = (TextView) findViewById(R.id.text_olhos);

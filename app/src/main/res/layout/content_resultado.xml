@@ -99,7 +99,7 @@
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/text_area"
+                        android:id="@+id/text_velocidade_media"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
