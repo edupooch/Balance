@@ -58,7 +58,7 @@
     <string name="ver_mais">Ver mais</string>
     <string name="nome">Nome</string>
     <string name="idade">Idade</string>
-    <string name="velocidade">Área de dispersão</string>
+    <string name="velocidade">Velocidade Média</string>
     <string name="duracao">Duração</string>
     <string name="olhos">Olhos</string>
     <string name="exportar_csv">Exportar (csv)</string>
@@ -90,6 +90,7 @@
     <string name="nenhuma_avaliacao_realizada_ainda">Nenhuma avaliação realizada ainda.</string>
     <string name="title_activity_grafico">GraficoActivity</string>
     <string name="escala_em_centimetros">Escala em centímetros</string>
+    <string name="aplicacao_externa">Aplicação Externa</string>
 
 
 </resources>

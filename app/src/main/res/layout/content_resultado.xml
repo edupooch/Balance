@@ -67,7 +67,10 @@
                 android:layout_height="wrap_content"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:paddingBottom="15dp"
+                android:paddingEnd="15dp"
+                android:paddingStart="15dp"
+                android:paddingTop="5dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -95,21 +98,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="@string/velocidade"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/text_velocidade_media"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="sans-serif-light"
                         android:text="@string/duracao"
                         android:textSize="13sp" />
 
@@ -120,6 +108,21 @@
 
                         android:textSize="15sp"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="sans-serif-light"
+                        android:text="@string/velocidade"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/text_velocidade_media"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -129,20 +132,26 @@
                     android:orientation="vertical">
 
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                        android:fontFamily="sans-serif-light"
-                        android:text="@string/idade"
-                        android:textSize="13sp" />
-
-                    <TextView
-                        android:id="@+id/text_idade_paciente"
+                    <LinearLayout
+                        android:id="@+id/layout_idade_resultados"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:text="@string/idade"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:id="@+id/text_idade_paciente"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -244,7 +253,19 @@
                 app:rangeOriginLineColor="@color/ap_gray"
                 app:rangeOriginLineThickness="1dp" />
 
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/bt_ok"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="20dp"
+                android:text="ok"
+                android:textColor="#fff"
+                app:backgroundTint="@color/colorPrimary"
+                app:srcCompat="@android:drawable/ic_dialog_email" />
+
         </LinearLayout>
+
 
         <android.support.v4.widget.Space
             android:layout_width="match_parent"

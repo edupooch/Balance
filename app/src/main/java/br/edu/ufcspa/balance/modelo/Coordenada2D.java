@@ -8,7 +8,7 @@ public class Coordenada2D {
     private float x;
     private float y;
 
-    Coordenada2D(float x, float y) {
+    public Coordenada2D(float x, float y) {
         this.x = x;
         this.y = y;
     }
@@ -31,5 +31,11 @@ public class Coordenada2D {
     public boolean isValido() {
         return !(Double.isInfinite(getX()) || Double.isInfinite(getY()) ||
                 Double.isNaN(getX()) || Double.isNaN(getY()));
+    }
+
+    public static Coordenada2D diminui(Coordenada2D p1, Coordenada2D p2) {
+        float p2x = (float) (p2.getX() * 0.99999);
+        float p2y = (float) (p2.getY() * 0.99999);
+        return new Coordenada2D(p1.getX() - p2x, p1.getY() - p2y);
     }
 }

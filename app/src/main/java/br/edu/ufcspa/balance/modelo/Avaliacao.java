@@ -22,7 +22,7 @@ public class Avaliacao extends SugarRecord<Avaliacao> implements Serializable {
     private Integer pernas;
     private Integer mitigacao;
     private Integer frequencia;
-    private Double velocidade;
+    public Double velocidade;
     private String observacoes;
     private Integer Duracao;
 

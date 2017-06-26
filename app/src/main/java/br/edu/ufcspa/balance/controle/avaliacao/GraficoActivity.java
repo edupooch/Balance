@@ -49,20 +49,22 @@ public class GraficoActivity extends AppCompatActivity {
     }
 
     private void criaGrafico() {
-
         float alturaDoAparelho = 1.20f;
         float maiorX = 0;
         float maiorY = 0;
         SimpleXYSeries pontos = new SimpleXYSeries("Gráfico");
-        for (DadoAcelerometro dado : listaDadosAcelerometro) {
-            Coordenada2D coordenada2D = Calcula.coordenada2D(dado, alturaDoAparelho);
-            if (coordenada2D.isValido()) {
-                pontos.addLast(coordenada2D.getX(), coordenada2D.getY());
+        Coordenada2D origem = getOrigem(alturaDoAparelho);
 
-                if (Math.abs(coordenada2D.getX()) > maiorX)
-                    maiorX = Math.abs(coordenada2D.getX());
-                if (Math.abs(coordenada2D.getY()) > maiorY)
-                    maiorY = Math.abs(coordenada2D.getY());
+        for (DadoAcelerometro dado : listaDadosAcelerometro) {
+            Coordenada2D ponto = Calcula.coordenada2D(dado, alturaDoAparelho);
+            ponto = Coordenada2D.diminui(ponto, origem);
+            if (ponto.isValido()) {
+                pontos.addLast(ponto.getX(), ponto.getY());
+
+                if (Math.abs(ponto.getX()) > maiorX)
+                    maiorX = Math.abs(ponto.getX());
+                if (Math.abs(ponto.getY()) > maiorY)
+                    maiorY = Math.abs(ponto.getY());
             }
         }
 
@@ -75,6 +77,24 @@ public class GraficoActivity extends AppCompatActivity {
         plot.addSeries(pontos, layoutPontos);
 
         PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.SCALE, PanZoom.ZoomLimit.OUTER);
+    }
+
+
+    /**
+     * Método para retornar o primeiro ponto para diminuir os outros e manter o gráfico com origem
+     * em (0,0)
+     *
+     * @param alturaDoAparelho em m
+     * @return o primeiro valor de coordenada válido na lista.
+     */
+    private Coordenada2D getOrigem(float alturaDoAparelho) {
+        for (DadoAcelerometro dado : listaDadosAcelerometro) {
+            Coordenada2D coordenada2D = Calcula.coordenada2D(dado, alturaDoAparelho);
+            if (coordenada2D.isValido()) {
+                return coordenada2D;
+            }
+        }
+        return new Coordenada2D(0, 0);
     }
 
 }

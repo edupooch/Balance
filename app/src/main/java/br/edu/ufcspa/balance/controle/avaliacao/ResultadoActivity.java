@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -51,11 +52,12 @@ public class ResultadoActivity extends AppCompatActivity {
 
     private TextView textNomePaciente;
     private TextView textIdadePaciente;
-    private TextView textArea;
+    private TextView textVelocidade;
     private TextView textDuracao;
     private TextView textPernas;
     private TextView textOlhos;
     private Avaliacao avaliacao;
+    private AppCompatButton btOk;
     XYPlot plot;
 
 
@@ -80,7 +82,13 @@ public class ResultadoActivity extends AppCompatActivity {
     private void escreveTextos() {
         Paciente paciente = Paciente.findById(Paciente.class, avaliacao.getIdPaciente());
         textNomePaciente.setText(paciente.getNome());
-        textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
+        textVelocidade.setText(String.format(Locale.getDefault(), "%.2f m/s", avaliacao.getVelocidade()));
+
+        if (paciente.getDataNascimento().isEmpty()) {
+            findViewById(R.id.layout_idade_resultados).setVisibility(View.INVISIBLE);
+        } else {
+            textIdadePaciente.setText(Calcula.idadeEmAnos(paciente.getDataNascimento()));
+        }
 
         if (avaliacao.getOlhos() == Avaliacao.OLHOS_ABERTOS)
             textOlhos.setText("Abertos");
@@ -99,12 +107,11 @@ public class ResultadoActivity extends AppCompatActivity {
     private void criaGrafico() {
         final List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
 
-        float alturaDoAparelho = 1.20f;
         float maiorX = 0;
         float maiorY = 0;
         SimpleXYSeries pontos = new SimpleXYSeries("Gráfico");
         for (DadoAcelerometro dado : listaDadosAcelerometro) {
-            Coordenada2D coordenada2D = Calcula.coordenada2D(dado, alturaDoAparelho);
+            Coordenada2D coordenada2D = Calcula.coordenada2D(dado, avaliacao.getAltura().floatValue());
             if (coordenada2D.isValido()) {
                 pontos.addLast(coordenada2D.getX(), coordenada2D.getY());
 
@@ -113,7 +120,6 @@ public class ResultadoActivity extends AppCompatActivity {
                 if (Math.abs(coordenada2D.getY()) > maiorY)
                     maiorY = Math.abs(coordenada2D.getY());
             }
-
         }
         plot = (XYPlot) findViewById(R.id.android_plot);
         plot.setDomainBoundaries(-maiorX * 1.1, maiorX * 1.1, BoundaryMode.FIXED);
@@ -129,10 +135,8 @@ public class ResultadoActivity extends AppCompatActivity {
                 grafico_Click(v);
             }
         });
-        float distancia = Calcula.distanciaTotal(pontos);
-        avaliacao.setVelocidade((double) (distancia / avaliacao.getDuracao()));
-        textArea.setText(String.format(Locale.getDefault(), "%.2f m/s", avaliacao.getVelocidade()));
     }
+
 
     public void grafico_Click(View view) {
         final List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
@@ -153,10 +157,18 @@ public class ResultadoActivity extends AppCompatActivity {
     private void findViews() {
         textNomePaciente = (TextView) findViewById(R.id.text_nome_paciente);
         textIdadePaciente = (TextView) findViewById(R.id.text_idade_paciente);
-        textArea = (TextView) findViewById(R.id.text_velocidade_media);
+        textVelocidade = (TextView) findViewById(R.id.text_velocidade_media);
         textDuracao = (TextView) findViewById(R.id.text_duracao);
         textPernas = (TextView) findViewById(R.id.text_pernas);
         textOlhos = (TextView) findViewById(R.id.text_olhos);
+
+        btOk = (AppCompatButton) findViewById(R.id.bt_ok);
+        btOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -197,7 +209,7 @@ public class ResultadoActivity extends AppCompatActivity {
                 .append(nomePaciente).append(SEPARADOR)
                 .append(textIdadePaciente.getText().toString()).append(SEPARADOR)
                 .append(sdf.format(avaliacao.getData())).append(SEPARADOR)
-                .append(textArea.getText().toString()).append(SEPARADOR)
+                .append(textVelocidade.getText().toString()).append(SEPARADOR)
                 .append(textDuracao.getText().toString()).append(SEPARADOR)
                 .append(textOlhos.getText().toString()).append(SEPARADOR)
                 .append(textPernas.getText().toString()).append("\n\n");

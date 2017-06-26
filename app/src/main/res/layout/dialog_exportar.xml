@@ -19,12 +19,12 @@
         android:layout_marginStart="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="15dp"
+        android:baselineAligned="false">
 
 
         <LinearLayout
             android:padding="5dp"
-            android:background="#ededed"
             android:id="@+id/layout_aparelho"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -50,7 +50,7 @@
 
         <LinearLayout
             android:padding="5dp"
-            android:background="#f4f4f4"
+            android:background="#f5f5f5"
             android:id="@+id/layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,7 +69,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Aplicação Externa" />
+                android:text="@string/aplicacao_externa" />
 
         </LinearLayout>
 

@@ -19,14 +19,18 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidplot.xy.SimpleXYSeries;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import br.edu.ufcspa.balance.R;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
+import br.edu.ufcspa.balance.modelo.Calcula;
+import br.edu.ufcspa.balance.modelo.Coordenada2D;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.DadoGiroscopio;
 import br.edu.ufcspa.balance.modelo.Paciente;
@@ -72,10 +76,10 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
 
         final TextView txtTimer = (TextView) findViewById(R.id.text_timer);
 
-        new CountDownTimer((duracao)*1000, 1000) {
+        new CountDownTimer((duracao) * 1000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                txtTimer.setText(""+millisUntilFinished / 1000);
+                txtTimer.setText("" + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -175,22 +179,22 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
         avaliacao.setOlhos(modoOlhos);
         avaliacao.setDuracao(duracao);
         avaliacao.setFrequencia(100);
-        avaliacao.setVelocidade(0.0);
+        //TODO - tirar esse padrao de altura do aparelho
+        avaliacao.setAltura(1.2);
 
         /*Salva os dados dos sensores como JSON*/
         Gson gson = new Gson();
         avaliacao.setDadosAcelerometro(gson.toJson(dadosAcelerometro));
         avaliacao.setDadosGiroscopio(gson.toJson(dadosGiroscopio));
 
+        avaliacao.setVelocidade(calculaVelocidade(dadosAcelerometro,
+                avaliacao.getAltura(), avaliacao.getDuracao()));
+
         /*Escreve no log do aparelho*/
         Log.d("-- -- -- GIROSCOPIO", ":" + String.valueOf(Arrays.deepToString(dadosGiroscopio.toArray())));
         Log.d("-- -- -- ACELEROMETRO", ":" + String.valueOf(Arrays.deepToString(dadosAcelerometro.toArray())));
 
         avaliacao.save(); // Salva a avaliação no banco
-        Toast.makeText(activity, "ID = " +avaliacao.getId() , Toast.LENGTH_SHORT).show();avaliacao.getId();
-
-
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Sucesso!");
@@ -233,8 +237,22 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
 
     }
 
+    private Double calculaVelocidade(ArrayList<DadoAcelerometro> dadosAcelerometro,
+                                     Double alturaDoAparelho, int duracao) {
+        SimpleXYSeries pontos = new SimpleXYSeries("Gráfico");
+        for (DadoAcelerometro dado : dadosAcelerometro) {
+            Coordenada2D ponto = Calcula.coordenada2D(dado, alturaDoAparelho.floatValue());
+            if (ponto.isValido()) {
+                pontos.addLast(ponto.getX(), ponto.getY());
+            }
+        }
+
+        float distancia = Calcula.distanciaTotal(pontos);
+        return (double) (distancia / duracao);
+    }
+
     private void abrirResultado(Avaliacao avaliacao) {
-        Intent intentResultado = new Intent(SensoresActivity.this,ResultadoActivity.class);
+        Intent intentResultado = new Intent(SensoresActivity.this, ResultadoActivity.class);
         intentResultado.putExtra("avaliação", avaliacao);
         startActivity(intentResultado);
         finish();
@@ -264,7 +282,7 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
 //
 //            @Override
 //            public void onClick(DialogInterface dialog, int which) {
-                activity.finish();
+        activity.finish();
 //            }
 //        });
 //        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
