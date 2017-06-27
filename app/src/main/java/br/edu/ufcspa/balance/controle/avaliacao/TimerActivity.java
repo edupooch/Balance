@@ -7,18 +7,13 @@ import android.media.AudioManager;
 import android.media.ToneGenerator;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.InputType;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.edu.ufcspa.balance.R;
@@ -45,8 +40,6 @@ public class TimerActivity extends AppCompatActivity {
 
     CountDownTimer timer;
 
-    private static final int  MIN_ALTURA= 20;
-    private static final int  MAX_ALTURA= 250;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,165 +55,17 @@ public class TimerActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         paciente = (Paciente) intent.getSerializableExtra("paciente");
+        modoPernas = intent.getIntExtra("modoPernas", Avaliacao.DUAS_PERNAS);
+        modoOlhos = intent.getIntExtra("modoOlhos", Avaliacao.OLHOS_ABERTOS);
+        duracao = intent.getIntExtra("duracao", 15);
+        altura = intent.getDoubleExtra("modoPernas", 1.2);
 
-        mostrarDialogPernas();
+
+        mostrarDialogTimer();
 
     }
 
-    public void mostrarDialogPernas(){
-        final Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.pernas_dialog);
-
-        View btnUmaPerna = dialog.findViewById(R.id.layout_uma_perna);
-        View btnDuasPernas = dialog.findViewById(R.id.layout_duas_pernas);
-
-        btnUmaPerna.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView imageView = (ImageView) v.findViewById(R.id.icon_uma_perna);
-                imageView.setColorFilter(ContextCompat.getColor(This, R.color.colorPrimary));
-                modoPernas = Avaliacao.UMA_PERNA;
-                dialog.dismiss();
-                mostrarDialogOlhos();
-            }
-        });
-
-        btnDuasPernas.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView imageView = (ImageView) v.findViewById(R.id.icon_duas_pernas);
-                imageView.setColorFilter(ContextCompat.getColor(This, R.color.colorPrimary));
-                modoPernas = Avaliacao.DUAS_PERNAS;
-                dialog.dismiss();
-                mostrarDialogOlhos();
-            }
-        });
-        dialog.show();
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-            @Override
-            public boolean onKey(DialogInterface arg0, int keyCode,
-                                 KeyEvent event) {
-                // TODO Auto-generated method stub
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    mostrarDialogVoltar();
-                }
-                return true;
-            }
-        });
-    }
-
-    public void mostrarDialogDuracao(){
-        final Dialog dialog = new Dialog(This);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.duracao_dialog);
-
-        View btn60 = dialog.findViewById(R.id.txt60);
-        View btn45 = dialog.findViewById(R.id.txt45);
-        View btn30 = dialog.findViewById(R.id.txt30);
-        View btn15 = dialog.findViewById(R.id.txt15);
-
-        btn60.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                duracao = 60;
-                dialog.dismiss();
-                mostrarDialogAltura();
-            }
-        });
-
-        btn45.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                duracao = 45;
-                dialog.dismiss();
-                mostrarDialogAltura();
-            }
-        });
-
-        btn30.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                duracao = 30;
-                dialog.dismiss();
-                mostrarDialogAltura();
-            }
-        });
-
-        btn15.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                duracao = 15;
-                dialog.dismiss();
-                mostrarDialogAltura();
-            }
-        });
-
-        dialog.show();
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-            @Override
-            public boolean onKey(DialogInterface arg0, int keyCode,
-                                 KeyEvent event) {
-                // TODO Auto-generated method stub
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    mostrarDialogVoltar();
-                }
-                return true;
-            }
-        });
-    }
-
-    public void mostrarDialogOlhos(){
-        final Dialog dialog = new Dialog(This);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.olhos_dialog);
-
-        View btnOlhosAbertos = dialog.findViewById(R.id.layout_olhos_abertos);
-        View btnOlhosFechados = dialog.findViewById(R.id.layout_olhos_fechados);
-
-        btnOlhosAbertos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView imageView = (ImageView) v.findViewById(R.id.icon_olhos_abertos);
-                imageView.setColorFilter(ContextCompat.getColor(This, R.color.colorPrimary));
-                modoOlhos = Avaliacao.OLHOS_ABERTOS;
-                dialog.dismiss();
-                mostrarDialogDuracao();
-            }
-        });
-
-        btnOlhosFechados.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ImageView imageView = (ImageView) v.findViewById(R.id.icon_olhos_fechados);
-                imageView.setColorFilter(ContextCompat.getColor(This, R.color.colorPrimary));
-                modoOlhos = Avaliacao.OLHOS_FECHADOS;
-                dialog.dismiss();
-                mostrarDialogDuracao();
-            }
-        });
-        dialog.show();
-
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-            @Override
-            public boolean onKey(DialogInterface arg0, int keyCode,
-                                 KeyEvent event) {
-                // TODO Auto-generated method stub
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    mostrarDialogVoltar();
-                }
-                return true;
-            }
-        });
-    }
-
-    private void mostrarDialogTimer(){
+    private void mostrarDialogTimer() {
 
         final Dialog dialog = new Dialog(This);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -237,9 +82,9 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int time = Integer.parseInt(pickerTimer.getText().toString());
-                if(time >= 10){
+                if (time >= 10) {
                     time -= 5;
-                    pickerTimer.setText(time+"");
+                    pickerTimer.setText(time + "");
                 }
             }
         });
@@ -249,9 +94,9 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 int time = Integer.parseInt(pickerTimer.getText().toString());
-                if(time <=55){
-                    time+=5;
-                    pickerTimer.setText(time+"");
+                if (time <= 55) {
+                    time += 5;
+                    pickerTimer.setText(time + "");
                 }
             }
         });
@@ -282,53 +127,8 @@ public class TimerActivity extends AppCompatActivity {
 
     }
 
-    private void mostrarDialogAltura(){
 
-        final Dialog dialog = new Dialog(This);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(false);
-        dialog.setContentView(R.layout.altura_dialog);
-
-        final View btnConfirmar = dialog.findViewById(R.id.btn_confirmar);
-        final EditText txtAltura = (EditText) dialog.findViewById(R.id.text_altura);
-
-        btnConfirmar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-
-                    double altura = Long.parseLong(txtAltura.getText().toString());
-
-                    if(altura >= MIN_ALTURA && altura <= MAX_ALTURA){
-                        This.altura = altura;
-                        dialog.dismiss();
-                        mostrarDialogTimer();
-                    }
-                }catch (Exception e){
-
-                }
-            }
-        });
-
-        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-
-        dialog.show();
-        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
-
-            @Override
-            public boolean onKey(DialogInterface arg0, int keyCode,
-                                 KeyEvent event) {
-                // TODO Auto-generated method stub
-                if (keyCode == KeyEvent.KEYCODE_BACK) {
-                    mostrarDialogVoltar();
-                }
-                return true;
-            }
-        });
-    }
-
-
-    public void iniciarTimer(){
+    public void iniciarTimer() {
 
         /*Desabilita o bloqueio da tela por timeout*/
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -336,25 +136,25 @@ public class TimerActivity extends AppCompatActivity {
         txtTimer.setVisibility(View.VISIBLE);
         txtPrepare.setVisibility(View.VISIBLE);
 
-         timer = new CountDownTimer((segundosTimer)*1000, 1000) {
+        timer = new CountDownTimer((segundosTimer) * 1000, 1000) {
 
-                public void onTick(long millisUntilFinished) {
-                    txtTimer.setText(""+millisUntilFinished / 1000);
+            public void onTick(long millisUntilFinished) {
+                txtTimer.setText("" + millisUntilFinished / 1000);
 
-                    if(millisUntilFinished / 1000 <=3){
-                        ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-                        toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
-                    }
-
-                }
-
-                public void onFinish() {
-                    iniciaAvaliação();
+                if (millisUntilFinished / 1000 <= 3) {
                     ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
-                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 1000);
-                    This.finish();
+                    toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
                 }
-            }.start();
+
+            }
+
+            public void onFinish() {
+                iniciaAvaliação();
+                ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
+                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 1000);
+                This.finish();
+            }
+        }.start();
     }
 
 
@@ -368,28 +168,17 @@ public class TimerActivity extends AppCompatActivity {
         startActivity(intentVaiPraListaDeAvaliacoes);
     }
 
-    private void setTimerText(String text){
-        txtTimer.setText(text);
-    }
-    private void esperarUmSegundo(){
-        try {
-            Thread.sleep(1000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
 
-        if(timer != null)
+        if (timer != null)
             timer.cancel();
     }
 
     private void mostrarDialogVoltar() {
 
-        if(backCounter >= 1)
+        if (backCounter >= 1)
             return;
 
         backCounter++;
@@ -402,7 +191,7 @@ public class TimerActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if(timer != null)
+                if (timer != null)
                     timer.cancel();
 
                 This.finish();

@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:padding="16dp"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="br.edu.ufcspa.balance.controle.avaliacao.PreTesteActivity"
+    tools:showIn="@layout/activity_pre_teste">
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/round_edge_branco"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#eee"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Altura do aparelho (em cm)"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginBottom="20dp"
+                    android:tint="#757575"
+                    android:paddingTop="4dp"
+                    android:src="@drawable/icon_celular"
+                    android:layout_marginLeft="16dp" />
+
+                <EditText
+                    android:id="@+id/text_altura_celular"
+                    android:layout_width="match_parent"
+                    android:layout_gravity="center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    android:maxLength="3"
+                    android:theme="@style/Theme.App.Base"
+                    android:layout_marginTop="2dp"
+                    android:layout_marginRight="16dp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#eee"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Tempo de duração da avaliação"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+
+                <TextView
+                    android:id="@+id/txt15"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="15s"
+                    android:textSize="30sp" />
+
+
+                <TextView
+                    android:id="@+id/txt30"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="30s"
+                    android:textSize="30sp" />
+
+
+                <TextView
+                    android:id="@+id/txt45"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="45s"
+                    android:textSize="30sp" />
+
+                <TextView
+                    android:id="@+id/txt60"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:padding="10dp"
+                    android:text="60s"
+                    android:textSize="30sp" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#eee"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="Tipo de apoio"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <LinearLayout
+                    android:id="@+id/layout_uma_perna"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/icon_uma_perna"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:contentDescription="@string/uma_perna"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_uma_perna"
+                        android:tint="#757575" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Apoio unipodal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_duas_pernas"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/icon_duas_pernas"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:contentDescription="@string/duas_pernas"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_duas_pernas"
+                        android:tint="#757575" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="Apoio bipodal" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#eee"
+                android:gravity="center"
+                android:padding="5dp"
+                android:text="@string/qual_o_estado_dos_olhos"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+
+                <LinearLayout
+                    android:id="@+id/layout_olhos_fechados"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/icon_olhos_fechados"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:contentDescription="@string/olhos_fechados"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_olho_fechado"
+                        android:tint="#757575" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/olhos_fechados" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_olhos_abertos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/icon_olhos_abertos"
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:contentDescription="@string/olhos_abertos"
+                        android:padding="8dp"
+                        android:src="@drawable/icon_olho_aberto"
+                        android:tint="#757575" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/olhos_abertos" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/bt_confirmar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="10dp"
+                android:text="Confirmar"
+                android:textColor="#fff"
+                app:backgroundTint="@color/colorPrimary"
+                app:srcCompat="@android:drawable/ic_dialog_email" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -25,6 +25,10 @@ import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Coordenada2D;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 
+/**
+ * Activity para visualização do gráfico em tela cheia, criada para possibilitar o zoom e
+ * melhor visualização dos pontos.
+ */
 public class GraficoActivity extends AppCompatActivity {
 
     List<DadoAcelerometro> listaDadosAcelerometro;

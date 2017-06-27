@@ -22,8 +22,8 @@ import java.util.List;
 import java.util.Locale;
 
 import br.edu.ufcspa.balance.R;
+import br.edu.ufcspa.balance.controle.avaliacao.PreTesteActivity;
 import br.edu.ufcspa.balance.controle.avaliacao.ResultadoActivity;
-import br.edu.ufcspa.balance.controle.avaliacao.TimerActivity;
 import br.edu.ufcspa.balance.controle.cadastro.CadastroActivity;
 import br.edu.ufcspa.balance.modelo.Avaliacao;
 import br.edu.ufcspa.balance.modelo.OperacoesBanco;
@@ -33,7 +33,6 @@ import br.edu.ufcspa.balance.modelo.Paciente;
 
 public class PerfilActivity extends AppCompatActivity {
 
-    private PerfilActivity activity = this;
     private Paciente paciente;
     private ArrayList<Avaliacao> avaliacoes;
     private static int TAMANHO_ESPACO_ENTRE_ITENS = 4;
@@ -54,11 +53,10 @@ public class PerfilActivity extends AppCompatActivity {
         carregaListaAvaliacoes();
     }
 
-
     private void escreveDados() {
         Intent intent = getIntent();
         paciente = (Paciente) intent.getSerializableExtra("paciente");
-        activity.setTitle(paciente.getNome());
+        setTitle(paciente.getNome());
 
         escreveDadosCadastrais();
         escreveDadosContato();
@@ -239,7 +237,7 @@ public class PerfilActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
 
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(PerfilActivity.this);
                     builder.setMessage("Não foi possível abrir a avaliação");
 
                     builder.setNegativeButton("ok", new DialogInterface.OnClickListener() {
@@ -274,7 +272,7 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     public void btnComecarAvaliacao_Click(View view) {
-        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, TimerActivity.class);
+        Intent intentVaiPraListaDeAvaliacoes = new Intent(PerfilActivity.this, PreTesteActivity.class);
         intentVaiPraListaDeAvaliacoes.putExtra("paciente", paciente);
         startActivity(intentVaiPraListaDeAvaliacoes);
     }

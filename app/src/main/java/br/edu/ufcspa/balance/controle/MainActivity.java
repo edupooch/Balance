@@ -26,7 +26,9 @@ import br.edu.ufcspa.balance.controle.perfil.PacientesAdapter;
 import br.edu.ufcspa.balance.controle.perfil.PerfilActivity;
 import br.edu.ufcspa.balance.modelo.Paciente;
 
-
+/**
+ * Classe principal que exibe a lista de pacientes e opção de adicionar novo paciente
+ */
 public class MainActivity extends AppCompatActivity {
 
     private ListView listaPacientes;
@@ -93,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
-
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
         final Paciente paciente = (Paciente) listaPacientes.getItemAtPosition(info.position);
 
@@ -142,22 +143,6 @@ public class MainActivity extends AppCompatActivity {
         if (intent.resolveActivity(getPackageManager()) != null) {
             startActivity(intent);
         }
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_lista, menu);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-
-        }
-        return super.onOptionsItemSelected(item);
     }
 
 }

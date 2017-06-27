@@ -5,7 +5,7 @@
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
 
     <application
         android:name="com.orm.SugarApp"
@@ -21,7 +21,7 @@
             android:value="balance_dados.db" />
         <meta-data
             android:name="VERSION"
-            android:value="7" />
+            android:value="8" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
@@ -68,6 +68,11 @@
             android:label="@string/titulo_resultados"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".controle.avaliacao.OldTimerActivity"
+            android:label="@string/title_activity_timer"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".controle.avaliacao.TimerActivity"
             android:label="@string/title_activity_timer"
             android:screenOrientation="portrait"
@@ -75,6 +80,10 @@
         <activity
             android:name=".controle.avaliacao.GraficoActivity"
             android:label="@string/title_activity_grafico"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".controle.avaliacao.PreTesteActivity"
+            android:label="@string/title_activity_pre_teste"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

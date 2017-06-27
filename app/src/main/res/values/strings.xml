@@ -20,6 +20,7 @@
     <string name="dialog_deletar_paciente">Deseja deletar este paciente e todos os seus exames? Esta ação não poderá ser desfeita.</string>
     <string name="dialog_deletar_avaliacao">Deseja deletar esta avaliação? Esta ação não poderá ser desfeita.</string>
     <string name="atencao_deletar">Deletar Paciente</string>
+    <string name="atencao_deletar_ava">Deletar Avaliação</string>
 
     <string name="configura_es">Configurações</string>
     <string name="avaliacoes">avaliações</string>
@@ -34,7 +35,7 @@
     <string name="nome_do_paciente">Nome do Paciente</string>
     <string name="data_de_nascimento">Data de nascimento</string>
     <string name="description_calendario">Botão para abrir um calendário e escolher a data</string>
-    <string name="genero">Gênero</string>
+    <string name="genero">Sexo</string>
     <string name="description_peso">Ícone de balança</string>
     <string name="massa_corporal_em_kg">Massa corporal (em kg)</string>
     <string name="estatura_em_cm">Estatura (em cm)</string>
@@ -49,7 +50,7 @@
     <string name="data_de_anamnese">Data de Anamnese</string>
     <string name="diagnostico_clinico">Diagnostico Clínico</string>
     <string name="hist_rico_da_doen_a_atual">Histórico da Doença Atual</string>
-    <string name="hist_rico_de_doen_as_anteriores">Histórico de Doenças Anteriores</string>
+    <string name="hist_rico_de_doen_as_anteriores">Histórico da Doença Pregressa</string>
     <string name="text_inicial">Ainda não há Pacientes Cadastrados.</string>
     <string name="text_header_lista">Balance: Avaliação do Equilíbrio\nSelecione um paciente para realizar um novo exame ou verificar os resultados de exames anteriores</string>
     <string name="data_de_diagnostico">Data de Diagnóstico</string>
@@ -68,7 +69,7 @@
     <string name="quantas_pernas">Quantas Pernas?</string>
     <string name="uma_perna">Uma perna</string>
     <string name="duas_pernas">Duas Pernas</string>
-    <string name="qual_o_estado_dos_olhos">Qual o estado dos olhos?</string>
+    <string name="qual_o_estado_dos_olhos">Estado dos olhos</string>
     <string name="olhos_abertos">Olhos Abertos</string>
     <string name="olhos_fechados">Olhos Fechados</string>
     <string name="title_activity_timer">TimerActivity</string>
@@ -77,20 +78,12 @@
     <string name="iniciar_avalia_o">Iniciar Avaliação</string>
     <string name="selecione_o_tempo_para_prepara_o">Selecione o tempo para preparação:</string>
     <string name="vamos_come_ar">Vamos começar!</string>
-
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-
-    <!-- Example settings for Data & Sync -->
-
-    <!-- Example settings for Notifications -->
-
     <string name="clique_na_avaliacao_para_mais_detalhes">Clique na Avaliação para mais detalhes.</string>
     <string name="nenhuma_avaliacao_realizada_ainda">Nenhuma avaliação realizada ainda.</string>
     <string name="title_activity_grafico">GraficoActivity</string>
     <string name="escala_em_centimetros">Escala em centímetros</string>
     <string name="aplicacao_externa">Aplicação Externa</string>
+    <string name="title_activity_pre_teste">Parâmetros da Avaliação</string>
 
 
 </resources>

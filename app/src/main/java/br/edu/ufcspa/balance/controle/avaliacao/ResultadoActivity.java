@@ -45,6 +45,10 @@ import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.Paciente;
 import br.edu.ufcspa.balance.modelo.PermissoesHandler;
 
+/**
+ * Activity que apresenta o resultado da avaliação, é aberta no fim de uma avaliação e também
+ * com um clique em algum item da lista de avaliações do paciente.
+ */
 public class ResultadoActivity extends AppCompatActivity {
 
     public static final String DIRETORIO_PADRÃO = "/storage/emulated/0/Balance/";
@@ -78,6 +82,22 @@ public class ResultadoActivity extends AppCompatActivity {
         escreveTextos();
     }
 
+    private void findViews() {
+        textNomePaciente = (TextView) findViewById(R.id.text_nome_paciente);
+        textIdadePaciente = (TextView) findViewById(R.id.text_idade_paciente);
+        textVelocidade = (TextView) findViewById(R.id.text_velocidade_media);
+        textDuracao = (TextView) findViewById(R.id.text_duracao);
+        textPernas = (TextView) findViewById(R.id.text_pernas);
+        textOlhos = (TextView) findViewById(R.id.text_olhos);
+
+        btOk = (AppCompatButton) findViewById(R.id.bt_ok);
+        btOk.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
 
     private void escreveTextos() {
         Paciente paciente = Paciente.findById(Paciente.class, avaliacao.getIdPaciente());
@@ -132,105 +152,16 @@ public class ResultadoActivity extends AppCompatActivity {
         plot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                grafico_Click(v);
+                onClickGrafico(v);
             }
         });
     }
 
-
-    public void grafico_Click(View view) {
+    public void onClickGrafico(View view) {
         final List<DadoAcelerometro> listaDadosAcelerometro = getDadosAcelerometro();
         Intent intentVaiProGrafico = new Intent(ResultadoActivity.this, GraficoActivity.class);
         intentVaiProGrafico.putExtra("listaDadosAcelerometro", new Gson().toJson(listaDadosAcelerometro));
         startActivity(intentVaiProGrafico);
-
-    }
-
-    private List<DadoAcelerometro> getDadosAcelerometro() {
-        Gson gson = new Gson();
-        String jsonArray = avaliacao.getDadosAcelerometro();
-        Type listType = new TypeToken<ArrayList<DadoAcelerometro>>() {
-        }.getType();
-        return gson.fromJson(jsonArray, listType);
-    }
-
-    private void findViews() {
-        textNomePaciente = (TextView) findViewById(R.id.text_nome_paciente);
-        textIdadePaciente = (TextView) findViewById(R.id.text_idade_paciente);
-        textVelocidade = (TextView) findViewById(R.id.text_velocidade_media);
-        textDuracao = (TextView) findViewById(R.id.text_duracao);
-        textPernas = (TextView) findViewById(R.id.text_pernas);
-        textOlhos = (TextView) findViewById(R.id.text_olhos);
-
-        btOk = (AppCompatButton) findViewById(R.id.bt_ok);
-        btOk.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_resultado, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_deletar:
-                criaDeletarDialog();
-                break;
-            case R.id.action_exportar:
-                PermissoesHandler permissoes = new PermissoesHandler(this);
-                if (permissoes.verificaPermissaoArquivos()) {
-                    exportarCSV();
-                } else {
-                    permissoes.pedePermissãoArquivos();
-                }
-
-                break;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void exportarCSV() {
-        String nomePaciente = textNomePaciente.getText().toString();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm", Locale.getDefault());
-        String fileName = nomePaciente.replace(" ", "").toLowerCase() + "-" + sdf.format(avaliacao.getData()) + ".csv";
-
-        File diretorio = criaDiretorio();
-        File file = new File(diretorio, fileName);
-        StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append("DADOS DA AVALIAÇÃO:\n")
-                .append(nomePaciente).append(SEPARADOR)
-                .append(textIdadePaciente.getText().toString()).append(SEPARADOR)
-                .append(sdf.format(avaliacao.getData())).append(SEPARADOR)
-                .append(textVelocidade.getText().toString()).append(SEPARADOR)
-                .append(textDuracao.getText().toString()).append(SEPARADOR)
-                .append(textOlhos.getText().toString()).append(SEPARADOR)
-                .append(textPernas.getText().toString()).append("\n\n");
-
-        stringBuilder.append("TEMPO;X;Y;Z\n");
-        for (DadoAcelerometro dado : getDadosAcelerometro()) {
-            stringBuilder.append(dado.getTempo()).append(SEPARADOR)
-                    .append(dado.getX()).append(SEPARADOR)
-                    .append(dado.getY()).append(SEPARADOR)
-                    .append(dado.getZ()).append("\n");
-        }
-
-        try {
-            Files.asCharSink(file, Charsets.UTF_8).write(stringBuilder.toString());
-
-            criaExportarDialog(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-            Toast.makeText(this, "Falha ao salvar arquivo " + file.getPath(), Toast.LENGTH_LONG).show();
-        }
-
 
     }
 
@@ -262,12 +193,47 @@ public class ResultadoActivity extends AppCompatActivity {
         dialog.show();
     }
 
-
     private File criaDiretorio() {
         File dir = new File(DIRETORIO_PADRÃO);
         //noinspection ResultOfMethodCallIgnored
         dir.mkdir();
         return dir;
+    }
+
+    private void exportarCSV() {
+        String nomePaciente = textNomePaciente.getText().toString();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm", Locale.getDefault());
+        String fileName = nomePaciente.replace(" ", "").toLowerCase() + "-" + sdf.format(avaliacao.getData()) + ".csv";
+
+        File diretorio = criaDiretorio();
+        File file = new File(diretorio, fileName);
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("DADOS DA AVALIAÇÃO:\n")
+                .append(nomePaciente).append(SEPARADOR)
+                .append(textIdadePaciente.getText().toString()).append(SEPARADOR)
+                .append(sdf.format(avaliacao.getData())).append(SEPARADOR)
+                .append(textVelocidade.getText().toString()).append(SEPARADOR)
+                .append(textDuracao.getText().toString()).append(SEPARADOR)
+                .append(textOlhos.getText().toString()).append(SEPARADOR)
+                .append(textPernas.getText().toString()).append("\n\n");
+
+        stringBuilder.append("TEMPO;X;Y;Z\n");
+        for (DadoAcelerometro dado : getDadosAcelerometro()) {
+            stringBuilder.append(dado.getTempo()).append(SEPARADOR)
+                    .append(dado.getX()).append(SEPARADOR)
+                    .append(dado.getY()).append(SEPARADOR)
+                    .append(dado.getZ()).append("\n");
+        }
+
+        try {
+            Files.asCharSink(file, Charsets.UTF_8).write(stringBuilder.toString());
+            criaExportarDialog(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Falha ao salvar arquivo " + file.getPath(), Toast.LENGTH_LONG).show();
+        }
+
+
     }
 
     public void compartilhar(File file) {
@@ -285,11 +251,10 @@ public class ResultadoActivity extends AppCompatActivity {
         }
     }
 
-
     private void criaDeletarDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
-        builder.setTitle(getString(R.string.atencao_deletar));
+        builder.setTitle(getString(R.string.atencao_deletar_ava));
         builder.setMessage(getString(R.string.dialog_deletar_avaliacao));
         builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
 
@@ -319,6 +284,40 @@ public class ResultadoActivity extends AppCompatActivity {
         });
         AlertDialog alert = builder.create();
         alert.show();
+    }
+
+    private List<DadoAcelerometro> getDadosAcelerometro() {
+        Gson gson = new Gson();
+        String jsonArray = avaliacao.getDadosAcelerometro();
+        Type listType = new TypeToken<ArrayList<DadoAcelerometro>>() {
+        }.getType();
+        return gson.fromJson(jsonArray, listType);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_resultado, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_deletar:
+                criaDeletarDialog();
+                break;
+            case R.id.action_exportar:
+                PermissoesHandler permissoes = new PermissoesHandler(this);
+                if (permissoes.verificaPermissaoArquivos()) {
+                    exportarCSV();
+                } else {
+                    permissoes.pedePermissãoArquivos();
+                }
+
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
