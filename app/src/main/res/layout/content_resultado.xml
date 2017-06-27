@@ -158,7 +158,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="Pernas:"
+                        android:text="Pernas"
                         android:textSize="13sp" />
 
                     <TextView

@@ -11,10 +11,13 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -32,6 +35,7 @@ public class TimerActivity extends AppCompatActivity {
     int modoOlhos;
     int duracao;
     int segundosTimer;
+    double altura;
 
     int backCounter = 0;
 
@@ -41,6 +45,8 @@ public class TimerActivity extends AppCompatActivity {
 
     CountDownTimer timer;
 
+    private static final int  MIN_ALTURA= 20;
+    private static final int  MAX_ALTURA= 250;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -122,7 +128,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 60;
                 dialog.dismiss();
-                mostrarDialogTimer();
+                mostrarDialogAltura();
             }
         });
 
@@ -131,7 +137,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 45;
                 dialog.dismiss();
-                mostrarDialogTimer();
+                mostrarDialogAltura();
             }
         });
 
@@ -140,7 +146,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 30;
                 dialog.dismiss();
-                mostrarDialogTimer();
+                mostrarDialogAltura();
             }
         });
 
@@ -149,7 +155,7 @@ public class TimerActivity extends AppCompatActivity {
             public void onClick(View v) {
                 duracao = 15;
                 dialog.dismiss();
-                mostrarDialogTimer();
+                mostrarDialogAltura();
             }
         });
 
@@ -199,6 +205,7 @@ public class TimerActivity extends AppCompatActivity {
             }
         });
         dialog.show();
+
         dialog.setOnKeyListener(new Dialog.OnKeyListener() {
 
             @Override
@@ -275,6 +282,52 @@ public class TimerActivity extends AppCompatActivity {
 
     }
 
+    private void mostrarDialogAltura(){
+
+        final Dialog dialog = new Dialog(This);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.altura_dialog);
+
+        final View btnConfirmar = dialog.findViewById(R.id.btn_confirmar);
+        final EditText txtAltura = (EditText) dialog.findViewById(R.id.text_altura);
+
+        btnConfirmar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+
+                    double altura = Long.parseLong(txtAltura.getText().toString());
+
+                    if(altura >= MIN_ALTURA && altura <= MAX_ALTURA){
+                        This.altura = altura;
+                        dialog.dismiss();
+                        mostrarDialogTimer();
+                    }
+                }catch (Exception e){
+
+                }
+            }
+        });
+
+        dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+
+        dialog.show();
+        dialog.setOnKeyListener(new Dialog.OnKeyListener() {
+
+            @Override
+            public boolean onKey(DialogInterface arg0, int keyCode,
+                                 KeyEvent event) {
+                // TODO Auto-generated method stub
+                if (keyCode == KeyEvent.KEYCODE_BACK) {
+                    mostrarDialogVoltar();
+                }
+                return true;
+            }
+        });
+    }
+
+
     public void iniciarTimer(){
 
         /*Desabilita o bloqueio da tela por timeout*/
@@ -311,6 +364,7 @@ public class TimerActivity extends AppCompatActivity {
         intentVaiPraListaDeAvaliacoes.putExtra("modoPernas", modoPernas);
         intentVaiPraListaDeAvaliacoes.putExtra("modoOlhos", modoOlhos);
         intentVaiPraListaDeAvaliacoes.putExtra("duracao", duracao);
+        intentVaiPraListaDeAvaliacoes.putExtra("altura", altura);
         startActivity(intentVaiPraListaDeAvaliacoes);
     }
 

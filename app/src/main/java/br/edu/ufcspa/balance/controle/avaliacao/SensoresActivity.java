@@ -33,7 +33,9 @@ import br.edu.ufcspa.balance.modelo.Calcula;
 import br.edu.ufcspa.balance.modelo.Coordenada2D;
 import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 import br.edu.ufcspa.balance.modelo.DadoGiroscopio;
+import br.edu.ufcspa.balance.modelo.OperacoesBanco;
 import br.edu.ufcspa.balance.modelo.Paciente;
+import br.edu.ufcspa.balance.modelo.Util;
 
 public class SensoresActivity extends AppCompatActivity implements SensorEventListener {
 
@@ -43,6 +45,7 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
     private int modoPernas;
     private int modoOlhos;
     private int duracao;
+    private double altura;
 
     private SensorManager mSensorManager;
 
@@ -65,6 +68,7 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
         modoOlhos = (int) intent.getSerializableExtra("modoOlhos");
         modoPernas = (int) intent.getSerializableExtra("modoPernas");
         duracao = (int) intent.getSerializableExtra("duracao");
+        altura = (double) intent.getSerializableExtra("altura");
 
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         tempoInicio = System.currentTimeMillis();
@@ -83,15 +87,6 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
             }
 
             public void onFinish() {
-//                txtTimer.setText("0");
-//                ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 100);
-//                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
-//                try {
-//                    Thread.sleep(80);
-//                } catch (InterruptedException e) {
-//                    e.printStackTrace();
-//                }
-//                toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 80);
                 ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_ALARM, 100);
                 toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 1000);
                 terminar();
@@ -144,10 +139,6 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
 
     public void terminar() {
 
-        /*Toca 1 beep longo*/
-        //ToneGenerator toneG = new ToneGenerator(AudioManager.STREAM_NOTIFICATION, 1500);
-        //toneG.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 1500);
-
         mSensorManager.unregisterListener(this);
         Log.d("GIROSCOPE", "GIROSCOPIO:");
 
@@ -179,8 +170,7 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
         avaliacao.setOlhos(modoOlhos);
         avaliacao.setDuracao(duracao);
         avaliacao.setFrequencia(100);
-        //TODO - tirar esse padrao de altura do aparelho
-        avaliacao.setAltura(1.2);
+        avaliacao.setAltura(altura);
 
         /*Salva os dados dos sensores como JSON*/
         Gson gson = new Gson();
