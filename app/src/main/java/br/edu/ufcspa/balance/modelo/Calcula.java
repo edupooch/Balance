@@ -8,6 +8,8 @@ import org.joda.time.PeriodType;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.util.List;
+
 
 /**
  * Classe que realiza cálculos como o de idade a partir da data de nascimento e o cálculo da
@@ -21,6 +23,7 @@ public class Calcula {
     private static final int AO_QUADRADO = 2;
     private static final int M_PARA_CM = 100;
     private static final int CM_PARA_M = 100;
+    public static final int INVERTER = -1;
 
     /**
      * Calcula a idadeEmAnos em anos
@@ -64,7 +67,7 @@ public class Calcula {
 
         float resultanteD = -altura / cosGama;
 
-        float dx = resultanteD * cosAlfa * M_PARA_CM;
+        float dx = resultanteD * cosAlfa * M_PARA_CM * INVERTER;
         float dy = resultanteD * cosBeta * M_PARA_CM;
 
         return new Coordenada2D(dx, dy);
@@ -81,10 +84,26 @@ public class Calcula {
     }
 
     private static double distanciaEuclidiana(float x1, float x2, float y1, float y2) {
-        float dx = x1/CM_PARA_M - x2/CM_PARA_M;
-        float dy = y1/CM_PARA_M - y2/CM_PARA_M;
+        float dx = x1 / CM_PARA_M - x2 / CM_PARA_M;
+        float dy = y1 / CM_PARA_M - y2 / CM_PARA_M;
         return Math.sqrt((dx * dx) + (dy * dy));
     }
 
+    /**
+     * Método para retornar o primeiro ponto para diminuir os outros e manter o gráfico com origem
+     * em (0,0)
+     *
+     * @param alturaDoAparelho em m
+     * @return o primeiro valor de coordenada válido na lista.
+     */
+    public static Coordenada2D getOrigem(List<DadoAcelerometro> listaDadosAcelerometro, float alturaDoAparelho) {
+        for (DadoAcelerometro dado : listaDadosAcelerometro) {
+            Coordenada2D coordenada2D = Calcula.coordenada2D(dado, alturaDoAparelho);
+            if (coordenada2D.isValido()) {
+                return coordenada2D;
+            }
+        }
+        return new Coordenada2D(0, 0);
 
+    }
 }

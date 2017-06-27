@@ -29,6 +29,7 @@
                 android:background="#eee"
                 android:gravity="center"
                 android:padding="5dp"
+                android:textColor="@color/colorPrimary"
                 android:text="Altura do aparelho (em cm)"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -71,7 +72,8 @@
                 android:background="#eee"
                 android:gravity="center"
                 android:padding="5dp"
-                android:text="Tempo de duração da avaliação"
+                android:textColor="@color/colorPrimary"
+                android:text="Duração da avaliação"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -137,6 +139,7 @@
                 android:gravity="center"
                 android:padding="5dp"
                 android:text="Tipo de apoio"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -204,6 +207,7 @@
                 android:layout_marginTop="10dp"
                 android:background="#eee"
                 android:gravity="center"
+                android:textColor="@color/colorPrimary"
                 android:padding="5dp"
                 android:text="@string/qual_o_estado_dos_olhos"
                 android:textSize="20sp"

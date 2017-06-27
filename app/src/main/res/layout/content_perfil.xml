@@ -61,6 +61,8 @@
                 android:layout_height="10dp" />
 
             <TextView
+                android:background="#e9ece9"
+                android:padding="3dp"
                 android:id="@+id/text_ver_mais"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

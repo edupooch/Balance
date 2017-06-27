@@ -12,44 +12,48 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/round_edge_cinza"
-        android:orientation="vertical"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp"
-        >
+        android:background="@drawable/round_edge_cinza"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:padding="4dp"
-        android:layout_weight="1">
-
-        <com.androidplot.xy.XYPlot
-            android:id="@+id/android_plot"
-            style="@style/APDefacto.Light"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:borderColor="@color/off_white"
-            app:borderThickness="3dp"
-            app:domainOriginLineColor="@color/ap_gray"
-            app:domainOriginLineThickness="1dp"
-            app:gridBackgroundColor="@color/off_white"
-            app:legendVisible="false"
-            app:lineLabelRotationBottom="-45"
-            app:lineLabelTextColorBottom="@color/textColor"
-            app:lineLabelTextColorLeft="@color/textColor"
-            app:lineLabelTextSizeBottom="12sp"
-            app:lineLabelTextSizeLeft="12sp"
-            app:lineLabels="left|bottom"
-            app:paddingLeft="2dp"
-            app:paddingRight="10dp"
-            app:pieBorderThickness="0dp"
-            app:rangeOriginLineColor="@color/ap_gray"
-            app:rangeOriginLineThickness="1dp" />
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="4dp">
 
-    </LinearLayout>
+            <com.androidplot.xy.XYPlot
+                android:id="@+id/android_plot"
+                style="@style/APDefacto.Light"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:borderColor="@color/off_white"
+                app:borderThickness="3dp"
+                app:domainLineColor="#d4d4d4"
+                app:domainLineThickness="1px"
+                app:domainOriginLineColor="#d4d4d4"
+                app:domainOriginLineThickness="1dp"
+                app:gridBackgroundColor="@color/off_white"
+                app:legendVisible="false"
+                app:lineLabelRotationBottom="-45"
+                app:lineLabelTextColorBottom="@color/textColor"
+                app:lineLabelTextColorLeft="@color/textColor"
+                app:lineLabelTextSizeBottom="14sp"
+                app:lineLabelTextSizeLeft="14sp"
+                app:lineLabels="left|bottom"
+                app:paddingLeft="2dp"
+                app:paddingRight="10dp"
+                app:pieBorderThickness="0dp"
+                app:rangeLineColor="#d4d4d4"
+                app:rangeLineThickness="1px"
+                app:rangeOriginLineColor="#d4d4d4"
+                app:rangeOriginLineThickness="1dp" />
+
+        </LinearLayout>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

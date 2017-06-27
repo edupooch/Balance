@@ -32,6 +32,7 @@ import br.edu.ufcspa.balance.modelo.DadoAcelerometro;
 public class GraficoActivity extends AppCompatActivity {
 
     List<DadoAcelerometro> listaDadosAcelerometro;
+    private float alturaDoAparelho;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +42,10 @@ public class GraficoActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("Gráfico de Dispersão");
 
-
         /*Busca a lista de dados do acelerômetro em Json*/
         Intent intent = getIntent();
         String jsonDadosAcelerometro = intent.getStringExtra("listaDadosAcelerometro");
+        alturaDoAparelho = intent.getFloatExtra("altura", 1);
         Gson gson = new Gson();
         Type listType = new TypeToken<ArrayList<DadoAcelerometro>>() {
         }.getType();
@@ -53,11 +54,11 @@ public class GraficoActivity extends AppCompatActivity {
     }
 
     private void criaGrafico() {
-        float alturaDoAparelho = 1.20f;
+
         float maiorX = 0;
         float maiorY = 0;
         SimpleXYSeries pontos = new SimpleXYSeries("Gráfico");
-        Coordenada2D origem = getOrigem(alturaDoAparelho);
+        Coordenada2D origem = Calcula.getOrigem(listaDadosAcelerometro, alturaDoAparelho);
 
         for (DadoAcelerometro dado : listaDadosAcelerometro) {
             Coordenada2D ponto = Calcula.coordenada2D(dado, alturaDoAparelho);
@@ -83,22 +84,5 @@ public class GraficoActivity extends AppCompatActivity {
         PanZoom.attach(plot, PanZoom.Pan.BOTH, PanZoom.Zoom.SCALE, PanZoom.ZoomLimit.OUTER);
     }
 
-
-    /**
-     * Método para retornar o primeiro ponto para diminuir os outros e manter o gráfico com origem
-     * em (0,0)
-     *
-     * @param alturaDoAparelho em m
-     * @return o primeiro valor de coordenada válido na lista.
-     */
-    private Coordenada2D getOrigem(float alturaDoAparelho) {
-        for (DadoAcelerometro dado : listaDadosAcelerometro) {
-            Coordenada2D coordenada2D = Calcula.coordenada2D(dado, alturaDoAparelho);
-            if (coordenada2D.isValido()) {
-                return coordenada2D;
-            }
-        }
-        return new Coordenada2D(0, 0);
-    }
 
 }

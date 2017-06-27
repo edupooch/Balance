@@ -13,8 +13,13 @@ import java.util.Locale;
 
 public class Util {
 
-    public static String converterDate(Date date) {
-        SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault());
+    public static String converterDateComHoras(Date date) {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm", Locale.getDefault());
+        return simpleDate.format(date);
+    }
+
+    public static String converterDateApenasData(Date date) {
+        SimpleDateFormat simpleDate = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         return simpleDate.format(date);
     }
 }

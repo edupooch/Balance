@@ -92,22 +92,21 @@
                         android:textSize="15sp"
                         android:textStyle="bold" />
 
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="@string/duracao"
+                        android:text="@string/olhos"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/text_duracao"
+                        android:id="@+id/text_olhos"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-
                         android:textSize="15sp"
                         android:textStyle="bold" />
+
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -142,11 +141,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif-light"
-                            android:text="@string/idade"
+                            android:text="Data da avaliação"
                             android:textSize="13sp" />
 
                         <TextView
-                            android:id="@+id/text_idade_paciente"
+                            android:id="@+id/text_data_resultado"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:textSize="15sp"
@@ -158,7 +157,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="Pernas"
+                        android:text="@string/apoio"
                         android:textSize="13sp" />
 
                     <TextView
@@ -173,15 +172,16 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:fontFamily="sans-serif-light"
-                        android:text="@string/olhos"
+                        android:text="@string/duracao"
                         android:textSize="13sp" />
 
                     <TextView
-                        android:id="@+id/text_olhos"
+                        android:id="@+id/text_duracao"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="15sp"
                         android:textStyle="bold" />
+
 
                 </LinearLayout>
             </LinearLayout>
@@ -237,7 +237,9 @@
                 android:layout_height="360dp"
                 app:borderColor="@color/off_white"
                 app:borderThickness="3dp"
-                app:domainOriginLineColor="@color/ap_gray"
+                app:domainLineColor="#d4d4d4"
+                app:domainLineThickness="1px"
+                app:domainOriginLineColor="#d4d4d4"
                 app:domainOriginLineThickness="1dp"
                 app:gridBackgroundColor="@color/off_white"
                 app:legendVisible="false"
@@ -250,7 +252,9 @@
                 app:paddingLeft="2dp"
                 app:paddingRight="10dp"
                 app:pieBorderThickness="0dp"
-                app:rangeOriginLineColor="@color/ap_gray"
+                app:rangeLineColor="#d4d4d4"
+                app:rangeLineThickness="1px"
+                app:rangeOriginLineColor="#d4d4d4"
                 app:rangeOriginLineThickness="1dp" />
 
             <android.support.v7.widget.AppCompatButton

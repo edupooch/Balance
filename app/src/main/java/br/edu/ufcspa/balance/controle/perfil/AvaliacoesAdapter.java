@@ -60,7 +60,7 @@ class AvaliacoesAdapter extends BaseAdapter {
         textTitulo.setText("Avaliação " + String.valueOf(getCount() - position));
         //DATA
         TextView txtData = (TextView) view.findViewById(R.id.text_data_avaliacao);
-        txtData.setText(Util.converterDate(avaliacao.getData()));
+        txtData.setText(Util.converterDateComHoras(avaliacao.getData()));
         //vm
         TextView txtVelocidadeMedia = (TextView) view.findViewById(R.id.text_velocidade_media);
         txtVelocidadeMedia.setText((String.format(Locale.getDefault(), "%.2f m/s", avaliacao.getVelocidade())));
