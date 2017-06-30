@@ -29,15 +29,19 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="br.edu.ufcspa.balance.modelo" />
 
+
+        <activity android:name=".controle.SplashScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
         <activity
             android:name=".controle.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".controle.cadastro.CadastroActivity"
@@ -84,7 +88,8 @@
         <activity
             android:name=".controle.avaliacao.PreTesteActivity"
             android:label="@string/title_activity_pre_teste"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
