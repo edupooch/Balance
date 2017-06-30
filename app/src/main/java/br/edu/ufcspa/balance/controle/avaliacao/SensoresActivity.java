@@ -52,8 +52,6 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
     private ArrayList<DadoGiroscopio> dadosGiroscopio = new ArrayList<DadoGiroscopio>();
     private ArrayList<DadoAcelerometro> dadosAcelerometro = new ArrayList<DadoAcelerometro>();
     private long tempoInicio;
-    private int count;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,14 +103,14 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-
-        if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
-            float x = event.values[0];
-            float y = event.values[1];
-            float z = event.values[2];
-
-            dadosGiroscopio.add(new DadoGiroscopio(System.currentTimeMillis() - tempoInicio, x, y, z));
-        }
+//
+//        if (event.sensor.getType() == Sensor.TYPE_GYROSCOPE) {
+//            float x = event.values[0];
+//            float y = event.values[1];
+//            float z = event.values[2];
+//
+//            dadosGiroscopio.add(new DadoGiroscopio(System.currentTimeMillis() - tempoInicio, x, y, z));
+//        }
 
         if (event.sensor.getType() == Sensor.TYPE_ACCELEROMETER) {
 
@@ -140,14 +138,14 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
     public void terminar() {
 
         mSensorManager.unregisterListener(this);
-        Log.d("GIROSCOPE", "GIROSCOPIO:");
-
-        for (DadoGiroscopio d : dadosGiroscopio) {
-
-            Log.d("GIROSCOPE", "            X:" + String.valueOf(d.getX()));
-            Log.d("GIROSCOPE", "            Y:" + String.valueOf(d.getY()));
-            Log.d("GIROSCOPE", "            Z:" + String.valueOf(d.getZ()));
-        }
+//        Log.d("GIROSCOPE", "GIROSCOPIO:");
+//
+//        for (DadoGiroscopio d : dadosGiroscopio) {
+//
+//            Log.d("GIROSCOPE", "            X:" + String.valueOf(d.getX()));
+//            Log.d("GIROSCOPE", "            Y:" + String.valueOf(d.getY()));
+//            Log.d("GIROSCOPE", "            Z:" + String.valueOf(d.getZ()));
+//        }
 
         Log.d("ACELEROMETER", "ACELEROMETRO:");
 
@@ -175,13 +173,13 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
         /*Salva os dados dos sensores como JSON*/
         Gson gson = new Gson();
         avaliacao.setDadosAcelerometro(gson.toJson(dadosAcelerometro));
-        avaliacao.setDadosGiroscopio(gson.toJson(dadosGiroscopio));
+//        avaliacao.setDadosGiroscopio(gson.toJson(dadosGiroscopio));
 
         avaliacao.setVelocidade(calculaVelocidade(dadosAcelerometro,
                 avaliacao.getAltura(), avaliacao.getDuracao()));
 
         /*Escreve no log do aparelho*/
-        Log.d("-- -- -- GIROSCOPIO", ":" + String.valueOf(Arrays.deepToString(dadosGiroscopio.toArray())));
+//        Log.d("-- -- -- GIROSCOPIO", ":" + String.valueOf(Arrays.deepToString(dadosGiroscopio.toArray())));
         Log.d("-- -- -- ACELEROMETRO", ":" + String.valueOf(Arrays.deepToString(dadosAcelerometro.toArray())));
 
         avaliacao.save(); // Salva a avaliação no banco
@@ -256,32 +254,5 @@ public class SensoresActivity extends AppCompatActivity implements SensorEventLi
     @Override
     public void onBackPressed() {
 
-        /*
-        *
-        * O dialog abre fecha, muda de activity e não finaliza a activity
-        * por isso foi deixado só a finalização, que funciona normalmente
-        *
-        */
-
-//        super.onBackPressed();
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        builder.setCancelable(false);
-//        builder.setTitle("Voltar");
-//        builder.setMessage("Deseja cancelar esta avaliação?");
-//        builder.setPositiveButton(getString(R.string.dialog_yes), new DialogInterface.OnClickListener() {
-//
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-        activity.finish();
-//            }
-//        });
-//        builder.setNegativeButton(getString(R.string.dialog_no), new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.cancel();
-//            }
-//        });
-//        AlertDialog alert = builder.create();
-//        alert.show();
     }
 }

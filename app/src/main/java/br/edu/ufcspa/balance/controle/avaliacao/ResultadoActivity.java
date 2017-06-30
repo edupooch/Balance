@@ -62,7 +62,6 @@ public class ResultadoActivity extends AppCompatActivity {
     private TextView textPernas;
     private TextView textOlhos;
     private Avaliacao avaliacao;
-    private AppCompatButton btOk;
     XYPlot plot;
 
 
@@ -91,7 +90,7 @@ public class ResultadoActivity extends AppCompatActivity {
         textPernas = (TextView) findViewById(R.id.text_pernas);
         textOlhos = (TextView) findViewById(R.id.text_olhos);
 
-        btOk = (AppCompatButton) findViewById(R.id.bt_ok);
+        AppCompatButton btOk = (AppCompatButton) findViewById(R.id.bt_ok);
         btOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -212,6 +211,7 @@ public class ResultadoActivity extends AppCompatActivity {
         stringBuilder.append("DADOS DA AVALIAÇÃO:\n")
                 .append(nomePaciente).append(SEPARADOR)
                 .append(textData.getText().toString()).append(SEPARADOR)
+                .append(avaliacao.getAltura().toString()).append(SEPARADOR)
                 .append(sdf.format(avaliacao.getData())).append(SEPARADOR)
                 .append(textVelocidade.getText().toString()).append(SEPARADOR)
                 .append(textDuracao.getText().toString()).append(SEPARADOR)

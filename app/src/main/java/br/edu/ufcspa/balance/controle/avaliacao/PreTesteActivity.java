@@ -165,12 +165,14 @@ public class PreTesteActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (verificaAltura(txtAltura)) {
+                    altura = Double.parseDouble(txtAltura.getText().toString());
+
                     Intent intentVaiProTimer = new Intent(PreTesteActivity.this, TimerActivity.class);
                     intentVaiProTimer.putExtra("paciente", paciente);
                     intentVaiProTimer.putExtra("modoPernas", modoPernas);
                     intentVaiProTimer.putExtra("modoOlhos", modoOlhos);
                     intentVaiProTimer.putExtra("duracao", duracao);
-                    intentVaiProTimer.putExtra("altura", altura);
+                    intentVaiProTimer.putExtra("altura", altura/100);
                     startActivity(intentVaiProTimer);
                     finish();
                 }
@@ -200,11 +202,11 @@ public class PreTesteActivity extends AppCompatActivity {
     private boolean verificaAltura(EditText txtAltura) {
         if (txtAltura.getText().toString().isEmpty()) {
             txtAltura.setError("Preencha com o valor da altura");
+            return false;
         }
         try {
             int valorAltura = Integer.valueOf(txtAltura.getText().toString());
             if (valorAltura >= MIN_ALTURA && valorAltura <= MAX_ALTURA) {
-                altura = valorAltura/100;
                 return true;
             } else {
                 Toast.makeText(getApplicationContext(), "" + valorAltura, Toast.LENGTH_SHORT).show();

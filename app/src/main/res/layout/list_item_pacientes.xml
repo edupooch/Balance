@@ -19,13 +19,13 @@
             android:layout_margin="4dp"
             android:src="@drawable/icon_usuario_redondo" />
 
-        <ImageView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
-            android:layout_margin="4dp"
-            android:padding="5dp"
-            android:layout_centerInParent="true"
-            android:src="@drawable/icon_moldura_redonda"/>
+        <!--<ImageView-->
+            <!--android:layout_width="64dp"-->
+            <!--android:layout_height="64dp"-->
+            <!--android:layout_margin="4dp"-->
+            <!--android:padding="5dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/icon_moldura_redonda"/>-->
 
     </RelativeLayout>
 

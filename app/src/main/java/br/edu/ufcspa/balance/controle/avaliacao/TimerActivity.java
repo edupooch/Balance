@@ -58,8 +58,7 @@ public class TimerActivity extends AppCompatActivity {
         modoPernas = intent.getIntExtra("modoPernas", Avaliacao.DUAS_PERNAS);
         modoOlhos = intent.getIntExtra("modoOlhos", Avaliacao.OLHOS_ABERTOS);
         duracao = intent.getIntExtra("duracao", 15);
-        altura = intent.getDoubleExtra("modoPernas", 1.2);
-
+        altura = intent.getDoubleExtra("altura", 1);
 
         mostrarDialogTimer();
 
