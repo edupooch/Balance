@@ -85,7 +85,8 @@ class CadastroHelper {
 
     void preencheFormulário(Paciente paciente) {
         edTextNomePaciente.setText(paciente.getNome());
-        edTextDataNascimento.setText(paciente.getDataNascimento());
+        if (paciente.getDataNascimento() != null)
+            edTextDataNascimento.setText(paciente.getDataNascimento());
 
         if (paciente.getGenero() != null) {
             if (paciente.getGenero() == Paciente.FEMININO) {
@@ -98,17 +99,24 @@ class CadastroHelper {
             edTextPeso.setText(String.valueOf(paciente.getMassa()));
         if (paciente.getAltura() != null)
             edTextAltura.setText(String.valueOf(paciente.getAltura()));
-        edTextTelefone.setText(paciente.getTelefone());
-
-        edTextEmail.setText(paciente.getEmail());
-        edTextObs.setText(paciente.getObs());
-
-        edTextDataAnamnese.setText(paciente.getDataAnamnese());
-        edTextDiagnostico.setText(paciente.getDiagnostico());
-        edTextDataDiagnostico.setText(paciente.getDataDiagnostico());
-        edTextCurrentDisease.setText(paciente.getHistoricoDoencaAtual());
-        edTextPreviousDisease.setText(paciente.getHistoricoDoencasAnteriores());
-        edTextProcedimentos.setText(paciente.getProcedimentosTerapeuticos());
+        if (paciente.getTelefone() != null)
+            edTextTelefone.setText(paciente.getTelefone());
+        if (paciente.getEmail() != null)
+            edTextEmail.setText(paciente.getEmail());
+        if (paciente.getObs() != null)
+            edTextObs.setText(paciente.getObs());
+        if (paciente.getDataAnamnese() != null)
+            edTextDataAnamnese.setText(paciente.getDataAnamnese());
+        if (paciente.getDiagnostico() != null)
+            edTextDiagnostico.setText(paciente.getDiagnostico());
+        if (paciente.getDataDiagnostico() != null)
+            edTextDataDiagnostico.setText(paciente.getDataDiagnostico());
+        if (paciente.getHistoricoDoencaAtual() != null)
+            edTextCurrentDisease.setText(paciente.getHistoricoDoencaAtual());
+        if (paciente.getHistoricoDoencasAnteriores() != null)
+            edTextPreviousDisease.setText(paciente.getHistoricoDoencasAnteriores());
+        if (paciente.getProcedimentosTerapeuticos() != null)
+            edTextProcedimentos.setText(paciente.getProcedimentosTerapeuticos());
     }
 
     boolean validateFields() {
